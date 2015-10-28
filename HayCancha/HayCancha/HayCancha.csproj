@@ -4353,6 +4353,7 @@
     <Content Include="include\rs-plugin\js\jquery.themepunch.revolution.min.js" />
     <Content Include="include\rs-plugin\js\jquery.themepunch.tools.min.js" />
     <Content Include="index.aspx" />
+    <Content Include="template\form_controls.html" />
     <Content Include="template\index.html" />
     <Content Include="js\canvas.slider.fade.js" />
     <Content Include="js\events-data.js" />
@@ -4387,6 +4388,8 @@
     <Content Include="registro.aspx" />
     <Content Include="css\style-import.css" />
     <Content Include="css\style.css" />
+    <Content Include="template\maps_google.html" />
+    <Content Include="template\ui_extended_modals.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

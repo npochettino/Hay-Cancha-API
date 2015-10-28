@@ -5,7 +5,7 @@
 <head>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="SemiColonWeb" />
+    <meta name="author" content="SempaIT" />
 
     <!-- Stylesheets
 	============================================= -->
@@ -103,7 +103,7 @@
                             </div>
                         </div>
 
-                        <div class="row center dark"><small>Copyrights &copy; All Rights Reserved by SempaIT.</small></div>
+                        <div class="row center dark"><small>Copyrights &copy; All Rights Reserved by SempaIT</small></div>
 
                     </div>
                 </div>

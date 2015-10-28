@@ -6,7 +6,7 @@
 <head>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="SemiColonWeb" />
+    <meta name="author" content="SempaIT" />
 
     <!-- Stylesheets
 	============================================= -->
@@ -35,405 +35,393 @@
 
 </head>
 
-<body class="stretched">
-
-    <!-- Document Wrapper
+<%--<body class="stretched">--%>
+    <body class="stretched" data-loader="1" data-loader-timeout="8000" data-animation-in="fadeIn" data-speed-in="1500" data-animation-out="fadeOut" data-speed-out="800">
+    <form runat="server">
+        <!-- Document Wrapper
 	============================================= -->
-    <div id="wrapper" class="clearfix">
+        <div id="wrapper" class="clearfix">
 
-        <!-- Header
+            <!-- Header
 		============================================= -->
-        <header id="header" class="full-header">
+            <header id="header" class="full-header">
 
-            <div id="header-wrap">
-
-                <div class="container clearfix">
-
-                    <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
-
-                    <!-- Logo
+                <div id="header-wrap">
+                    <div class="container clearfix">
+                        <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+                        <!-- Logo
 					============================================= -->
-                    <div id="logo">
-                        <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png">
-                            <img src="images/logo.png" alt="Canvas Logo"></a>
-                        <a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png">
-                            <img src="images/logo@2x.png" alt="Canvas Logo"></a>
+                        <div id="logo">
+                            <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png">
+                                <img src="images/logo.png" alt="Canvas Logo"></a>
+                            <a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png">
+                                <img src="images/logo@2x.png" alt="Canvas Logo"></a>
+                        </div>
+                        <!-- #logo end -->
+                        <!-- Primary Navigation
+					============================================= -->
+                        <nav id="primary-menu">
+                            <ul>
+                                <li class="current"><a href="index.html">
+                                    <div>Inicio</div>
+                                </a></li>
+                                <li class="mega-menu"><a href="registro.aspx">
+                                    <div>Crea tu cuenta</div>
+                                </a></li>
+                                <li class="mega-menu"><a href="login.aspx">
+                                    <div>Ingresa</div>
+                                </a></li>
+                            </ul>
+                        </nav>
+                        <!-- #primary-menu end -->
                     </div>
-                    <!-- #logo end -->
+                </div>
+            </header>
+            <!-- #header end -->
 
-                    <!-- Primary Navigation
-					============================================= -->
-                    <nav id="primary-menu">
+            <section id="slider" class="slider-parallax full-screen">
+                <div class="full-screen" style="height: 513px; background: url('images/appshowcase/1.jpg'); background-size: cover;">
+                    <div class="container clearfix">
 
-                        <ul>
-                            <li class="current"><a href="index.html">
-                                <div>Home</div>
-                            </a></li>
-                            <li class="mega-menu"><a href="registro.aspx">
-                                <div>Registra tu cancha</div>
-                            </a></li>
-                            <li class="mega-menu"><a href="login.aspx">
-                                <div>Ingresa</div>
-                            </a></li>
-                        </ul>
+                        <img src="images/appshowcase/iphone-solid.png" alt="Image" class="hidden-sm hidden-xs" style="padding-top: 100px" data-style-lg="position: absolute; left: 0; bottom: 0; height: auto;padding-top" data-style-md="position: absolute; left: 0; bottom: 0; height: 450px;">
 
-                    </nav>
-                    <!-- #primary-menu end -->
+                        <div class="vertical-middle no-fade">
+                            <div class="col-md-6 dark fright nobottommargin" data-animate="fadeIn">
+
+                                <div class="emphasis-title">
+                                    <h1 data-style-lg="font-size: 52px;" data-style-md="font-size: 44px;">La nueva forma de reservar tu cancha. Usá <strong>Hay Cancha</strong>.</h1>
+                                </div>
+
+                                <div class="hidden-xs">
+                                    <a href="#" class="button button-desc button-border button-light button-rounded nomargin"><i class="icon-android"></i>
+                                        <div>Descarga la App<span>Google Play</span></div>
+                                    </a>
+                                </div>
+
+                                <div class="visible-xs">
+                                    <a href="#" class="button button-light button-xlarge button-rounded nomargin"><i class="icon-android"></i>Descarga la App</a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content
+		============================================= -->
+            <section id="content">
+
+                <div class="content-wrap">
+
+                    <div class="container clearfix">
+
+                        <div class="col_one_third nobottommargin center">
+                            <a href="#">
+                                <img src="images/appshowcase/s1.png" alt="Image" class="bottommargin-sm"></a>
+                            <h4>Responsive Layout</h4>
+                            <p>Powerful Layout with Responsive functionality that can be adapted to any screen size. Resize browser to view.</p>
+                        </div>
+
+                        <div class="col_one_third nobottommargin center">
+                            <a href="#">
+                                <img src="images/appshowcase/s4.png" alt="Image" class="bottommargin-sm"></a>
+                            <h4>Retina Ready Graphics</h4>
+                            <p>Looks beautiful &amp; ultra-sharp on Retina Screen Displays. Retina Icons, Fonts &amp; all others graphics are optimized.</p>
+                        </div>
+
+                        <div class="col_one_third nobottommargin center col_last">
+                            <a href="#">
+                                <img src="images/appshowcase/s5.png" alt="Image" class="bottommargin-sm"></a>
+                            <h4>Powerful Performance</h4>
+                            <p>Canvas includes tons of optimized code that are completely customizable and deliver unmatched fast performance.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="section nobottommargin" style="padding-bottom: 150px;">
+
+                        <div class="hidden-sm hidden-xs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent url('images/appshowcase/ipad-section.png') bottom right no-repeat;"></div>
+
+                        <div class="container clearfix" style="z-index: 1;">
+
+                            <div class="col-md-6 nobottommargin">
+
+                                <div class="heading-block topmargin-sm">
+                                    <h2>Awesome Scalable Apps</h2>
+                                    <span>Our Template acts &amp; behaves truly as a Canvas.</span>
+                                </div>
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem maiores pariatur voluptatem placeat laborum iste accusamus nam unde, iure id.</p>
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet cumque, perferendis accusamus porro illo exercitationem molestias, inventore obcaecati ut omnis voluptatibus ratione odio amet magnam quidem tempore necessitatibus quaerat, voluptates excepturi voluptatem, veritatis qui temporibus.</p>
+
+                                <a href="#" class="button button-border button-rounded button-large button-dark noleftmargin">Start Trial</a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="section notopmargin nobottommargin">
+                        <div class="container clearfix">
+
+                            <div class="col_half nobottommargin topmargin-lg">
+
+                                <img src="images/appshowcase/iphone-solid.png" alt="Image" class="center-block">
+                            </div>
+
+                            <div class="col_half nobottommargin topmargin-lg col_last">
+
+                                <div class="heading-block topmargin-lg">
+                                    <h2>Typically Responsive</h2>
+                                    <span>Our App scales beautifully to different Devices.</span>
+                                </div>
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet cumque, perferendis accusamus porro illo exercitationem molestias, inventore obcaecati ut omnis voluptatibus ratione odio amet magnam quidem tempore necessitatibus quaerat, voluptates excepturi voluptatem, veritatis qui temporibus.</p>
+
+                                <a href="#" class="button button-border button-rounded button-large button-dark noleftmargin">View Gallery</a>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="section dark notopmargin" style="padding-top: 60px;">
+                        <div class="container clearfix">
+
+                            <div class="col_one_third">
+                                <div class="feature-box fbox-plain">
+                                    <div class="fbox-icon">
+                                        <a href="#"><i class="icon-screen"></i></a>
+                                    </div>
+                                    <h3>Responsive Layout</h3>
+                                    <p>Powerful Layout with Responsive functionality that can be adapted to any screen size. Resize browser to view.</p>
+                                </div>
+                            </div>
+
+                            <div class="col_one_third">
+                                <div class="feature-box fbox-plain">
+                                    <div class="fbox-icon">
+                                        <a href="#"><i class="icon-eye"></i></a>
+                                    </div>
+                                    <h3>Retina Ready Graphics</h3>
+                                    <p>Looks beautiful &amp; ultra-sharp on Retina Screen Displays. Retina Icons, Fonts &amp; all others graphics are optimized.</p>
+                                </div>
+                            </div>
+
+                            <div class="col_one_third col_last">
+                                <div class="feature-box fbox-plain">
+                                    <div class="fbox-icon">
+                                        <a href="#"><i class="icon-beaker"></i></a>
+                                    </div>
+                                    <h3>Powerful Performance</h3>
+                                    <p>Canvas includes tons of optimized code that are completely customizable and deliver unmatched fast performance.</p>
+                                </div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="col_one_third nobottommargin">
+                                <div class="feature-box fbox-plain">
+                                    <div class="fbox-icon">
+                                        <a href="#"><i class="icon-ok"></i></a>
+                                    </div>
+                                    <h3>12+ Header Designs</h3>
+                                    <p>We have included 12+ Header + Menu Designs for your convenience so that you can match your style.</p>
+                                </div>
+                            </div>
+
+                            <div class="col_one_third nobottommargin">
+                                <div class="feature-box fbox-plain">
+                                    <div class="fbox-icon">
+                                        <a href="#"><i class="icon-thumbs-up"></i></a>
+                                    </div>
+                                    <h3>Awesome Mega menu</h3>
+                                    <p>Completely Customizable 2 Columns, 3 Columns, 4 Columns &amp; 5 Columns Mega Menus are available with Canvas.</p>
+                                </div>
+                            </div>
+
+                            <div class="col_one_third nobottommargin col_last">
+                                <div class="feature-box fbox-plain">
+                                    <div class="fbox-icon">
+                                        <a href="#"><i class="icon-magnet"></i></a>
+                                    </div>
+                                    <h3>Attractive Sticky Menu</h3>
+                                    <p>Smooth &amp; Stylish Sticky Menu is what will make your Website differentiate with others.</p>
+                                </div>
+                            </div>
+
+                            <div class="clear"></div>
+                            <div class="line"></div>
+
+                            <div class="heading-block center">
+                                <h2>Looks beautiful on all displays.</h2>
+                            </div>
+
+                            <div style="position: relative; margin-bottom: -60px;" data-height-lg="415" data-height-md="342" data-height-sm="262" data-height-xs="160" data-height-xxs="102">
+                                <img src="images/services/chrome.png" style="position: absolute; top: 0; left: 0;" data-animate="fadeInUp" alt="Chrome">
+                                <img src="images/services/ipad3.png" style="position: absolute; top: 0; left: 0;" data-animate="fadeInUp" data-delay="300" alt="iPad">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="registrate" class="container clearfix">
+
+                        <div class="heading-block center">
+                            <h3>Available on all Major Platforms.</h3>
+                            <span>We have made our App available on all Major Platforms</span>
+                        </div>
+
+                        <p class="divcenter center" style="max-width: 800px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo animi ab dolorem deleniti, incidunt, recusandae tenetur eius aut similique delectus nisi labore odit temporibus reprehenderit eum iure natus voluptatem commodi? Quam ea, placeat quia et dignissimos laboriosam unde earum repudiandae?</p>
+
+                        <div class="col_full center topmargin nobottommargin">
+
+                            <a href="#" class="social-icon si-appstore si-large si-rounded si-colored inline-block" title="iOS App Store">
+                                <i class="icon-appstore"></i>
+                                <i class="icon-appstore"></i>
+                            </a>
+
+                            <a href="#" class="social-icon si-android si-large si-rounded si-colored inline-block" title="Android Store">
+                                <i class="icon-android"></i>
+                                <i class="icon-android"></i>
+                            </a>
+
+                            <a href="#" class="social-icon si-gplus si-large si-rounded si-colored inline-block" title="Windows Store">
+                                <i class="icon-windows3"></i>
+                                <i class="icon-windows3"></i>
+                            </a>
+
+                        </div>
+
+                        <div class="clear"></div>
+
+                        <div class="divider divider-short divider-vshort divider-line divider-center">&nbsp;</div>
+
+                        <div class="heading-block center">
+                            <h3>Subscribe for more <span>Updates</span>.</h3>
+                        </div>
+
+                        <div id="widget-subscribe-form2-result" data-notify-type="success" data-notify-msg=""></div>
+                        <form id="widget-subscribe-form2" action="include/subscribe.php" role="form" method="post" class="nobottommargin">
+                            <div class="input-group input-group-lg divcenter" style="max-width: 600px;">
+                                <span class="input-group-addon"><i class="icon-email2"></i></span>
+                                <input type="email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Enter your Email">
+                            </div>
+                            <div class="input-group input-group-lg divcenter" style="max-width: 600px;">
+                                <span class="input-group-addon"><i class="icon-lock"></i></span>
+                                <input type="password" name="widget-subscribe-form-email" class="form-control required password" placeholder="Enter your Password">
+                            </div>
+                            <div class="input-group input-group-lg divcenter" style="max-width: 600px;">
+                                <button class="button button-light button-xlarge button-rounded nomargin" type="submit">Subscribe Now</button>
+                            </div>
+                        </form>
+
+                        <script>
+                            $("#widget-subscribe-form2").validate({
+                                submitHandler: function (form) {
+                                    $(form).find('.input-group-addon').find('.icon-email2').removeClass('icon-email2').addClass('icon-line-loader icon-spin');
+                                    $(form).ajaxSubmit({
+                                        target: '#widget-subscribe-form2-result',
+                                        success: function () {
+                                            $(form).find('.input-group-addon').find('.icon-line-loader').removeClass('icon-line-loader icon-spin').addClass('icon-email2');
+                                            $('#widget-subscribe-form2').find('.form-control').val('');
+                                            $('#widget-subscribe-form2-result').attr('data-notify-msg', $('#widget-subscribe-form2-result').html()).html('');
+                                            SEMICOLON.widget.notifications($('#widget-subscribe-form2-result'));
+                                        }
+                                    });
+                                }
+                            });
+                        </script>
+
+                    </div>
 
                 </div>
 
-            </div>
+            </section>
+            <!-- #content end -->
 
-        </header>
-        <!-- #header end -->
+            <!-- Footer
+		============================================= -->
+            <footer id="footer" class="dark">
 
-        <section id="slider" class="slider-parallax full-screen">
-            <div class="full-screen" style="height: 513px; background: url('images/appshowcase/1.jpg'); background-size: cover;">
-                <div class="container clearfix">
 
-                    <img src="images/appshowcase/iphone-solid.png" alt="Image" class="hidden-sm hidden-xs" style="padding-top:200px" data-style-lg="position: absolute; left: 0; bottom: 0; height: auto;padding-top" data-style-md="position: absolute; left: 0; bottom: 0; height: 450px;">
+                <!-- Copyrights
+			============================================= -->
+                <div id="copyrights">
 
-                    <div class="vertical-middle no-fade">
-                        <div class="col-md-6 dark fright nobottommargin" data-animate="fadeIn">
+                    <div class="container clearfix">
 
-                            <div class="emphasis-title">
-                                <h1 data-style-lg="font-size: 52px;" data-style-md="font-size: 44px;">La nueva forma de reservar tu cancha. Usá <strong>Hay Cancha</strong>.</h1>
-                            </div>
+                        <div class="col_half">
+                            Copyrights &copy; <% DateTime.Now.Year.ToString();  %> All Rights Reserved by SempaIT<br>
+                            <div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
+                        </div>
 
-                            <div class="hidden-xs">
-                                <a href="#" class="button button-desc button-border button-light button-rounded nomargin"><i class="icon-android"></i>
-                                    <div>Descarga la App<span>Google Play</span></div>
+                        <div class="col_half col_last tright">
+                            <div class="fright clearfix">
+                                <a href="#" class="social-icon si-small si-borderless si-facebook">
+                                    <i class="icon-facebook"></i>
+                                    <i class="icon-facebook"></i>
+                                </a>
+
+                                <a href="#" class="social-icon si-small si-borderless si-twitter">
+                                    <i class="icon-twitter"></i>
+                                    <i class="icon-twitter"></i>
+                                </a>
+
+                                <a href="#" class="social-icon si-small si-borderless si-gplus">
+                                    <i class="icon-gplus"></i>
+                                    <i class="icon-gplus"></i>
+                                </a>
+
+                                <a href="#" class="social-icon si-small si-borderless si-pinterest">
+                                    <i class="icon-pinterest"></i>
+                                    <i class="icon-pinterest"></i>
+                                </a>
+
+                                <a href="#" class="social-icon si-small si-borderless si-vimeo">
+                                    <i class="icon-vimeo"></i>
+                                    <i class="icon-vimeo"></i>
+                                </a>
+
+                                <a href="#" class="social-icon si-small si-borderless si-github">
+                                    <i class="icon-github"></i>
+                                    <i class="icon-github"></i>
+                                </a>
+
+                                <a href="#" class="social-icon si-small si-borderless si-instagram">
+                                    <i class="icon-instagram"></i>
+                                    <i class="icon-instagram"></i>
                                 </a>
                             </div>
 
-                            <div class="visible-xs">
-                                <a href="#" class="button button-light button-xlarge button-rounded nomargin"><i class="icon-android"></i>Descarga la App</a>
-                            </div>
+                            <div class="clear"></div>
 
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Content
-		============================================= -->
-        <section id="content">
-
-            <div class="content-wrap">
-
-                <div class="container clearfix">
-
-                    <div class="col_one_third nobottommargin center">
-                        <a href="#">
-                            <img src="images/appshowcase/s1.png" alt="Image" class="bottommargin-sm"></a>
-                        <h4>Responsive Layout</h4>
-                        <p>Powerful Layout with Responsive functionality that can be adapted to any screen size. Resize browser to view.</p>
-                    </div>
-
-                    <div class="col_one_third nobottommargin center">
-                        <a href="#">
-                            <img src="images/appshowcase/s4.png" alt="Image" class="bottommargin-sm"></a>
-                        <h4>Retina Ready Graphics</h4>
-                        <p>Looks beautiful &amp; ultra-sharp on Retina Screen Displays. Retina Icons, Fonts &amp; all others graphics are optimized.</p>
-                    </div>
-
-                    <div class="col_one_third nobottommargin center col_last">
-                        <a href="#">
-                            <img src="images/appshowcase/s5.png" alt="Image" class="bottommargin-sm"></a>
-                        <h4>Powerful Performance</h4>
-                        <p>Canvas includes tons of optimized code that are completely customizable and deliver unmatched fast performance.</p>
-                    </div>
-
-                </div>
-
-                <div class="section nobottommargin" style="padding-bottom: 150px;">
-
-                    <div class="hidden-sm hidden-xs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent url('images/appshowcase/ipad-section.png') bottom right no-repeat;"></div>
-
-                    <div class="container clearfix" style="z-index: 1;">
-
-                        <div class="col-md-6 nobottommargin">
-
-                            <div class="heading-block topmargin-sm">
-                                <h2>Awesome Scalable Apps</h2>
-                                <span>Our Template acts &amp; behaves truly as a Canvas.</span>
-                            </div>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem maiores pariatur voluptatem placeat laborum iste accusamus nam unde, iure id.</p>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet cumque, perferendis accusamus porro illo exercitationem molestias, inventore obcaecati ut omnis voluptatibus ratione odio amet magnam quidem tempore necessitatibus quaerat, voluptates excepturi voluptatem, veritatis qui temporibus.</p>
-
-                            <a href="#" class="button button-border button-rounded button-large button-dark noleftmargin">Start Trial</a>
-
+                            <i class="icon-envelope2"></i>haycancha@sempait.com.ar <span class="middot">&middot;</span> <i class="icon-headphones"></i>+91-11-6541-6369 <span class="middot">&middot;</span> <i class="icon-skype2"></i>HayCanchaOnSkype
                         </div>
 
                     </div>
 
                 </div>
+                <!-- #copyrights end -->
 
-                <div class="section notopmargin nobottommargin">
-                    <div class="container clearfix">
+            </footer>
+            <!-- #footer end -->
 
-                        <div class="col_half nobottommargin topmargin-lg">
+        </div>
+        <!-- #wrapper end -->
 
-                            <img src="images/appshowcase/iphone-solid.png" alt="Image" class="center-block">
-                        </div>
-
-                        <div class="col_half nobottommargin topmargin-lg col_last">
-
-                            <div class="heading-block topmargin-lg">
-                                <h2>Typically Responsive</h2>
-                                <span>Our App scales beautifully to different Devices.</span>
-                            </div>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet cumque, perferendis accusamus porro illo exercitationem molestias, inventore obcaecati ut omnis voluptatibus ratione odio amet magnam quidem tempore necessitatibus quaerat, voluptates excepturi voluptatem, veritatis qui temporibus.</p>
-
-                            <a href="#" class="button button-border button-rounded button-large button-dark noleftmargin">View Gallery</a>
-
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="section dark notopmargin" style="padding-top: 60px;">
-                    <div class="container clearfix">
-
-                        <div class="col_one_third">
-                            <div class="feature-box fbox-plain">
-                                <div class="fbox-icon">
-                                    <a href="#"><i class="icon-screen"></i></a>
-                                </div>
-                                <h3>Responsive Layout</h3>
-                                <p>Powerful Layout with Responsive functionality that can be adapted to any screen size. Resize browser to view.</p>
-                            </div>
-                        </div>
-
-                        <div class="col_one_third">
-                            <div class="feature-box fbox-plain">
-                                <div class="fbox-icon">
-                                    <a href="#"><i class="icon-eye"></i></a>
-                                </div>
-                                <h3>Retina Ready Graphics</h3>
-                                <p>Looks beautiful &amp; ultra-sharp on Retina Screen Displays. Retina Icons, Fonts &amp; all others graphics are optimized.</p>
-                            </div>
-                        </div>
-
-                        <div class="col_one_third col_last">
-                            <div class="feature-box fbox-plain">
-                                <div class="fbox-icon">
-                                    <a href="#"><i class="icon-beaker"></i></a>
-                                </div>
-                                <h3>Powerful Performance</h3>
-                                <p>Canvas includes tons of optimized code that are completely customizable and deliver unmatched fast performance.</p>
-                            </div>
-                        </div>
-
-                        <div class="clear"></div>
-
-                        <div class="col_one_third nobottommargin">
-                            <div class="feature-box fbox-plain">
-                                <div class="fbox-icon">
-                                    <a href="#"><i class="icon-ok"></i></a>
-                                </div>
-                                <h3>12+ Header Designs</h3>
-                                <p>We have included 12+ Header + Menu Designs for your convenience so that you can match your style.</p>
-                            </div>
-                        </div>
-
-                        <div class="col_one_third nobottommargin">
-                            <div class="feature-box fbox-plain">
-                                <div class="fbox-icon">
-                                    <a href="#"><i class="icon-thumbs-up"></i></a>
-                                </div>
-                                <h3>Awesome Mega menu</h3>
-                                <p>Completely Customizable 2 Columns, 3 Columns, 4 Columns &amp; 5 Columns Mega Menus are available with Canvas.</p>
-                            </div>
-                        </div>
-
-                        <div class="col_one_third nobottommargin col_last">
-                            <div class="feature-box fbox-plain">
-                                <div class="fbox-icon">
-                                    <a href="#"><i class="icon-magnet"></i></a>
-                                </div>
-                                <h3>Attractive Sticky Menu</h3>
-                                <p>Smooth &amp; Stylish Sticky Menu is what will make your Website differentiate with others.</p>
-                            </div>
-                        </div>
-
-                        <div class="clear"></div>
-                        <div class="line"></div>
-
-                        <div class="heading-block center">
-                            <h2>Looks beautiful on all displays.</h2>
-                        </div>
-
-                        <div style="position: relative; margin-bottom: -60px;" data-height-lg="415" data-height-md="342" data-height-sm="262" data-height-xs="160" data-height-xxs="102">
-                            <img src="images/services/chrome.png" style="position: absolute; top: 0; left: 0;" data-animate="fadeInUp" alt="Chrome">
-                            <img src="images/services/ipad3.png" style="position: absolute; top: 0; left: 0;" data-animate="fadeInUp" data-delay="300" alt="iPad">
-                        </div>
-
-                    </div>
-                </div>
-
-                <div id="registrate" class="container clearfix">
-
-                    <div class="heading-block center">
-                        <h3>Available on all Major Platforms.</h3>
-                        <span>We have made our App available on all Major Platforms</span>
-                    </div>
-
-                    <p class="divcenter center" style="max-width: 800px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo animi ab dolorem deleniti, incidunt, recusandae tenetur eius aut similique delectus nisi labore odit temporibus reprehenderit eum iure natus voluptatem commodi? Quam ea, placeat quia et dignissimos laboriosam unde earum repudiandae?</p>
-
-                    <div class="col_full center topmargin nobottommargin">
-
-                        <a href="#" class="social-icon si-appstore si-large si-rounded si-colored inline-block" title="iOS App Store">
-                            <i class="icon-appstore"></i>
-                            <i class="icon-appstore"></i>
-                        </a>
-
-                        <a href="#" class="social-icon si-android si-large si-rounded si-colored inline-block" title="Android Store">
-                            <i class="icon-android"></i>
-                            <i class="icon-android"></i>
-                        </a>
-
-                        <a href="#" class="social-icon si-gplus si-large si-rounded si-colored inline-block" title="Windows Store">
-                            <i class="icon-windows3"></i>
-                            <i class="icon-windows3"></i>
-                        </a>
-
-                    </div>
-
-                    <div class="clear"></div>
-
-                    <div class="divider divider-short divider-vshort divider-line divider-center">&nbsp;</div>
-
-                    <div class="heading-block center">
-                        <h3>Subscribe for more <span>Updates</span>.</h3>
-                    </div>
-
-                    <div id="widget-subscribe-form2-result" data-notify-type="success" data-notify-msg=""></div>
-                    <form id="widget-subscribe-form2" action="include/subscribe.php" role="form" method="post" class="nobottommargin">
-                        <div class="input-group input-group-lg divcenter" style="max-width: 600px;">
-                            <span class="input-group-addon"><i class="icon-email2"></i></span>
-                            <input type="email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Enter your Email">
-                        </div>
-                        <div class="input-group input-group-lg divcenter" style="max-width: 600px;">
-                            <span class="input-group-addon"><i class="icon-lock"></i></span>
-                            <input type="password" name="widget-subscribe-form-email" class="form-control required password" placeholder="Enter your Password">
-                        </div>
-                        <div class="input-group input-group-lg divcenter" style="max-width: 600px;">
-                            <button class="button button-light button-xlarge button-rounded nomargin" type="submit">Subscribe Now</button>
-                        </div>
-                    </form>
-
-                    <script>
-                        $("#widget-subscribe-form2").validate({
-                            submitHandler: function (form) {
-                                $(form).find('.input-group-addon').find('.icon-email2').removeClass('icon-email2').addClass('icon-line-loader icon-spin');
-                                $(form).ajaxSubmit({
-                                    target: '#widget-subscribe-form2-result',
-                                    success: function () {
-                                        $(form).find('.input-group-addon').find('.icon-line-loader').removeClass('icon-line-loader icon-spin').addClass('icon-email2');
-                                        $('#widget-subscribe-form2').find('.form-control').val('');
-                                        $('#widget-subscribe-form2-result').attr('data-notify-msg', $('#widget-subscribe-form2-result').html()).html('');
-                                        SEMICOLON.widget.notifications($('#widget-subscribe-form2-result'));
-                                    }
-                                });
-                            }
-                        });
-                    </script>
-
-                </div>
-
-            </div>
-
-        </section>
-        <!-- #content end -->
-
-        <!-- Footer
-		============================================= -->
-        <footer id="footer" class="dark">
-
-
-            <!-- Copyrights
-			============================================= -->
-            <div id="copyrights">
-
-                <div class="container clearfix">
-
-                    <div class="col_half">
-                        Copyrights &copy; 2014 All Rights Reserved by Canvas Inc.<br>
-                        <div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
-                    </div>
-
-                    <div class="col_half col_last tright">
-                        <div class="fright clearfix">
-                            <a href="#" class="social-icon si-small si-borderless si-facebook">
-                                <i class="icon-facebook"></i>
-                                <i class="icon-facebook"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-borderless si-twitter">
-                                <i class="icon-twitter"></i>
-                                <i class="icon-twitter"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-borderless si-gplus">
-                                <i class="icon-gplus"></i>
-                                <i class="icon-gplus"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-borderless si-pinterest">
-                                <i class="icon-pinterest"></i>
-                                <i class="icon-pinterest"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-borderless si-vimeo">
-                                <i class="icon-vimeo"></i>
-                                <i class="icon-vimeo"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-borderless si-github">
-                                <i class="icon-github"></i>
-                                <i class="icon-github"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-borderless si-yahoo">
-                                <i class="icon-yahoo"></i>
-                                <i class="icon-yahoo"></i>
-                            </a>
-
-                            <a href="#" class="social-icon si-small si-borderless si-linkedin">
-                                <i class="icon-linkedin"></i>
-                                <i class="icon-linkedin"></i>
-                            </a>
-                        </div>
-
-                        <div class="clear"></div>
-
-                        <i class="icon-envelope2"></i>info@canvas.com <span class="middot">&middot;</span> <i class="icon-headphones"></i>+91-11-6541-6369 <span class="middot">&middot;</span> <i class="icon-skype2"></i>CanvasOnSkype
-                    </div>
-
-                </div>
-
-            </div>
-            <!-- #copyrights end -->
-
-        </footer>
-        <!-- #footer end -->
-
-    </div>
-    <!-- #wrapper end -->
-
-    <!-- Go To Top
+        <!-- Go To Top
 	============================================= -->
-    <div id="gotoTop" class="icon-angle-up"></div>
+        <div id="gotoTop" class="icon-angle-up"></div>
 
-    <!-- Footer Scripts
+        <!-- Footer Scripts
 	============================================= -->
-    <script type="text/javascript" src="js/functions.js"></script>
+        <script type="text/javascript" src="js/functions.js"></script>
 
+    </form>
 </body>
 </html>

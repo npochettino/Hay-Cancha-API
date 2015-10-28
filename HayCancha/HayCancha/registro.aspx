@@ -5,7 +5,7 @@
 <head>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="SemiColonWeb" />
+    <meta name="author" content="SempaIT" />
 
     <!-- Stylesheets
 	============================================= -->
@@ -30,7 +30,7 @@
 
     <!-- Document Title
 	============================================= -->
-    <title>Login - Layout 5 | Canvas</title>
+    <title>Hay Cancha</title>
 
 </head>
 
@@ -61,7 +61,7 @@
                                 <form id="login-form" name="login-form" class="nobottommargin" action="#" method="post">
                                     <h3>Formulario de Registro</h3>
                                     <div class="col_full">
-                                        <label for="register-form-email">Email Address:</label>
+                                        <label for="register-form-email">Email:</label>
                                         <input type="text" id="register-form-email" name="register-form-email" value="" class="form-control" />
                                     </div>
                                     <div class="col_full">
@@ -73,7 +73,7 @@
                                         <input type="password" id="register-form-repassword" name="register-form-repassword" value="" class="form-control" />
                                     </div>
                                     <div class="col_full nobottommargin">
-                                        <button class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" value="login">Login</button>
+                                        <button class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" value="login">Registrar</button>
                                     </div>
 
                                     <div class="line line-sm"></div>
@@ -89,7 +89,7 @@
                             </div>
                         </div>
 
-                        <div class="row center dark"><small>Copyrights &copy; All Rights Reserved by Canvas Inc.</small></div>
+                        <div class="row center dark"><small>Copyrights &copy; All Rights Reserved by SempaIT</small></div>
 
                     </div>
                 </div>
