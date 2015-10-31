@@ -11,6 +11,7 @@ namespace BibliotecaDatos.Clases
         public UsuarioApp()
         {
             Valoraciones = new List<ValoracionUsuarioApp>();
+            ComplejosFravoritos = new List<Complejo>();
         }
 
         public virtual int Codigo { get; set; }
@@ -23,5 +24,6 @@ namespace BibliotecaDatos.Clases
 
         public virtual Posicion Posicion { get; set; }
         public virtual IList<ValoracionUsuarioApp> Valoraciones { get; set; }
+        public virtual IList<Complejo> ComplejosFravoritos { get; set; }
     }
 }

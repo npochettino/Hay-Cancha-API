@@ -16,8 +16,8 @@ namespace BibliotecaDatos.Clases
         public virtual int Codigo { get; set; }
         public virtual string Responsable { get; set; }
         public virtual int CodigoDiaSemana { get; set; }
-        public virtual string HoraDesde { set; get; }
-        public virtual string HoraHasta { set; get; }
+        public virtual int HoraDesde { set; get; }
+        public virtual int HoraHasta { set; get; }
         public virtual DateTime FechaDesde { set; get; }
         public virtual DateTime? FechaHasta { set; get; }
         public virtual string Observaciones { get; set; }
@@ -26,6 +26,6 @@ namespace BibliotecaDatos.Clases
 
         public virtual Cancha Cancha { get; set; }
         public virtual UsuarioWeb UsuarioWeb { get; set; }
-        public virtual List<HistorialTurnoFijo> HistorialTurnoFijo { get; set; }
+        public virtual IList<HistorialTurnoFijo> HistorialTurnoFijo { get; set; }
     }
 }

@@ -15,5 +15,6 @@ namespace BibliotecaDatos.Clases
         public virtual double PrecioNoche { get; set; }
 
         public virtual TipoCancha TipoCancha { get; set; }
+        public virtual Complejo Complejo { get; set; }
     }
 }

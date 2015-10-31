@@ -20,6 +20,8 @@ namespace BibliotecaDatos.Mapeos
             Map(x => x.Mail).Column("mail");
             Map(x => x.HoraApertura).Column("horaApertura");
             Map(x => x.HoraCierre).Column("horaCierre");
+            Map(x => x.Latitud).Column("latitud");
+            Map(x => x.Longitud).Column("longitud");
         }
     }
 }

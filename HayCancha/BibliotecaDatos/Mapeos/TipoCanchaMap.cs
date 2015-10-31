@@ -8,7 +8,7 @@ using FluentNHibernate.Mapping;
 
 namespace BibliotecaDatos.Mapeos
 {
-    public class TipoCanchaMap : ClassMap<TipoCancha> //ES UNA TABLA ???? O CLASE CONSTANTE ????
+    public class TipoCanchaMap : ClassMap<TipoCancha>
     {
         public TipoCanchaMap()
         {

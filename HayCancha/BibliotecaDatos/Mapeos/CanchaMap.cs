@@ -20,6 +20,7 @@ namespace BibliotecaDatos.Mapeos
             Map(x => x.PrecioNoche).Column("precioNoche");
 
             References(x => x.TipoCancha).Column("codigoTipoCancha").Cascade.None().LazyLoad(Laziness.Proxy);
+            References(x => x.Complejo).Column("codigoComplejo").Cascade.None().LazyLoad(Laziness.Proxy);
         }
     }
 }

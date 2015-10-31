@@ -38,7 +38,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BibliotecaLogica">
+      <HintPath>..\BibliotecaLogica\bin\Debug\BibliotecaLogica.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -4353,6 +4359,7 @@
     <Content Include="include\rs-plugin\js\jquery.themepunch.revolution.min.js" />
     <Content Include="include\rs-plugin\js\jquery.themepunch.tools.min.js" />
     <Content Include="index.aspx" />
+    <Content Include="ServiciosWeb\HayCanchaSW.asmx" />
     <Content Include="template\form_controls.html" />
     <Content Include="template\index.html" />
     <Content Include="js\canvas.slider.fade.js" />
@@ -4456,6 +4463,10 @@
     </Compile>
     <Compile Include="registro.aspx.designer.cs">
       <DependentUpon>registro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ServiciosWeb\HayCanchaSW.asmx.cs">
+      <DependentUpon>HayCanchaSW.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -4857,6 +4868,7 @@
     <Content Include="less\variables.less" />
     <Content Include="less\widgets.less" />
     <Content Include="css\style.less" />
+    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

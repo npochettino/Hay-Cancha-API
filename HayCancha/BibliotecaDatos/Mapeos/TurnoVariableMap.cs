@@ -8,7 +8,7 @@ using FluentNHibernate.Mapping;
 
 namespace BibliotecaDatos.Mapeos
 {
-    class TurnoVariableMap : ClassMap<TurnoVariable> //Falta cantidad de jugadores????????
+    class TurnoVariableMap : ClassMap<TurnoVariable>
     {
         public TurnoVariableMap()
         {

@@ -38,7 +38,7 @@ namespace BibliotecaLogica.Controladores
                 usuario.Contraseña = contraseña;
                 usuario.Telefono = telefono;
                 usuario.Posicion = CatalogoGenerico<Posicion>.RecuperarPorCodigo(codigoPosicion, nhSesion);
-                usuario.IsActivo = true; //lo ponemos activo de arranque???
+                usuario.IsActivo = true;
 
                 CatalogoGenerico<UsuarioApp>.InsertarActualizar(usuario, nhSesion);
             }

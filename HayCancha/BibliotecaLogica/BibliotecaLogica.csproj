@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{88FCB900-D5AB-4241-A46C-76CA2DE1AF45}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BibliotecaLogica</RootNamespace>
     <AssemblyName>BibliotecaLogica</AssemblyName>
@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BibliotecaDatos">
       <HintPath>..\BibliotecaDatos\bin\Debug\BibliotecaDatos.dll</HintPath>
@@ -53,6 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controladores\ControladorGeneral.cs" />
+    <Compile Include="Controladores\ControladorTurnos.cs" />
     <Compile Include="Controladores\ControladorUsuarios.cs" />
     <Compile Include="ModuloPrueba.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

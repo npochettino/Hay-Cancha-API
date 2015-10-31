@@ -23,6 +23,7 @@ namespace BibliotecaDatos.Mapeos
 
             References(x => x.Posicion).Column("codigoPosicion").Cascade.None().LazyLoad(Laziness.Proxy);
             HasMany<ValoracionUsuarioApp>(x => x.Valoraciones).Table("ValoracionesUsuariosApp").KeyColumn("codigoUsuarioAppEvaluado").Cascade.None();
+            HasManyToMany<Complejo>(x => x.ComplejosFravoritos).Table("ComplejosFavoritos").ParentKeyColumn("codigoUsuarioApp").ChildKeyColumn("codigoComplejo").Cascade.AllDeleteOrphan();
         }
     }
 }
