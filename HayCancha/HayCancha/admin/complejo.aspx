@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <!-- BEGIN PAGE TITLE -->
                 <div class="page-title">
-                    <h1>User Account <small>user account page sample</small></h1>
+                    <h1>Complejo <small>ingrese los datos del complejo</small></h1>
                 </div>
                 <!-- END PAGE TITLE -->
             </div>
@@ -19,7 +19,7 @@
                 <!-- BEGIN PAGE BREADCRUMB -->
                 <ul class="page-breadcrumb breadcrumb">
                     <li>
-                        <a href="#">Inicio</a><i class="fa fa-circle"></i>
+                        <a href="index.aspx">Inicio</a><i class="fa fa-circle"></i>
                     </li>
                     <li class="active">Complejo
                     </li>

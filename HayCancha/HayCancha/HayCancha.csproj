@@ -4389,6 +4389,7 @@
     <Content Include="js\vmap\jquery.vmap.sampledata.js" />
     <Content Include="js\vmap\jquery.vmap.usa.js" />
     <Content Include="js\vmap\jquery.vmap.world.js" />
+    <Content Include="template\login-register-3.html" />
     <Content Include="template\login-register.html" />
     <Content Include="login.aspx" />
     <Content Include="template\login.html" />
@@ -4398,6 +4399,7 @@
     <Content Include="template\maps_google.html" />
     <Content Include="template\ui_extended_modals.html" />
     <Content Include="Web.config" />
+    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\canchas.aspx.cs">
@@ -4467,6 +4469,13 @@
     <Compile Include="ServiciosWeb\HayCanchaSW.asmx.cs">
       <DependentUpon>HayCanchaSW.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

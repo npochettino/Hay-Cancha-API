@@ -8756,7 +8756,7 @@ body:not(.device-touch) .social-icon i {
 	margin: 0;
 	font-size: 14px;
 	font-weight: bold;
-	color: #444;
+	color: #FFF;/*change to #444*/
 	cursor: pointer;
 	border-top: 1px dotted #DDD;
 	padding: 10px 0 10px 20px;

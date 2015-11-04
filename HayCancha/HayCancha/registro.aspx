@@ -35,80 +35,80 @@
 </head>
 
 <body class="stretched">
-
-    <!-- Document Wrapper
+    <form runat="server">
+        <!-- Document Wrapper
 	============================================= -->
-    <div id="wrapper" class="clearfix">
+        <div id="wrapper" class="clearfix">
 
-        <!-- Content
+            <!-- Content
 		============================================= -->
-        <section id="content">
+            <section id="content">
 
-            <div class="content-wrap nopadding">
+                <div class="content-wrap nopadding">
 
-                <div class="section nopadding nomargin" style="width: 100%; height: 100%; position: fixed; left: 0; top: 0; background: url('images/parallax/home/1.jpg') center center no-repeat; background-size: cover;"></div>
+                    <div class="section nopadding nomargin" style="width: 100%; height: 100%; position: fixed; left: 0; top: 0; background: url('images/parallax/home/1.jpg') center center no-repeat; background-size: cover;"></div>
 
-                <div class="section nobg full-screen nopadding nomargin">
-                    <div class="container vertical-middle divcenter clearfix">
+                    <div class="section nobg full-screen nopadding nomargin">
+                        <div class="container vertical-middle divcenter clearfix">
 
-                        <div class="row center">
-                            <a href="index.html">
-                                <img src="images/logo-dark.png" alt="Canvas Logo"></a>
-                        </div>
-
-                        <div class="panel panel-default divcenter noradius noborder" style="max-width: 400px; background-color: rgba(255,255,255,0.93);">
-                            <div class="panel-body" style="padding: 40px;">
-                                <form id="login-form" name="login-form" class="nobottommargin" action="#" method="post">
-                                    <h3>Formulario de Registro</h3>
-                                    <div class="col_full">
-                                        <label for="register-form-email">Email:</label>
-                                        <input type="text" id="register-form-email" name="register-form-email" value="" class="form-control" />
-                                    </div>
-                                    <div class="col_full">
-                                        <label for="register-form-password">Choose Password:</label>
-                                        <input type="password" id="register-form-password" name="register-form-password" value="" class="form-control" />
-                                    </div>
-                                    <div class="col_full">
-                                        <label for="register-form-repassword">Re-enter Password:</label>
-                                        <input type="password" id="register-form-repassword" name="register-form-repassword" value="" class="form-control" />
-                                    </div>
-                                    <div class="col_full nobottommargin">
-                                        <button class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" value="login">Registrar</button>
-                                    </div>
-
-                                    <div class="line line-sm"></div>
-
-                                    <div class="center">
-                                        <h4 style="margin-bottom: 15px;">o Registrate con:</h4>
-                                        <a href="#" class="button button-rounded si-facebook si-colored">Facebook</a>
-                                        <%--<span class="hidden-xs">or</span>
-                                            <a href="#" class="button button-rounded si-twitter si-colored">Twitter</a>--%>
-                                    </div>
-
-                                </form>
+                            <div class="row center">
+                                <a href="index.html">
+                                    <img src="images/logo-dark.png" alt="Canvas Logo"></a>
                             </div>
+
+                            <div class="panel panel-default divcenter noradius noborder" style="max-width: 400px; background-color: rgba(255,255,255,0.93);">
+                                <div class="panel-body" style="padding: 40px;">
+                                    <form id="login-form" name="login-form" class="nobottommargin" action="#" method="post">
+                                        <%--<h3>Formulario de Registro</h3>--%>
+                                        <div class="col_full">
+                                            <label for="register-form-email">Email:</label>
+                                            <input type="text" id="txtEmail" name="register-form-email" runat="server" value="" class="form-control" />
+                                        </div>
+                                        <div class="col_full">
+                                            <label for="register-form-password">Choose Password:</label>
+                                            <input type="password" id="txtContraseña" runat="server" name="register-form-password" value="" class="form-control" />
+                                        </div>
+                                        <div class="col_full">
+                                            <label for="register-form-repassword">Re-enter Password:</label>
+                                            <input type="password" id="txtReContraseña" runat="server" name="register-form-repassword" value="" class="form-control" />
+                                        </div>
+                                        <div class="col_full nobottommargin">
+                                            <asp:Button class="button button-3d button-black nomargin" ID="btnRegistro" runat="server" Text="Registrar" OnClick="btnRegistro_Click" name="login-form-submit" value="registrar" />
+                                        </div>
+
+                                        <div class="line line-sm"></div>
+
+                                        <div class="center">
+                                            <h4 style="margin-bottom: 5px;">o Registrate con:</h4>
+                                            <a href="#" class="button button-rounded si-facebook si-colored">Facebook</a>
+                                            <%--<span class="hidden-xs">or</span>
+                                            <a href="#" class="button button-rounded si-twitter si-colored">Twitter</a>--%>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="row center dark"><small>Copyrights &copy; All Rights Reserved by SempaIT</small></div>
+
                         </div>
-
-                        <div class="row center dark"><small>Copyrights &copy; All Rights Reserved by SempaIT</small></div>
-
                     </div>
+
                 </div>
 
-            </div>
+            </section>
+            <!-- #content end -->
 
-        </section>
-        <!-- #content end -->
+        </div>
+        <!-- #wrapper end -->
 
-    </div>
-    <!-- #wrapper end -->
-
-    <!-- Go To Top
+        <!-- Go To Top
 	============================================= -->
-    <div id="gotoTop" class="icon-angle-up"></div>
+        <div id="gotoTop" class="icon-angle-up"></div>
 
-    <!-- Footer Scripts
+        <!-- Footer Scripts
 	============================================= -->
-    <script type="text/javascript" src="js/functions.js"></script>
-
+        <script type="text/javascript" src="js/functions.js"></script>
+    </form>
 </body>
 </html>
