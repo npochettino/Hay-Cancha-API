@@ -115,5 +115,48 @@ namespace BibliotecaLogica.Controladores
         }
 
         #endregion
+
+        #region Complejo
+
+        public static void InsertarActualizarComplejo(int codigoComplejo, string descripcion, string direccion, string horaApertura, string horaCierre, string mail, string telefono, double latitud, double longitud)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                Complejo complejo;
+
+                if (codigoComplejo == 0)
+                {
+                    complejo = new Complejo();
+                }
+                else
+                {
+                    complejo = CatalogoGenerico<Complejo>.RecuperarPorCodigo(codigoComplejo, nhSesion);
+                }
+
+                complejo.Descripcion = descripcion;
+                complejo.Direccion = direccion;
+                complejo.HoraApertura = horaApertura;
+                complejo.HoraCierre = horaCierre;
+                complejo.Latitud = latitud;
+                complejo.Longitud = longitud;
+                complejo.Mail = mail;
+                complejo.Telefono = telefono;
+
+                CatalogoGenerico<Complejo>.InsertarActualizar(complejo, nhSesion);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
+        #endregion
     }
 }

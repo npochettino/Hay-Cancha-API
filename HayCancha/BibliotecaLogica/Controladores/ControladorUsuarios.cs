@@ -95,28 +95,27 @@ namespace BibliotecaLogica.Controladores
 
         #region UsuarioWeb
 
-        public static void InsertarNuevoUsuarioWebConComplejo(string nombre, string apellido, string mail, string contraseña, string descripcionComplejo, string direccionComplejo, string horaApertura, string horaCierre, string mailComplejo, string telefonoComplejo)
+        public static void InsertarActualizarUsuario(int codigoUsuario, string nombre, string apellido, string mail, string contraseña)
         {
             ISession nhSesion = ManejoNHibernate.IniciarSesion();
 
             try
             {
-                UsuarioWeb usuario = new UsuarioWeb();
+                UsuarioWeb usuario;
+
+                if (codigoUsuario == 0)
+                {
+                    usuario = new UsuarioWeb();
+                }
+                else
+                {
+                    usuario = CatalogoGenerico<UsuarioWeb>.RecuperarPorCodigo(codigoUsuario, nhSesion);
+                }
 
                 usuario.Nombre = nombre;
                 usuario.Apellido = apellido;
                 usuario.Mail = mail;
                 usuario.Contraseña = contraseña;
-
-                Complejo complejo = new Complejo();
-                complejo.Descripcion = descripcionComplejo;
-                complejo.Direccion = direccionComplejo;
-                complejo.HoraApertura = horaApertura;
-                complejo.HoraCierre = horaCierre;
-                complejo.Mail = mailComplejo;
-                complejo.Telefono = telefonoComplejo;
-
-                usuario.Complejo = complejo;
 
                 CatalogoGenerico<UsuarioWeb>.InsertarActualizar(usuario, nhSesion);
             }
