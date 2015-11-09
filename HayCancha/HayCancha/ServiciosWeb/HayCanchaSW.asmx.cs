@@ -43,10 +43,11 @@ namespace HayCancha.ServiciosWeb
         }
 
         [WebMethod]
-        public string RecuperarTurnosPorRangoHorario(DateTime fecha, int horaDesde, int horaHasta, int codigoUsuarioApp)
+        public string RecuperarTurnosPorRangoHorario(string fechaStr, int horaDesde, int horaHasta, int codigoUsuarioApp)
         {
             try
             {
+                DateTime fecha = Convert.ToDateTime(fechaStr);
                 DataTable tablaTurnos = ControladorTurnos.RecuperarTurnosPorRangoHorario(fecha, horaDesde, horaDesde, codigoUsuarioApp);
                 return JsonConvert.SerializeObject(tablaTurnos);
             }
