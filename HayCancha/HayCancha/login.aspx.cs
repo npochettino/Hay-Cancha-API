@@ -22,7 +22,8 @@ namespace HayCancha
             DataTable dtUsuarioActual = ControladorUsuarios.RecuperarUsuarioWeb(txtEmail.Value.Trim(), txtContraseña.Value.Trim());
             if (dtUsuarioActual.Rows.Count != 0)
             {
-                Session.Add("usuarioLogueado", dtUsuarioActual.Rows[0]["mail"].ToString());
+                Session.Add("contraseñaUsuarioActual", dtUsuarioActual.Rows[0]["contraseña"].ToString());
+                Session.Add("mailUsuarioActual", dtUsuarioActual.Rows[0]["mail"].ToString());
                 Response.Redirect("admin\\index.aspx");
             }
             else

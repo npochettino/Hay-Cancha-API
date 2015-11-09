@@ -106,6 +106,17 @@ namespace BibliotecaLogica.Controladores
                 if (codigoUsuario == 0)
                 {
                     usuario = new UsuarioWeb();
+
+                    Complejo complejo = new Complejo();
+                    
+                    complejo.Descripcion = "";
+                    complejo.Direccion = "";
+                    complejo.HoraApertura = "";
+                    complejo.HoraCierre = "";
+                    complejo.Mail = "";
+                    complejo.Telefono = "";
+
+                    usuario.Complejo = complejo;
                 }
                 else
                 {

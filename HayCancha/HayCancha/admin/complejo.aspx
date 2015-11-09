@@ -1,6 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/Site1.Master" AutoEventWireup="true" CodeBehind="complejo.aspx.cs" Inherits="HayCancha.admin.complejo" %>
 
+<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+
     <div class="page-container">
         <!-- BEGIN PAGE HEAD -->
         <div class="page-head">
@@ -44,16 +48,20 @@
                                     <div class="form-body">
                                         <div class="form-group">
                                             <label>Nombre del Complejo</label>
-                                            <input type="text" class="form-control" placeholder="Nombre del Complejo">
+                                            <dx:ASPxTextBox type="text" class="form-control" placeholder="Nombre del Complejo"  runat="server" id="txtNombreComplejo"></dx:ASPxTextBox>
                                         </div>
                                         <div class="form-group">
                                             <label>Teléfono</label>
-                                            <input type="text" class="form-control" placeholder="Telefono">
+                                            <dx:ASPxTextBox type="text" class="form-control" placeholder="Telefono" runat="server" id="txtTelefono"></dx:ASPxTextBox>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Mail Complejo</label>
+                                            <dx:ASPxTextBox type="text" class="form-control" placeholder="Mail Complejo" runat="server" id="txtMailComplejo"></dx:ASPxTextBox>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Dirección</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Dirección en Google Maps">
+                                                <dx:ASPxTextBox type="text" class="form-control" id="txtDireccion" runat="server" placeholder="Dirección en Google Maps"></dx:ASPxTextBox>
                                                 <span class="input-group-addon">
                                                     <i onclick="showGoogleMapsModal" class="fa fa-map-marker"></i>
                                                 </span>
@@ -61,16 +69,16 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Hora Apertura</label>
-                                            <input type="text" class="form-control" placeholder="Hora Apertura">
+                                            <dx:ASPxTextBox type="text" class="form-control" runat="server" id="txtHoraApertura" placeholder="Hora Apertura"></dx:ASPxTextBox>
                                         </div>
                                         <div class="form-group">
                                             <label>Hora Cierre</label>
-                                            <input type="text" class="form-control" placeholder="Hora Cierre">
+                                            <dx:ASPxTextBox type="text" class="form-control" runat="server" id="txtHoraCierre" placeholder="Hora Cierre"></dx:ASPxTextBox>
                                         </div>
 
                                     </div>
                                     <div class="form-actions">
-                                        <button type="submit" class="btn blue">Guardar</button>
+                                        <asp:Button type="submit" class="btn blue" ID="btnGuardar" OnClick="btnGuardar_Click" runat="server" Text="Guardar" />
                                         <button type="button" class="btn default">Cancelar</button>
                                     </div>
                                 </form>
@@ -81,60 +89,42 @@
                 </div>
                 <!-- END PAGE CONTENT -->
             </div>
+        </div>
+    </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <!-- BEGIN GEOCODING PORTLET-->
-                    <div class="portlet light">
-                        <div class="portlet-title">
-                            <div class="caption">
-                                <i class="fa fa-gift"></i>Geocoding
-                            </div>
-                            <div class="tools">
-                                <a href="javascript:;" class="collapse"></a>
-                                <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                <a href="javascript:;" class="reload"></a>
-                                <a href="javascript:;" class="remove"></a>
-                            </div>
-                        </div>
-                        <div class="portlet-body">
-                            <form class="form-inline margin-bottom-10" action="javascript:;">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="gmap_geocoding_address" placeholder="address...">
-                                    <span class="input-group-btn">
-                                        <button class="btn blue" id="gmap_geocoding_btn">
-                                            <i class="fa fa-search"></i>
-                                    </span>
-                                </div>
-                            </form>
-                            <div id="gmap_geocoding" class="gmaps">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END GEOCODING PORTLET-->
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <!-- BEGIN MARKERS PORTLET-->
-                    <div class="portlet light">
-                        <div class="portlet-title">
-                            <div class="caption">
-                                <i class="fa fa-gift"></i>Markers
-                            </div>
-                            <div class="tools">
-                                <a href="javascript:;" class="collapse"></a>
-                                <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                <a href="javascript:;" class="reload"></a>
-                                <a href="javascript:;" class="remove"></a>
-                            </div>
-                        </div>
-                        <div class="portlet-body">
-                            <div id="gmap_marker" class="gmaps">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END MARKERS PORTLET-->
-                </div>
-            </div>
+    <%--<object type="text/html" data="../template/google.html" style="overflow:hidden;" width="800" height="600"></object>--%>
+
+
+
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <!--[if lt IE 9]>
+    <script src="assets/global/plugins/respond.min.js"></script>
+    <script src="assets/global/plugins/excanvas.min.js"></script> 
+    <![endif]-->
+    <script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+    <script src="assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="assets/global/scripts/metronic.js" type="text/javascript"></script>
+    <script src="assets/admin/layout3/scripts/layout.js" type="text/javascript"></script>
+    <script src="assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <script>
+        jQuery(document).ready(function () {
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+            Demo.init(); // init demo features
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
 </asp:Content>

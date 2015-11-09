@@ -41,6 +41,7 @@
     <Reference Include="BibliotecaLogica">
       <HintPath>..\BibliotecaLogica\bin\Debug\BibliotecaLogica.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -4168,6 +4169,7 @@
     <Content Include="admin\canchas.aspx" />
     <Content Include="admin\complejo.aspx" />
     <Content Include="admin\index.aspx" />
+    <Content Include="admin\test.html" />
     <Content Include="admin\perfil.aspx" />
     <Content Include="admin\reservas.aspx" />
     <Content Include="css\animate.css" />
@@ -4361,6 +4363,7 @@
     <Content Include="index.aspx" />
     <Content Include="ServiciosWeb\HayCanchaSW.asmx" />
     <Content Include="template\form_controls.html" />
+    <Content Include="template\google.html" />
     <Content Include="template\index.html" />
     <Content Include="js\canvas.slider.fade.js" />
     <Content Include="js\events-data.js" />
@@ -4888,6 +4891,9 @@
   <ItemGroup>
     <Folder Include="admin\assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
     <Folder Include="include\twitter\cache\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

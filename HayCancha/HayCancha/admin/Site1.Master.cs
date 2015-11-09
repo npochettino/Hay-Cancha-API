@@ -11,7 +11,7 @@ namespace HayCancha.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["usuarioLogueado"] == null)
+            if (Session["mailUsuarioActual"] == null)
             {
                 Session.Clear();
                 Session.Abandon();
@@ -19,12 +19,11 @@ namespace HayCancha.admin
             }
             else
             {
-                lblUsuarioLogueado.InnerText = " " + Session["usuarioLogueado"].ToString();
+                lblUsuarioLogueado.InnerText = " " + Session["mailUsuarioActual"].ToString();
             }
         }
 
-       
-        protected void lnkSalir(object sender, EventArgs e)
+        protected void lnkSalir_Click(object sender, EventArgs e)
         {
             Session.Clear();
             Session.Abandon();
