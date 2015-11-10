@@ -10,7 +10,7 @@
 namespace HayCancha.admin {
     
     
-    public partial class Site1 {
+    public partial class adminMaster {
         
         /// <summary>
         /// Control lblUsuarioLogueado.

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/Site1.Master" AutoEventWireup="true" CodeBehind="perfil.aspx.cs" Inherits="HayCancha.admin.perfil" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/adminMaster.Master" AutoEventWireup="true" CodeBehind="perfil.aspx.cs" Inherits="HayCancha.admin.perfil" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="page-container">
@@ -40,9 +40,8 @@
                                 <!-- SIDEBAR USER TITLE -->
                                 <div class="profile-usertitle">
                                     <div class="profile-usertitle-name">
-                                        Complejo Tifossi
+                                        <asp:Label ID="lblNombreDelComplejo" runat="server" Text="Complejo Tifossi"></asp:Label>
                                     </div>
-                                    
                                 </div>
                                 <!-- END SIDEBAR USER TITLE -->
 
@@ -79,19 +78,15 @@
                                                     <form role="form" action="#">
                                                         <div class="form-group">
                                                             <label class="control-label">Nombre</label>
-                                                            <input type="text" placeholder="Lio" class="form-control" />
+                                                            <asp:TextBox type="text" placeholder="Lio" class="form-control" ID="txtNombreUsuario" runat="server"></asp:TextBox>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="control-label">Apellido</label>
-                                                            <input type="text" placeholder="Messi" class="form-control" />
+                                                            <asp:TextBox type="text" placeholder="Messi" class="form-control" ID="txtApellidoUsuario" runat="server"></asp:TextBox>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="control-label">Correo</label>
-                                                            <input type="text" placeholder="haycancha@sempait.com.ar" class="form-control" />
-                                                        </div>
-                                                        <div class="margiv-top-10">
-                                                            <a href="javascript:;" class="btn green-haze">Guardar Cambios </a>
-                                                            <a href="javascript:;" class="btn default">Cancelar </a>
+                                                            <asp:TextBox type="text" placeholder="haycancha@sempait.com.ar" class="form-control disabled fc-state-disabled" ID="txtMailUsuario" runat="server"></asp:TextBox>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -123,10 +118,6 @@
                                                                 <span>Acción soportada por la última versión de Firefox, Chrome, Opera, Safari e Internet Explorer 10. </span>
                                                             </div>
                                                         </div>
-                                                        <div class="margin-top-10">
-                                                            <a href="javascript:;" class="btn green-haze">Guardar </a>
-                                                            <a href="javascript:;" class="btn default">Cancelar </a>
-                                                        </div>
                                                     </form>
                                                 </div>
                                                 <!-- END CHANGE AVATAR TAB -->
@@ -135,80 +126,24 @@
                                                     <form action="#">
                                                         <div class="form-group">
                                                             <label class="control-label">Contraseña Actual</label>
-                                                            <input type="password" class="form-control" />
+                                                            <asp:TextBox type="password" class="form-control" ID="txtPasswordUsuario" runat="server"></asp:TextBox>
+                                                            <input  />
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="control-label">Nueva Contraseña</label>
-                                                            <input type="password" class="form-control" />
+                                                            <asp:TextBox ID="txtNewPasswordUsuario" runat="server" type="password" class="form-control"></asp:TextBox>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="control-label">Repita Nueva Contraseña</label>
-                                                            <input type="password" class="form-control" />
-                                                        </div>
-                                                        <div class="margin-top-10">
-                                                            <a href="javascript:;" class="btn green-haze">Cambiar Contraseña </a>
-                                                            <a href="javascript:;" class="btn default">Cancelar </a>
+                                                            <asp:TextBox type="password" class="form-control" ID="txtRepeatNewPasswordUsuario" runat="server"></asp:TextBox>
                                                         </div>
                                                     </form>
                                                 </div>
                                                 <!-- END CHANGE PASSWORD TAB -->
-                                                <!-- PRIVACY SETTINGS TAB -->
-                                                <div class="tab-pane" id="tab_1_4">
-                                                    <form action="#">
-                                                        <table class="table table-light table-hover">
-                                                            <tr>
-                                                                <td>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus..
-                                                                </td>
-                                                                <td>
-                                                                    <label class="uniform-inline">
-                                                                        <input type="radio" name="optionsRadios1" value="option1" />
-                                                                        Yes
-                                                                    </label>
-                                                                    <label class="uniform-inline">
-                                                                        <input type="radio" name="optionsRadios1" value="option2" checked />
-                                                                        No
-                                                                    </label>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Enim eiusmod high life accusamus terry richardson ad squid wolf moon
-                                                                </td>
-                                                                <td>
-                                                                    <label class="uniform-inline">
-                                                                        <input type="checkbox" value="" />
-                                                                        Yes
-                                                                    </label>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Enim eiusmod high life accusamus terry richardson ad squid wolf moon
-                                                                </td>
-                                                                <td>
-                                                                    <label class="uniform-inline">
-                                                                        <input type="checkbox" value="" />
-                                                                        Yes
-                                                                    </label>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Enim eiusmod high life accusamus terry richardson ad squid wolf moon
-                                                                </td>
-                                                                <td>
-                                                                    <label class="uniform-inline">
-                                                                        <input type="checkbox" value="" />
-                                                                        Yes
-                                                                    </label>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                        <!--end profile-settings-->
-                                                        <div class="margin-top-10">
-                                                            <a href="javascript:;" class="btn green-haze">Save Changes </a>
-                                                            <a href="javascript:;" class="btn default">Cancel </a>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <!-- END PRIVACY SETTINGS TAB -->
+                                            </div>
+                                            <div class="margin-top-10">
+                                                <asp:Button class="btn green-haze" ID="btnGuardar" OnClick="btnGuardar_Click" runat="server" Text="Guardar" />
+                                                <a href="javascript:;" class="btn default">Cancelar </a>
                                             </div>
                                         </div>
                                     </div>

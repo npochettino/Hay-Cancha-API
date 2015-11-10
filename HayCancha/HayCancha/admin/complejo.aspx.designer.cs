@@ -19,7 +19,7 @@ namespace HayCancha.admin {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox txtNombreComplejo;
+        protected global::System.Web.UI.WebControls.TextBox txtNombreComplejo;
         
         /// <summary>
         /// Control txtTelefono.
@@ -28,7 +28,7 @@ namespace HayCancha.admin {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox txtTelefono;
+        protected global::System.Web.UI.WebControls.TextBox txtTelefono;
         
         /// <summary>
         /// Control txtMailComplejo.
@@ -37,7 +37,7 @@ namespace HayCancha.admin {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox txtMailComplejo;
+        protected global::System.Web.UI.WebControls.TextBox txtMailComplejo;
         
         /// <summary>
         /// Control txtDireccion.
@@ -46,7 +46,7 @@ namespace HayCancha.admin {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox txtDireccion;
+        protected global::System.Web.UI.WebControls.TextBox txtDireccion;
         
         /// <summary>
         /// Control txtHoraApertura.
@@ -55,7 +55,7 @@ namespace HayCancha.admin {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox txtHoraApertura;
+        protected global::System.Web.UI.WebControls.TextBox txtHoraApertura;
         
         /// <summary>
         /// Control txtHoraCierre.
@@ -64,7 +64,7 @@ namespace HayCancha.admin {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox txtHoraCierre;
+        protected global::System.Web.UI.WebControls.TextBox txtHoraCierre;
         
         /// <summary>
         /// Control btnGuardar.

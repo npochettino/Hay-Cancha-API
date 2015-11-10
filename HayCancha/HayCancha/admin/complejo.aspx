@@ -1,6 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/Site1.Master" AutoEventWireup="true" CodeBehind="complejo.aspx.cs" Inherits="HayCancha.admin.complejo" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/adminMaster.Master" AutoEventWireup="true" CodeBehind="complejo.aspx.cs" Inherits="HayCancha.admin.complejo" %>
 
 <%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
+
+<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dx" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -48,37 +51,36 @@
                                     <div class="form-body">
                                         <div class="form-group">
                                             <label>Nombre del Complejo</label>
-                                            <dx:ASPxTextBox type="text" class="form-control" placeholder="Nombre del Complejo"  runat="server" id="txtNombreComplejo"></dx:ASPxTextBox>
+                                            <asp:TextBox  type="text" class="form-control" placeholder="Nombre del Complejo"  runat="server" id="txtNombreComplejo"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
                                             <label>Teléfono</label>
-                                            <dx:ASPxTextBox type="text" class="form-control" placeholder="Telefono" runat="server" id="txtTelefono"></dx:ASPxTextBox>
+                                            <asp:TextBox type="text" class="form-control" placeholder="Telefono" runat="server" id="txtTelefono"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
                                             <label>Mail Complejo</label>
-                                            <dx:ASPxTextBox type="text" class="form-control" placeholder="Mail Complejo" runat="server" id="txtMailComplejo"></dx:ASPxTextBox>
+                                            <asp:TextBox type="text" class="form-control" placeholder="Mail Complejo" runat="server" id="txtMailComplejo"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Dirección</label>
                                             <div class="input-group">
-                                                <dx:ASPxTextBox type="text" class="form-control" id="txtDireccion" runat="server" placeholder="Dirección en Google Maps"></dx:ASPxTextBox>
-                                                <span class="input-group-addon">
-                                                    <i onclick="showGoogleMapsModal" class="fa fa-map-marker"></i>
+                                                <asp:TextBox type="text" class="form-control" id="txtDireccion" runat="server" placeholder="Dirección en Google Maps"></asp:TextBox>
+                                                <span onclick="showGoogleMapsModal()" class="input-group-addon">
+                                                    <i class="fa fa-map-marker"></i>
                                                 </span>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>Hora Apertura</label>
-                                            <dx:ASPxTextBox type="text" class="form-control" runat="server" id="txtHoraApertura" placeholder="Hora Apertura"></dx:ASPxTextBox>
+                                            <asp:TextBox type="text" class="form-control" runat="server" id="txtHoraApertura" placeholder="Hora Apertura"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
                                             <label>Hora Cierre</label>
-                                            <dx:ASPxTextBox type="text" class="form-control" runat="server" id="txtHoraCierre" placeholder="Hora Cierre"></dx:ASPxTextBox>
+                                            <asp:TextBox type="text" class="form-control" runat="server" id="txtHoraCierre" placeholder="Hora Cierre"></asp:TextBox>
                                         </div>
-
                                     </div>
                                     <div class="form-actions">
-                                        <asp:Button type="submit" class="btn blue" ID="btnGuardar" OnClick="btnGuardar_Click" runat="server" Text="Guardar" />
+                                        <asp:Button type="submit" class="btn blue" ID="btnGuardar" OnClientClick="return validateForm()" OnClick="btnGuardar_Click" runat="server" Text="Guardar" />
                                         <button type="button" class="btn default">Cancelar</button>
                                     </div>
                                 </form>
@@ -94,8 +96,18 @@
 
     <%--<object type="text/html" data="../template/google.html" style="overflow:hidden;" width="800" height="600"></object>--%>
 
+    <script type="text/javascript">
+        function validateForm() {
+            if (document.getElementById("ContentPlaceHolder1_txtNombreComplejo").value == "")
+                {alert("Debe Ingresar el nombre del complejo"); return false;}
+            return true;
+        }
 
+        function showGoogleMapsModal() {
+            alert("Show Modal Google Maps......");
+        }
 
+    </script>
     <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
     <!-- BEGIN CORE PLUGINS -->
     <!--[if lt IE 9]>

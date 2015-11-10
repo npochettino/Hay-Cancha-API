@@ -41,6 +41,10 @@
     <Reference Include="BibliotecaLogica">
       <HintPath>..\BibliotecaLogica\bin\Debug\BibliotecaLogica.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Data.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v14.1.Core, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v14.1.Core, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.ASPxThemes.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
@@ -4401,8 +4405,6 @@
     <Content Include="css\style.css" />
     <Content Include="template\maps_google.html" />
     <Content Include="template\ui_extended_modals.html" />
-    <Content Include="Web.config" />
-    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\canchas.aspx.cs">
@@ -4440,12 +4442,12 @@
     <Compile Include="admin\reservas.aspx.designer.cs">
       <DependentUpon>reservas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="admin\Site1.Master.cs">
-      <DependentUpon>Site1.Master</DependentUpon>
+    <Compile Include="admin\adminMaster.Master.cs">
+      <DependentUpon>adminMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\Site1.Master.designer.cs">
-      <DependentUpon>Site1.Master</DependentUpon>
+    <Compile Include="admin\adminMaster.Master.designer.cs">
+      <DependentUpon>adminMaster.Master</DependentUpon>
     </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
@@ -4472,13 +4474,6 @@
     <Compile Include="ServiciosWeb\HayCanchaSW.asmx.cs">
       <DependentUpon>HayCanchaSW.asmx</DependentUpon>
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -4794,7 +4789,7 @@
     <Content Include="admin\assets\global\plugins\typeahead\README.md" />
     <Content Include="admin\assets\global\plugins\uniform\css\uniform.default.scss" />
     <Content Include="admin\assets\global\plugins\uniform\README.md" />
-    <Content Include="admin\Site1.Master" />
+    <Content Include="admin\adminMaster.Master" />
     <Content Include="css\colors.php" />
     <Content Include="css\fonts\font-icons.eot" />
     <Content Include="css\fonts\font-icons.ttf" />
@@ -4881,12 +4876,6 @@
     <Content Include="less\widgets.less" />
     <Content Include="css\style.less" />
     <Content Include="packages.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="admin\assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
@@ -4894,6 +4883,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

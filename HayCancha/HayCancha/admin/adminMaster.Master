@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="HayCancha.admin.Site1" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="adminMaster.Master.cs" Inherits="HayCancha.admin.adminMaster" %>
 
 <!DOCTYPE html>
 <!-- 
@@ -86,80 +86,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                         <h3>Usted tiene <strong>nuevas</strong> reservas</h3>
                                         <a href="javascript:;">ver</a>
                                     </li>
-                                    <!--<li>
-								<ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
-									<li>
-										<a href="inbox.html?a=view">
-										<span class="photo">
-										<img src="assets/admin/layout3/img/avatar2.jpg" class="img-circle" alt="">
-										</span>
-										<span class="subject">
-										<span class="from">
-										Lisa Wong </span>
-										<span class="time">Just Now </span>
-										</span>
-										<span class="message">
-										Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-										</a>
-									</li>
-									<li>
-										<a href="inbox.html?a=view">
-										<span class="photo">
-										<img src="assets/admin/layout3/img/avatar3.jpg" class="img-circle" alt="">
-										</span>
-										<span class="subject">
-										<span class="from">
-										Richard Doe </span>
-										<span class="time">16 mins </span>
-										</span>
-										<span class="message">
-										Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-										</a>
-									</li>
-									<li>
-										<a href="inbox.html?a=view">
-										<span class="photo">
-										<img src="assets/admin/layout3/img/avatar1.jpg" class="img-circle" alt="">
-										</span>
-										<span class="subject">
-										<span class="from">
-										Bob Nilson </span>
-										<span class="time">2 hrs </span>
-										</span>
-										<span class="message">
-										Vivamus sed nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-										</a>
-									</li>
-									<li>
-										<a href="inbox.html?a=view">
-										<span class="photo">
-										<img src="assets/admin/layout3/img/avatar2.jpg" class="img-circle" alt="">
-										</span>
-										<span class="subject">
-										<span class="from">
-										Lisa Wong </span>
-										<span class="time">40 mins </span>
-										</span>
-										<span class="message">
-										Vivamus sed auctor 40% nibh congue nibh... </span>
-										</a>
-									</li>
-									<li>
-										<a href="inbox.html?a=view">
-										<span class="photo">
-										<img src="assets/admin/layout3/img/avatar3.jpg" class="img-circle" alt="">
-										</span>
-										<span class="subject">
-										<span class="from">
-										Richard Doe </span>
-										<span class="time">46 mins </span>
-										</span>
-										<span class="message">
-										Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-										</a>
-									</li>
-								</ul>
-							</li>-->
                                 </ul>
                             </li>
                             <!-- END INBOX DROPDOWN -->
@@ -180,9 +106,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     </li>
                                     <li class="divider"></li>
                                     <li>
-                                        <%--<a>
-                                            <i class="icon-key"></i>Log Out </a>
-                                        <asp:LinkButton runat="server" ID="lnkSalir" OnClick="lnkSalir" Text="Log Out"></asp:LinkButton>--%>
                                         <asp:LinkButton ID="lnkSalir" OnClick="lnkSalir_Click" runat="server">Log Out</asp:LinkButton>
                                     </li>
                                 </ul>
@@ -241,9 +164,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
         <!-- BEGIN JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) -->
         <!-- BEGIN CORE PLUGINS -->
         <!--[if lt IE 9]>
-<script src="assets/global/plugins/respond.min.js"></script>
-<script src="assets/global/plugins/excanvas.min.js"></script> 
-<![endif]-->
+        <script src="assets/global/plugins/respond.min.js"></script>
+        <script src="assets/global/plugins/excanvas.min.js"></script> 
+        <![endif]-->
         <script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
         <script src="assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
         <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
@@ -256,14 +179,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
         <script src="assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
         <!-- END CORE PLUGINS -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <!-- <script src="assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
-        <script src="assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
-        <script src="assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
-        <script src="assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
-        <script src="assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript"></script>
-        <script src="assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
-        <script src="assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script>
-        IMPORTANT! fullcalendar depends on jquery-ui.min.js for drag & drop support -->
         <script src="assets/global/plugins/morris/morris.min.js" type="text/javascript"></script>
         <script src="assets/global/plugins/morris/raphael-min.js" type="text/javascript"></script>
         <script src="assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
