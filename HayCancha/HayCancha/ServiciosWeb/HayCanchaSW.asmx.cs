@@ -48,7 +48,7 @@ namespace HayCancha.ServiciosWeb
             try
             {
                 DateTime fecha = Convert.ToDateTime(fechaStr);
-                DataTable tablaTurnos = ControladorTurnos.RecuperarTurnosPorRangoHorario(fecha, horaDesde, horaDesde, codigoUsuarioApp);
+                DataTable tablaTurnos = ControladorTurnos.RecuperarTurnosPorRangoHorario(fecha, horaDesde, horaHasta, codigoUsuarioApp);
                 return JsonConvert.SerializeObject(tablaTurnos);
             }
             catch (Exception ex)
