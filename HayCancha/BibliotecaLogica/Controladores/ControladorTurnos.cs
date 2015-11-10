@@ -46,7 +46,7 @@ namespace BibliotecaLogica.Controladores
                 {
                     foreach (Cancha cancha in listaCanchas)
                     {
-                        TurnoFijo turnoFijo = (from tf in listaTurnosFijos where tf.HoraDesde== i && tf.Cancha.Codigo == cancha.Codigo select tf).SingleOrDefault();
+                        TurnoFijo turnoFijo = (from tf in listaTurnosFijos where tf.HoraDesde == i && tf.Cancha.Codigo == cancha.Codigo select tf).SingleOrDefault();
 
                         if (turnoFijo == null)
                         {
@@ -65,6 +65,46 @@ namespace BibliotecaLogica.Controladores
                 }
 
                 return tablaTurnos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
+        public static void InsertarActualizarTurnoVariable(int codigoTurnoVariable, int codigoCancha, DateTime fechaHoraDesde, DateTime fechaHoraHasta, int codigoUsuarioApp, string observaciones, string responsable, double seña)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                TurnoVariable turno;
+
+                if (codigoTurnoVariable == 0)
+                {
+                    turno = new TurnoVariable();
+                }
+                else
+                {
+                    turno = CatalogoGenerico<TurnoVariable>.RecuperarPorCodigo(codigoTurnoVariable, nhSesion);
+                }
+
+                turno.Cancha = CatalogoGenerico<Cancha>.RecuperarPorCodigo(codigoCancha, nhSesion);
+                turno.FechaHoraDesde = fechaHoraDesde;
+                turno.FechaHoraHasta = fechaHoraHasta;
+                turno.Observaciones = observaciones;
+                turno.Responsable = responsable;
+                turno.Seña = seña;
+                turno.UsuarioApp = CatalogoGenerico<UsuarioApp>.RecuperarPorCodigo(codigoUsuarioApp, nhSesion);
+                turno.EstadoTurno = CatalogoGenerico<EstadoTurno>.RecuperarPorCodigo(Constantes.EstadosTurno.PENDIENTE, nhSesion);
+                turno.UsuarioWeb = null;
+
+                CatalogoGenerico<TurnoVariable>.InsertarActualizar(turno, nhSesion);
             }
             catch (Exception ex)
             {

@@ -18,5 +18,6 @@ namespace BibliotecaDatos.Clases
         public virtual Cancha Cancha { get; set; }
         public virtual UsuarioWeb UsuarioWeb { get; set; }
         public virtual UsuarioApp UsuarioApp { get; set; }
+        public virtual EstadoTurno EstadoTurno { get; set; }
     }
 }

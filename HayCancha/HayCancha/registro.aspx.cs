@@ -17,9 +17,9 @@ namespace HayCancha
 
         protected void btnRegistro_Click(object sender, EventArgs e)
         {
-            ControladorUsuarios.InsertarNuevoUsuarioWebConComplejo("","",txtEmail.Value,txtContraseña.Value,"","","","","","");
+            ControladorUsuarios.InsertarActualizarUsuarioWeb(0, string.Empty, string.Empty, txtEmail.Value, txtContraseña.Value);
             Session.Add("usuarioLogueado", txtEmail.Value);
-            Response.Redirect("admin\\complejo.aspx");            
+            Response.Redirect("admin\\complejo.aspx");
         }
     }
 }

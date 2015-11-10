@@ -95,7 +95,7 @@ namespace BibliotecaLogica.Controladores
 
         #region UsuarioWeb
 
-        public static void InsertarActualizarUsuario(int codigoUsuario, string nombre, string apellido, string mail, string contraseña)
+        public static void InsertarActualizarUsuarioWeb(int codigoUsuario, string nombre, string apellido, string mail, string contraseña)
         {
             ISession nhSesion = ManejoNHibernate.IniciarSesion();
 

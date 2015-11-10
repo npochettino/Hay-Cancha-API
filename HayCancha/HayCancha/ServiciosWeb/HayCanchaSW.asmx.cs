@@ -70,5 +70,36 @@ namespace HayCancha.ServiciosWeb
                 throw ex;
             }
         }
+
+        [WebMethod]
+        public string RecuperarComplejo(int codigoComplejo)
+        {
+            try
+            {
+                DataTable tablaComplejo = ControladorGeneral.RecuperarComplejo(codigoComplejo);
+                return JsonConvert.SerializeObject(tablaComplejo);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [WebMethod]
+        public string InsertarActualizarTurnoVariable(int codigoTurnoVariable, int codigoCancha, string fecha, int horaDesde, int HoraHasta, int codigoUsuarioApp, string observaciones)
+        {
+            try
+            {
+                DateTime fechaHoraDesde = Convert.ToDateTime(fecha + " " + horaDesde.ToString("00") + ":00:00");
+                DateTime fechaHoraHasta = Convert.ToDateTime(fecha + " " + HoraHasta.ToString("00") + ":00:00");
+
+                ControladorTurnos.InsertarActualizarTurnoVariable(codigoTurnoVariable, codigoCancha, fechaHoraDesde, fechaHoraHasta, codigoUsuarioApp, observaciones, string.Empty, 0.0);
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

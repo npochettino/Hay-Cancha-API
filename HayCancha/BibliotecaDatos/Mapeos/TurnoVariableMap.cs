@@ -21,6 +21,7 @@ namespace BibliotecaDatos.Mapeos
             Map(x => x.Observaciones).Column("observacion");
 
             References(x => x.UsuarioWeb).Column("codigoUsuarioWeb").Cascade.None().LazyLoad(Laziness.Proxy);
+            References(x => x.EstadoTurno).Column("codigoEstado").Cascade.None().LazyLoad(Laziness.Proxy);
             References(x => x.UsuarioApp).Column("codigoUsuarioApp").Cascade.None().LazyLoad(Laziness.Proxy);
             References(x => x.Cancha).Column("codigoCancha").Cascade.None().LazyLoad(Laziness.Proxy);
         }

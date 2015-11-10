@@ -157,6 +157,44 @@ namespace BibliotecaLogica.Controladores
             }
         }
 
+        public static DataTable RecuperarComplejo(int codigoComplejo)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                DataTable tablaComplejo = new DataTable();
+                tablaComplejo.Columns.Add("codigoComplejo");
+                tablaComplejo.Columns.Add("descripcion");
+                tablaComplejo.Columns.Add("direccion");
+                tablaComplejo.Columns.Add("horaApertura");
+                tablaComplejo.Columns.Add("horaCierre");
+                tablaComplejo.Columns.Add("latitud");
+                tablaComplejo.Columns.Add("longitud");
+                tablaComplejo.Columns.Add("mail");
+                tablaComplejo.Columns.Add("telefono");
+
+                Complejo complejo = CatalogoGenerico<Complejo>.RecuperarPorCodigo(codigoComplejo, nhSesion);
+
+                if (complejo != null)
+                {
+                    tablaComplejo.Rows.Add(new object[] { complejo.Codigo, complejo.Descripcion, complejo.Direccion, complejo.HoraApertura, complejo.HoraCierre,
+                        complejo.Latitud, complejo.Longitud, complejo.Mail, complejo.Telefono});
+                }
+
+                return tablaComplejo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
         #endregion
     }
 }
