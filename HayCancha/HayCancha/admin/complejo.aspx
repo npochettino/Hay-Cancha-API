@@ -1,10 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/adminMaster.Master" AutoEventWireup="true" CodeBehind="complejo.aspx.cs" Inherits="HayCancha.admin.complejo" %>
 
-<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
-
-<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dx" %>
-
-
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
@@ -51,20 +46,20 @@
                                     <div class="form-body">
                                         <div class="form-group">
                                             <label>Nombre del Complejo</label>
-                                            <asp:TextBox  type="text" class="form-control" placeholder="Nombre del Complejo"  runat="server" id="txtNombreComplejo"></asp:TextBox>
+                                            <asp:TextBox type="text" class="form-control" placeholder="Nombre del Complejo" runat="server" ID="txtNombreComplejo"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
                                             <label>Teléfono</label>
-                                            <asp:TextBox type="text" class="form-control" placeholder="Telefono" runat="server" id="txtTelefono"></asp:TextBox>
+                                            <asp:TextBox type="text" class="form-control" placeholder="Telefono" runat="server" ID="txtTelefono"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
                                             <label>Mail Complejo</label>
-                                            <asp:TextBox type="text" class="form-control" placeholder="Mail Complejo" runat="server" id="txtMailComplejo"></asp:TextBox>
+                                            <asp:TextBox type="text" class="form-control" placeholder="Mail Complejo" runat="server" ID="txtMailComplejo"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Dirección</label>
                                             <div class="input-group">
-                                                <asp:TextBox type="text" class="form-control" id="txtDireccion" runat="server" placeholder="Dirección en Google Maps"></asp:TextBox>
+                                                <asp:TextBox type="text" class="form-control" ID="txtDireccion" runat="server" placeholder="Dirección en Google Maps"></asp:TextBox>
                                                 <span onclick="showGoogleMapsModal()" class="input-group-addon">
                                                     <i class="fa fa-map-marker"></i>
                                                 </span>
@@ -72,11 +67,45 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Hora Apertura</label>
-                                            <asp:TextBox type="text" class="form-control" runat="server" id="txtHoraApertura" placeholder="Hora Apertura"></asp:TextBox>
+                                            <asp:DropDownList ID="ddlHoraApertura" class="form-control" runat="server">
+                                                <asp:ListItem Value="10" Text="10:00"></asp:ListItem>
+                                                <asp:ListItem Value="11" Text="11:00"></asp:ListItem>
+                                                <asp:ListItem Selected="True" Value="12" Text="12:00"></asp:ListItem>
+                                                <asp:ListItem Value="13" Text="13:00"></asp:ListItem>
+                                                <asp:ListItem Value="14" Text="14:00"></asp:ListItem>
+                                                <asp:ListItem Value="15" Text="15:00"></asp:ListItem>
+                                                <asp:ListItem Value="16" Text="16:00"></asp:ListItem>
+                                                <asp:ListItem Value="17" Text="17:00"></asp:ListItem>
+                                                <asp:ListItem Value="18" Text="18:00"></asp:ListItem>
+                                                <asp:ListItem Value="19" Text="19:00"></asp:ListItem>
+                                                <asp:ListItem Value="20" Text="20:00"></asp:ListItem>
+                                                <asp:ListItem Value="21" Text="21:00"></asp:ListItem>
+                                                <asp:ListItem Value="22" Text="22:00"></asp:ListItem>
+                                                <asp:ListItem Value="23" Text="23:00"></asp:ListItem>
+                                                <asp:ListItem Value="0" Text="00:00"></asp:ListItem>
+                                                <asp:ListItem Value="1" Text="01:00"></asp:ListItem>
+                                            </asp:DropDownList>
                                         </div>
                                         <div class="form-group">
                                             <label>Hora Cierre</label>
-                                            <asp:TextBox type="text" class="form-control" runat="server" id="txtHoraCierre" placeholder="Hora Cierre"></asp:TextBox>
+                                            <asp:DropDownList ID="ddlHoraCierre" class="form-control" runat="server">
+                                                <asp:ListItem Value="10" Text="10:00"></asp:ListItem>
+                                                <asp:ListItem Value="11" Text="11:00"></asp:ListItem>
+                                                <asp:ListItem Value="12" Text="12:00"></asp:ListItem>
+                                                <asp:ListItem Value="13" Text="13:00"></asp:ListItem>
+                                                <asp:ListItem Value="14" Text="14:00"></asp:ListItem>
+                                                <asp:ListItem Value="15" Text="15:00"></asp:ListItem>
+                                                <asp:ListItem Value="16" Text="16:00"></asp:ListItem>
+                                                <asp:ListItem Value="17" Text="17:00"></asp:ListItem>
+                                                <asp:ListItem Value="18" Text="18:00"></asp:ListItem>
+                                                <asp:ListItem Value="19" Text="19:00"></asp:ListItem>
+                                                <asp:ListItem Value="20" Text="20:00"></asp:ListItem>
+                                                <asp:ListItem Value="21" Text="21:00"></asp:ListItem>
+                                                <asp:ListItem Value="22" Text="22:00"></asp:ListItem>
+                                                <asp:ListItem Value="23" Text="23:00"></asp:ListItem>
+                                                <asp:ListItem Selected="True" Value="0" Text="00:00"></asp:ListItem>
+                                                <asp:ListItem Value="1" Text="01:00"></asp:ListItem>
+                                            </asp:DropDownList>
                                         </div>
                                     </div>
                                     <div class="form-actions">
@@ -99,7 +128,7 @@
     <script type="text/javascript">
         function validateForm() {
             if (document.getElementById("ContentPlaceHolder1_txtNombreComplejo").value == "")
-                {alert("Debe Ingresar el nombre del complejo"); return false;}
+            { alert("Debe Ingresar el nombre del complejo"); return false; }
             return true;
         }
 

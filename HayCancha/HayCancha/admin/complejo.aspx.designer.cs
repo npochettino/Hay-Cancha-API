@@ -49,22 +49,22 @@ namespace HayCancha.admin {
         protected global::System.Web.UI.WebControls.TextBox txtDireccion;
         
         /// <summary>
-        /// Control txtHoraApertura.
+        /// Control ddlHoraApertura.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHoraApertura;
+        protected global::System.Web.UI.WebControls.DropDownList ddlHoraApertura;
         
         /// <summary>
-        /// Control txtHoraCierre.
+        /// Control ddlHoraCierre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHoraCierre;
+        protected global::System.Web.UI.WebControls.DropDownList ddlHoraCierre;
         
         /// <summary>
         /// Control btnGuardar.

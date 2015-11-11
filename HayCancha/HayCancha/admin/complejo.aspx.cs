@@ -25,15 +25,15 @@ namespace HayCancha.admin
             txtNombreComplejo.Text = dtComplejoActual.Rows[0]["descripcionComplejo"].ToString();
             txtDireccion.Text = dtComplejoActual.Rows[0]["direccionComplejo"].ToString();
             txtTelefono.Text = dtComplejoActual.Rows[0]["telefonoComplejo"].ToString();
-            txtHoraApertura.Text = dtComplejoActual.Rows[0]["horaApertura"].ToString();
-            txtHoraCierre.Text = dtComplejoActual.Rows[0]["horaCierre"].ToString();
+            ddlHoraApertura.Text = dtComplejoActual.Rows[0]["horaApertura"].ToString();
+            ddlHoraCierre.Text = dtComplejoActual.Rows[0]["horaCierre"].ToString();
             txtMailComplejo.Text = dtComplejoActual.Rows[0]["mailComplejo"].ToString();
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             ControladorGeneral.InsertarActualizarComplejo(Convert.ToInt32(Session["codigoComplejo"].ToString()), txtNombreComplejo.Text, txtDireccion.Text,
-                txtHoraApertura.Text, txtHoraCierre.Text, txtMailComplejo.Text, txtTelefono.Text, Convert.ToDouble(34.5555), Convert.ToDouble(34.5555));
+                ddlHoraApertura.SelectedValue, ddlHoraCierre.SelectedValue, txtMailComplejo.Text, txtTelefono.Text, Convert.ToDouble(34.5555), Convert.ToDouble(34.5555));
         }
     }
 }

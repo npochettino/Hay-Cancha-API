@@ -63,12 +63,12 @@
                                                 <li class="active">
                                                     <a href="#tab_1_1" data-toggle="tab">Info Personal</a>
                                                 </li>
-                                                <li>
+                                                <%--<li>
                                                     <a href="#tab_1_2" data-toggle="tab">Cambiar Imagen</a>
                                                 </li>
                                                 <li>
                                                     <a href="#tab_1_3" data-toggle="tab">Cambiar Contraseña</a>
-                                                </li>
+                                                </li>--%>
                                             </ul>
                                         </div>
                                         <div class="portlet-body">
@@ -86,7 +86,19 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="control-label">Correo</label>
-                                                            <asp:TextBox type="text" placeholder="haycancha@sempait.com.ar" class="form-control disabled fc-state-disabled" ID="txtMailUsuario" runat="server"></asp:TextBox>
+                                                            <asp:TextBox type="text" placeholder="haycancha@sempait.com.ar" ReadOnly="true" class="form-control" ID="txtMailUsuario" runat="server"></asp:TextBox>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">Contraseña Actual</label>
+                                                            <asp:TextBox type="password" class="form-control" ID="txtPasswordUsuario" runat="server"></asp:TextBox>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">Nueva Contraseña</label>
+                                                            <asp:TextBox ID="txtNewPasswordUsuario" runat="server" type="password" class="form-control"></asp:TextBox>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">Repita Nueva Contraseña</label>
+                                                            <asp:TextBox type="password" class="form-control" ID="txtRepeatNewPasswordUsuario" runat="server"></asp:TextBox>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -124,25 +136,13 @@
                                                 <!-- CHANGE PASSWORD TAB -->
                                                 <div class="tab-pane" id="tab_1_3">
                                                     <form action="#">
-                                                        <div class="form-group">
-                                                            <label class="control-label">Contraseña Actual</label>
-                                                            <asp:TextBox type="password" class="form-control" ID="txtPasswordUsuario" runat="server"></asp:TextBox>
-                                                            <input  />
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="control-label">Nueva Contraseña</label>
-                                                            <asp:TextBox ID="txtNewPasswordUsuario" runat="server" type="password" class="form-control"></asp:TextBox>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="control-label">Repita Nueva Contraseña</label>
-                                                            <asp:TextBox type="password" class="form-control" ID="txtRepeatNewPasswordUsuario" runat="server"></asp:TextBox>
-                                                        </div>
+                                                        
                                                     </form>
                                                 </div>
                                                 <!-- END CHANGE PASSWORD TAB -->
                                             </div>
                                             <div class="margin-top-10">
-                                                <asp:Button class="btn green-haze" ID="btnGuardar" OnClick="btnGuardar_Click" runat="server" Text="Guardar" />
+                                                <asp:Button class="btn green-haze" ID="btnGuardar" OnClientClick="return validateForm()" OnClick="btnGuardar_Click" runat="server" Text="Guardar" />
                                                 <a href="javascript:;" class="btn default">Cancelar </a>
                                             </div>
                                         </div>
@@ -158,4 +158,20 @@
         </div>
         <!-- END PAGE CONTENT -->
     </div>
+
+       <script type="text/javascript">
+
+           //document.getElementById("ContentPlaceHolder1_txtMailUsuario").disabled = true;
+
+           function validateForm() {
+               if (document.getElementById("ContentPlaceHolder1_txtNewPasswordUsuario").value == "")
+               { alert("Debe Ingresar una contraseña"); return false; }
+               if (document.getElementById("ContentPlaceHolder1_txtRepeatNewPasswordUsuario").value == "")
+               { alert("Debe Ingresar una contraseña"); return false; }
+               if (document.getElementById("ContentPlaceHolder1_txtNewPasswordUsuario").value != document.getElementById("ContentPlaceHolder1_txtRepeatNewPasswordUsuario").value)
+               { alert("Las contraseñas no coinciden"); $("#ContentPlaceHolder1_txtNewPasswordUsuario").focus(); return false; }
+               return true;
+           }
+
+    </script>
 </asp:Content>
