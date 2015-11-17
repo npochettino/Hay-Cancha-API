@@ -7,64 +7,73 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace HayCancha.admin {
+namespace HayCancha.admin.usuario {
     
     
-    public partial class complejo {
+    public partial class perfil {
         
         /// <summary>
-        /// Control txtNombreComplejo.
+        /// Control lblNombreDelComplejo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreComplejo;
+        protected global::System.Web.UI.WebControls.Label lblNombreDelComplejo;
         
         /// <summary>
-        /// Control txtTelefono.
+        /// Control txtNombreUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTelefono;
+        protected global::System.Web.UI.WebControls.TextBox txtNombreUsuario;
         
         /// <summary>
-        /// Control txtMailComplejo.
+        /// Control txtApellidoUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMailComplejo;
+        protected global::System.Web.UI.WebControls.TextBox txtApellidoUsuario;
         
         /// <summary>
-        /// Control txtDireccion.
+        /// Control txtMailUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDireccion;
+        protected global::System.Web.UI.WebControls.TextBox txtMailUsuario;
         
         /// <summary>
-        /// Control ddlHoraApertura.
+        /// Control txtPasswordUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlHoraApertura;
+        protected global::System.Web.UI.WebControls.TextBox txtPasswordUsuario;
         
         /// <summary>
-        /// Control ddlHoraCierre.
+        /// Control txtNewPasswordUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlHoraCierre;
+        protected global::System.Web.UI.WebControls.TextBox txtNewPasswordUsuario;
+        
+        /// <summary>
+        /// Control txtRepeatNewPasswordUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRepeatNewPasswordUsuario;
         
         /// <summary>
         /// Control btnGuardar.

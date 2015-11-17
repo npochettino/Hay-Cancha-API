@@ -7,7 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BibliotecaLogica.Controladores;
 
-namespace HayCancha.admin
+namespace HayCancha.admin.complejo
 {
     public partial class complejo : System.Web.UI.Page
     {

@@ -1,7 +1,81 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/adminMaster.Master" AutoEventWireup="true" CodeBehind="complejo.aspx.cs" Inherits="HayCancha.admin.complejo" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/adminMaster.Master" AutoEventWireup="true" CodeBehind="complejo.aspx.cs" Inherits="HayCancha.admin.complejo.complejo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+
+    <style>
+        html, body
+        {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map
+        {
+            height: 100%;
+        }
+
+        .controls
+        {
+            margin-top: 10px;
+            border: 1px solid transparent;
+            border-radius: 2px 0 0 2px;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            height: 32px;
+            outline: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        #pac-input
+        {
+            background-color: #fff;
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+            margin-left: 12px;
+            padding: 0 11px 0 13px;
+            text-overflow: ellipsis;
+            width: 300px;
+        }
+
+            #pac-input:focus
+            {
+                border-color: #4d90fe;
+            }
+
+        .pac-container
+        {
+            font-family: Roboto;
+        }
+
+        #type-selector
+        {
+            color: #fff;
+            background-color: #4d90fe;
+            padding: 5px 11px 0px 11px;
+        }
+
+            #type-selector label
+            {
+                font-family: Roboto;
+                font-size: 13px;
+                font-weight: 300;
+            }
+    </style>
+    <style>
+        #target
+        {
+            width: 345px;
+        }
+    </style>
+
+
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="../../admin/assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />
+    <link href="../../admin/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL STYLES -->
 
     <div class="page-container">
         <!-- BEGIN PAGE HEAD -->
@@ -21,7 +95,7 @@
                 <!-- BEGIN PAGE BREADCRUMB -->
                 <ul class="page-breadcrumb breadcrumb">
                     <li>
-                        <a href="index.aspx">Inicio</a><i class="fa fa-circle"></i>
+                        <a href="../../admin/index.aspx">Inicio</a><i class="fa fa-circle"></i>
                     </li>
                     <li class="active">Complejo
                     </li>
@@ -125,6 +199,97 @@
 
     <%--<object type="text/html" data="../template/google.html" style="overflow:hidden;" width="800" height="600"></object>--%>
 
+    <!--Init Modal Form Google Maps
+      ============================================-->
+
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    
+    <label id="direccion"></label>
+    <div id="map"></div>
+    <script>
+        // This example adds a search box to a map, using the Google Place Autocomplete
+        // feature. People can enter geographical searches. The search box will return a
+        // pick list containing a mix of places and predicted search terms.
+
+        function initAutocomplete() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: -32.9522253, lng: -60.8382453 },
+                zoom: 10,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            // Create the search box and link it to the UI element.
+            var input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener('bounds_changed', function () {
+                searchBox.setBounds(map.getBounds());
+            });
+
+            var markers = [];
+            // [START region_getplaces]
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            searchBox.addListener('places_changed', function () {
+                var places = searchBox.getPlaces();
+
+                if (places.length == 0) {
+                    return;
+                }
+
+                // Clear out the old markers.
+                markers.forEach(function (marker) {
+                    marker.setMap(null);
+                });
+                markers = [];
+
+                // For each place, get the icon, name and location.
+                var bounds = new google.maps.LatLngBounds();
+                places.forEach(function (place) {
+                    var icon = {
+                        url: place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(25, 25)
+                    };
+
+                    // Create a marker for each place.
+                    markers.push(new google.maps.Marker({
+                        map: map,
+                        icon: icon,
+                        title: place.name,
+                        position: place.geometry.location,
+                    }));
+
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+            // [END region_getplaces]
+        }
+
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzdnFhHd9eZW0l8Z_MVRacUMk6Janm9ls&libraries=places&callback=initAutocomplete" async defer></script>
+
+
+
+
+
+
+    <!--  Init Modal Form Google Maps
+      ============================================-->
+
+
+
     <script type="text/javascript">
         function validateForm() {
             if (document.getElementById("ContentPlaceHolder1_txtNombreComplejo").value == "")
@@ -137,34 +302,19 @@
         }
 
     </script>
-    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-    <!-- BEGIN CORE PLUGINS -->
-    <!--[if lt IE 9]>
-    <script src="assets/global/plugins/respond.min.js"></script>
-    <script src="assets/global/plugins/excanvas.min.js"></script> 
-    <![endif]-->
-    <script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-    <script src="assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-    <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-    <script src="assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-    <script src="assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <script src="assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-    <script src="assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
-    <script src="assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-    <!-- END CORE PLUGINS -->
 
+    <script src="../../admin/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="../../admin/assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="../../admin/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+    <script src="../../admin/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="assets/global/scripts/metronic.js" type="text/javascript"></script>
-    <script src="assets/admin/layout3/scripts/layout.js" type="text/javascript"></script>
-    <script src="assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
+    <script src="../../admin/assets/admin/pages/scripts/ui-extended-modals.js"></script>
     <!-- END PAGE LEVEL SCRIPTS -->
     <script>
         jQuery(document).ready(function () {
-            Metronic.init(); // init metronic core components
-            Layout.init(); // init current layout
-            Demo.init(); // init demo features
+            UIExtendedModals.init();
         });
     </script>
     <!-- END JAVASCRIPTS -->

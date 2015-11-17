@@ -52,6 +52,43 @@ namespace BibliotecaLogica.Controladores
             }
         }
 
+        public static DataTable RecuperarCanchasPorComplejo(int codigoComplejo)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                DataTable tablaCanchas = new DataTable();
+                tablaCanchas.Columns.Add("codigoComplejo");
+                tablaCanchas.Columns.Add("codigoCancha");
+                tablaCanchas.Columns.Add("descripcion");
+                tablaCanchas.Columns.Add("precioMañana");
+                tablaCanchas.Columns.Add("precioTarde");
+                tablaCanchas.Columns.Add("precioNoche");
+                tablaCanchas.Columns.Add("codigoTipoCancha");
+                tablaCanchas.Columns.Add("descripcionTipoCancha");
+
+                Cancha canchas = CatalogoGenerico<Cancha>.RecuperarPorCodigo(codigoComplejo, nhSesion);
+
+                if (canchas != null)
+                {
+                    tablaCanchas.Rows.Add(new object[] { canchas.Complejo.Codigo, canchas.Codigo, canchas.Descripcion, canchas.PrecioMañana, canchas.PrecioTarde,canchas.PrecioNoche,
+                        canchas.TipoCancha.Codigo,canchas.TipoCancha.Descripcion});
+                }
+
+                return tablaCanchas;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
         #endregion
 
         #region Posicion

@@ -7,10 +7,10 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace HayCancha.admin {
+namespace HayCancha.admin.canchas {
     
     
-    public partial class canchas {
+    public partial class listado {
         
         /// <summary>
         /// Control btnNuevo.
@@ -20,6 +20,15 @@ namespace HayCancha.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnNuevo;
+        
+        /// <summary>
+        /// Control btnEditar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEditar;
         
         /// <summary>
         /// Control btnEliminar.
@@ -40,12 +49,12 @@ namespace HayCancha.admin {
         protected global::System.Web.UI.WebControls.Button btnConsultar;
         
         /// <summary>
-        /// Control gvCancha.
+        /// Control gvCanchas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxGridView.ASPxGridView gvCancha;
+        protected global::DevExpress.Web.ASPxGridView.ASPxGridView gvCanchas;
     }
 }

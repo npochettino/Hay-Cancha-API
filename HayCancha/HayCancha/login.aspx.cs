@@ -24,6 +24,9 @@ namespace HayCancha
             {
                 Session.Add("contraseñaUsuarioActual", dtUsuarioActual.Rows[0]["contraseña"].ToString());
                 Session.Add("mailUsuarioActual", dtUsuarioActual.Rows[0]["mail"].ToString());
+                Session.Add("codigoUsuario", dtUsuarioActual.Rows[0]["codigoUsuario"]);
+                Session.Add("codigoComplejo", dtUsuarioActual.Rows[0]["codigoComplejo"]);
+
                 Response.Redirect("admin\\index.aspx");
             }
             else

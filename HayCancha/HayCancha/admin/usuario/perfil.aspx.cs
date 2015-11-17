@@ -7,7 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BibliotecaLogica.Controladores;
 
-namespace HayCancha.admin
+namespace HayCancha.admin.usuario
 {
     public partial class perfil : System.Web.UI.Page
     {

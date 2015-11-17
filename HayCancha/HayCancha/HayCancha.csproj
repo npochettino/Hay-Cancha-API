@@ -4170,11 +4170,14 @@
     <Content Include="admin\assets\global\plugins\zoom\jquery.zoom.min.js" />
     <Content Include="admin\assets\global\scripts\datatable.js" />
     <Content Include="admin\assets\global\scripts\metronic.js" />
-    <Content Include="admin\canchas.aspx" />
-    <Content Include="admin\complejo.aspx" />
+    <Content Include="admin\canchas\cancha.aspx" />
+    <Content Include="admin\canchas\listado.aspx" />
+    <Content Include="admin\complejo\complejo.aspx" />
+    <Content Include="admin\map2.html" />
     <Content Include="admin\index.aspx" />
+    <Content Include="admin\map.html" />
     <Content Include="admin\test.html" />
-    <Content Include="admin\perfil.aspx" />
+    <Content Include="admin\usuario\perfil.aspx" />
     <Content Include="admin\reservas.aspx" />
     <Content Include="css\animate.css" />
     <Content Include="css\bootstrap.css" />
@@ -4404,21 +4407,28 @@
     <Content Include="css\style-import.css" />
     <Content Include="css\style.css" />
     <Content Include="template\maps_google.html" />
-    <Content Include="template\ui_extended_modals.html" />
+    <Content Include="admin\modals.html" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="admin\canchas.aspx.cs">
-      <DependentUpon>canchas.aspx</DependentUpon>
+    <Compile Include="admin\canchas\cancha.aspx.cs">
+      <DependentUpon>cancha.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\canchas.aspx.designer.cs">
-      <DependentUpon>canchas.aspx</DependentUpon>
+    <Compile Include="admin\canchas\cancha.aspx.designer.cs">
+      <DependentUpon>cancha.aspx</DependentUpon>
     </Compile>
-    <Compile Include="admin\complejo.aspx.cs">
+    <Compile Include="admin\canchas\listado.aspx.cs">
+      <DependentUpon>listado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\canchas\listado.aspx.designer.cs">
+      <DependentUpon>listado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\complejo\complejo.aspx.cs">
       <DependentUpon>complejo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\complejo.aspx.designer.cs">
+    <Compile Include="admin\complejo\complejo.aspx.designer.cs">
       <DependentUpon>complejo.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\index.aspx.cs">
@@ -4428,11 +4438,11 @@
     <Compile Include="admin\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="admin\perfil.aspx.cs">
+    <Compile Include="admin\usuario\perfil.aspx.cs">
       <DependentUpon>perfil.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\perfil.aspx.designer.cs">
+    <Compile Include="admin\usuario\perfil.aspx.designer.cs">
       <DependentUpon>perfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\reservas.aspx.cs">
@@ -4879,6 +4889,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="admin\assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
+    <Folder Include="admin\reservas\" />
     <Folder Include="include\twitter\cache\" />
   </ItemGroup>
   <ItemGroup>
@@ -4892,6 +4903,12 @@
     <None Include="web.Release.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BibliotecaDatos\BibliotecaDatos.csproj">
+      <Project>{eb86356d-d667-40ea-aa77-77d077320750}</Project>
+      <Name>BibliotecaDatos</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
