@@ -60,15 +60,15 @@ namespace BibliotecaLogica.Controladores
             try
             {
                 DataTable tablaUsuario = new DataTable();
-                tablaUsuario.Columns.Add("codigoUsuario");
-                tablaUsuario.Columns.Add("nombre");
-                tablaUsuario.Columns.Add("apellido");
-                tablaUsuario.Columns.Add("mail");
-                tablaUsuario.Columns.Add("contraseña");
-                tablaUsuario.Columns.Add("telefono");
-                tablaUsuario.Columns.Add("codigoPosicion");
-                tablaUsuario.Columns.Add("descripcionPosicion");
-                tablaUsuario.Columns.Add("isActivo");
+                tablaUsuario.Columns.Add("codigoUsuario", typeof(int));
+                tablaUsuario.Columns.Add("nombre", typeof(string));
+                tablaUsuario.Columns.Add("apellido", typeof(string));
+                tablaUsuario.Columns.Add("mail", typeof(string));
+                tablaUsuario.Columns.Add("contraseña", typeof(string));
+                tablaUsuario.Columns.Add("telefono", typeof(string));
+                tablaUsuario.Columns.Add("codigoPosicion", typeof(int));
+                tablaUsuario.Columns.Add("descripcionPosicion", typeof(string));
+                tablaUsuario.Columns.Add("isActivo", typeof(bool));
 
                 UsuarioApp usuario = CatalogoGenerico<UsuarioApp>.RecuperarPor(x => x.Mail == mail && x.Contraseña == contraseña, nhSesion);
 
@@ -108,11 +108,11 @@ namespace BibliotecaLogica.Controladores
                     usuario = new UsuarioWeb();
 
                     Complejo complejo = new Complejo();
-                    
+
                     complejo.Descripcion = "";
                     complejo.Direccion = "";
-                    complejo.HoraApertura = "";
-                    complejo.HoraCierre = "";
+                    complejo.HoraApertura = 0;
+                    complejo.HoraCierre = 0;
                     complejo.Mail = "";
                     complejo.Telefono = "";
 

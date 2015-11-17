@@ -86,6 +86,20 @@ namespace HayCancha.ServiciosWeb
         }
 
         [WebMethod]
+        public string RecuperarTodosComplejos()
+        {
+            try
+            {
+                DataTable tablaComplejos = ControladorGeneral.RecuperarTodosComplejos();
+                return JsonConvert.SerializeObject(tablaComplejos);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [WebMethod]
         public string InsertarActualizarTurnoVariable(int codigoTurnoVariable, int codigoCancha, string fecha, int horaDesde, int horaHasta, int codigoUsuarioApp, string observaciones)
         {
             try
@@ -102,6 +116,34 @@ namespace HayCancha.ServiciosWeb
                 {
                     return "turnoOcupado";
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [WebMethod]
+        public string RecuperarValoracionesComplejo(int codigoComplejo)
+        {
+            try
+            {
+                DataTable tablaTurnos = ControladorGeneral.RecuperarValoracionesComplejo(codigoComplejo);
+                return JsonConvert.SerializeObject(tablaTurnos);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [WebMethod]
+        public string InsertarActualizarValoracionComplejo(int codigoComplejo, int puntaje, int codigoUsuarioApp, string comentario, string titulo)
+        {
+            try
+            {
+                ControladorGeneral.InsertarActualizarValoracionComplejo(puntaje, titulo, comentario, codigoComplejo, codigoUsuarioApp);
+                return JsonConvert.SerializeObject("ok");
             }
             catch (Exception ex)
             {

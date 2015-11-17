@@ -33,7 +33,7 @@ namespace HayCancha.admin
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             ControladorGeneral.InsertarActualizarComplejo(Convert.ToInt32(Session["codigoComplejo"].ToString()), txtNombreComplejo.Text, txtDireccion.Text,
-                ddlHoraApertura.SelectedValue, ddlHoraCierre.SelectedValue, txtMailComplejo.Text, txtTelefono.Text, Convert.ToDouble(34.5555), Convert.ToDouble(34.5555));
+                Convert.ToInt32(ddlHoraApertura.SelectedValue), Convert.ToInt32(ddlHoraCierre.SelectedValue), txtMailComplejo.Text, txtTelefono.Text, Convert.ToDouble(34.5555), Convert.ToDouble(34.5555));
         }
     }
 }

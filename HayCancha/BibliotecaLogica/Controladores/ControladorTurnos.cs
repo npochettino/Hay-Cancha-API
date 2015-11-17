@@ -20,21 +20,21 @@ namespace BibliotecaLogica.Controladores
             try
             {
                 DataTable tablaTurnos = new DataTable();
-                tablaTurnos.Columns.Add("horaDesde");
-                tablaTurnos.Columns.Add("horaHasta");
-                tablaTurnos.Columns.Add("codigoCancha");
-                tablaTurnos.Columns.Add("descripcionCancha");
-                tablaTurnos.Columns.Add("codigoTipoCancha");
-                tablaTurnos.Columns.Add("descripcionTipoCancha");
-                tablaTurnos.Columns.Add("codigoComplejo");
-                tablaTurnos.Columns.Add("descripcionComplejo");
-                tablaTurnos.Columns.Add("imagenComplejo");
-                tablaTurnos.Columns.Add("isFavorito");
-                tablaTurnos.Columns.Add("precio");
-                tablaTurnos.Columns.Add("direccion");
-                tablaTurnos.Columns.Add("puntajeComplejo");
-                tablaTurnos.Columns.Add("latitud");
-                tablaTurnos.Columns.Add("longitud");
+                tablaTurnos.Columns.Add("horaDesde", typeof(int));
+                tablaTurnos.Columns.Add("horaHasta", typeof(int));
+                tablaTurnos.Columns.Add("codigoCancha", typeof(int));
+                tablaTurnos.Columns.Add("descripcionCancha", typeof(string));
+                tablaTurnos.Columns.Add("codigoTipoCancha", typeof(int));
+                tablaTurnos.Columns.Add("descripcionTipoCancha", typeof(string));
+                tablaTurnos.Columns.Add("codigoComplejo", typeof(int));
+                tablaTurnos.Columns.Add("descripcionComplejo", typeof(string));
+                tablaTurnos.Columns.Add("imagenComplejo", typeof(string));
+                tablaTurnos.Columns.Add("isFavorito", typeof(bool));
+                tablaTurnos.Columns.Add("precio", typeof(double));
+                tablaTurnos.Columns.Add("direccion", typeof(string));
+                tablaTurnos.Columns.Add("puntajeComplejo", typeof(int));
+                tablaTurnos.Columns.Add("latitud", typeof(double));
+                tablaTurnos.Columns.Add("longitud", typeof(double));
 
                 UsuarioApp usuarioApp = CatalogoGenerico<UsuarioApp>.RecuperarPorCodigo(codigoUsuarioApp, nhSesion);
 

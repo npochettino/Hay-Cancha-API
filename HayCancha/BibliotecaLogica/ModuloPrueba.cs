@@ -12,7 +12,7 @@ namespace BibliotecaLogica
     {
         static void Main()
         {
-            ControladorTurnos.RecuperarTurnosPorRangoHorario(DateTime.Now, 16, 20, 1);
+
         }
     }
 }

@@ -69,6 +69,7 @@
     <Compile Include="Clases\TurnoVariable.cs" />
     <Compile Include="Clases\UsuarioApp.cs" />
     <Compile Include="Clases\UsuarioWeb.cs" />
+    <Compile Include="Clases\ValoracionComplejo.cs" />
     <Compile Include="Clases\ValoracionUsuarioApp.cs" />
     <Compile Include="Mapeos\CanchaMap.cs" />
     <Compile Include="Mapeos\ComplejoMap.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Mapeos\TurnoVariableMap.cs" />
     <Compile Include="Mapeos\UsuarioAppMap.cs" />
     <Compile Include="Mapeos\UsuarioWebMap.cs" />
+    <Compile Include="Mapeos\ValoracionComplejoMap.cs" />
     <Compile Include="Mapeos\ValoracionUsuarioAppMap.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

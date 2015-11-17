@@ -63,8 +63,8 @@ namespace BibliotecaLogica.Controladores
             try
             {
                 DataTable tablaPosiciones = new DataTable();
-                tablaPosiciones.Columns.Add("codigo");
-                tablaPosiciones.Columns.Add("descripcion");
+                tablaPosiciones.Columns.Add("codigo", typeof(int));
+                tablaPosiciones.Columns.Add("descripcion", typeof(string));
 
                 List<Posicion> listaPosiciones = CatalogoGenerico<Posicion>.RecuperarTodos(nhSesion);
 
@@ -118,7 +118,7 @@ namespace BibliotecaLogica.Controladores
 
         #region Complejo
 
-        public static void InsertarActualizarComplejo(int codigoComplejo, string descripcion, string direccion, string horaApertura, string horaCierre, string mail, string telefono, double latitud, double longitud)
+        public static void InsertarActualizarComplejo(int codigoComplejo, string descripcion, string direccion, int horaApertura, int horaCierre, string mail, string telefono, double latitud, double longitud)
         {
             ISession nhSesion = ManejoNHibernate.IniciarSesion();
 
@@ -164,25 +164,142 @@ namespace BibliotecaLogica.Controladores
             try
             {
                 DataTable tablaComplejo = new DataTable();
-                tablaComplejo.Columns.Add("codigoComplejo");
-                tablaComplejo.Columns.Add("descripcion");
-                tablaComplejo.Columns.Add("direccion");
-                tablaComplejo.Columns.Add("horaApertura");
-                tablaComplejo.Columns.Add("horaCierre");
-                tablaComplejo.Columns.Add("latitud");
-                tablaComplejo.Columns.Add("longitud");
-                tablaComplejo.Columns.Add("mail");
-                tablaComplejo.Columns.Add("telefono");
+                tablaComplejo.Columns.Add("codigoComplejo", typeof(int));
+                tablaComplejo.Columns.Add("descripcion", typeof(string));
+                tablaComplejo.Columns.Add("direccion", typeof(string));
+                tablaComplejo.Columns.Add("horaApertura", typeof(int));
+                tablaComplejo.Columns.Add("horaCierre", typeof(int));
+                tablaComplejo.Columns.Add("latitud", typeof(double));
+                tablaComplejo.Columns.Add("longitud", typeof(double));
+                tablaComplejo.Columns.Add("mail", typeof(string));
+                tablaComplejo.Columns.Add("telefono", typeof(string));
 
                 Complejo complejo = CatalogoGenerico<Complejo>.RecuperarPorCodigo(codigoComplejo, nhSesion);
 
                 if (complejo != null)
                 {
                     tablaComplejo.Rows.Add(new object[] { complejo.Codigo, complejo.Descripcion, complejo.Direccion, complejo.HoraApertura, complejo.HoraCierre,
-                        complejo.Latitud, complejo.Longitud, complejo.Mail, complejo.Telefono});
+                        complejo.Latitud, complejo.Longitud, complejo.Mail, complejo.Telefono });
                 }
 
                 return tablaComplejo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
+        public static DataTable RecuperarTodosComplejos()
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                DataTable tablaComplejos = new DataTable();
+                tablaComplejos.Columns.Add("codigoComplejo", typeof(int));
+                tablaComplejos.Columns.Add("descripcion", typeof(string));
+                tablaComplejos.Columns.Add("direccion", typeof(string));
+                tablaComplejos.Columns.Add("horaApertura", typeof(int));
+                tablaComplejos.Columns.Add("horaCierre", typeof(int));
+                tablaComplejos.Columns.Add("latitud", typeof(double));
+                tablaComplejos.Columns.Add("longitud", typeof(double));
+                tablaComplejos.Columns.Add("mail", typeof(string));
+                tablaComplejos.Columns.Add("telefono", typeof(string));
+
+                List<Complejo> listaComplejos = CatalogoGenerico<Complejo>.RecuperarTodos(nhSesion);
+
+                if (listaComplejos != null)
+                {
+                    listaComplejos.Aggregate(tablaComplejos, (dt, r) =>
+                    {
+                        dt.Rows.Add(r.Codigo, r.Descripcion, r.Direccion, r.HoraApertura, r.HoraCierre,
+                            r.Latitud, r.Longitud, r.Mail, r.Telefono); return dt;
+                    });
+                }
+
+                return tablaComplejos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
+        #endregion
+
+        #region ValoracionComplejo
+
+        public static DataTable RecuperarValoracionesComplejo(int codigoComplejo)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                DataTable tablaValoracionesComplejo = new DataTable();
+                tablaValoracionesComplejo.Columns.Add("codigoComplejo", typeof(int));
+                tablaValoracionesComplejo.Columns.Add("descripcion", typeof(string));
+                tablaValoracionesComplejo.Columns.Add("puntaje", typeof(int));
+                tablaValoracionesComplejo.Columns.Add("comentario", typeof(string));
+                tablaValoracionesComplejo.Columns.Add("titulo", typeof(string));
+                tablaValoracionesComplejo.Columns.Add("fechaHoraValoracion", typeof(DateTime));
+                tablaValoracionesComplejo.Columns.Add("codigoUsuarioApp", typeof(int));
+                tablaValoracionesComplejo.Columns.Add("nombreApellidoUsuarioApp", typeof(string));
+
+                Complejo complejo = CatalogoGenerico<Complejo>.RecuperarPorCodigo(codigoComplejo, nhSesion);
+
+                complejo.ValoracionesComplejo.Aggregate(tablaValoracionesComplejo, (dt, r) =>
+                {
+                    dt.Rows.Add(complejo.Codigo, complejo.Descripcion, r.Puntaje, r.Comentario, r.Titulo, r.FechaHoraValoracionComplejo,
+                        r.UsuarioApp.Codigo, r.UsuarioApp.Nombre + " " + r.UsuarioApp.Apellido); return dt;
+                });
+
+                return tablaValoracionesComplejo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
+        public static void InsertarActualizarValoracionComplejo(int puntaje, string titulo, string comentario, int codigoComplejo, int codigoUsuarioApp)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                Complejo complejo = CatalogoGenerico<Complejo>.RecuperarPorCodigo(codigoComplejo, nhSesion);
+
+                ValoracionComplejo valCom = complejo.ValoracionesComplejo.Where(x => x.UsuarioApp.Codigo == codigoUsuarioApp).SingleOrDefault();
+
+                if (valCom == null)
+                {
+                    valCom = new ValoracionComplejo();
+                    complejo.ValoracionesComplejo.Add(valCom);
+                }
+
+                valCom.Comentario = comentario;
+                valCom.Puntaje = puntaje;
+                valCom.Titulo = titulo;
+                valCom.FechaHoraValoracionComplejo = DateTime.Now;
+                valCom.UsuarioApp = CatalogoGenerico<UsuarioApp>.RecuperarPorCodigo(codigoUsuarioApp, nhSesion);
+
+                CatalogoGenerico<Complejo>.InsertarActualizar(complejo, nhSesion);
             }
             catch (Exception ex)
             {
