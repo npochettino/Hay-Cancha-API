@@ -86,15 +86,22 @@ namespace HayCancha.ServiciosWeb
         }
 
         [WebMethod]
-        public string InsertarActualizarTurnoVariable(int codigoTurnoVariable, int codigoCancha, string fecha, int horaDesde, int HoraHasta, int codigoUsuarioApp, string observaciones)
+        public string InsertarActualizarTurnoVariable(int codigoTurnoVariable, int codigoCancha, string fecha, int horaDesde, int horaHasta, int codigoUsuarioApp, string observaciones)
         {
             try
             {
                 DateTime fechaHoraDesde = Convert.ToDateTime(fecha + " " + horaDesde.ToString("00") + ":00:00");
-                DateTime fechaHoraHasta = Convert.ToDateTime(fecha + " " + HoraHasta.ToString("00") + ":00:00");
+                DateTime fechaHoraHasta = Convert.ToDateTime(fecha + " " + horaHasta.ToString("00") + ":00:00");
 
-                ControladorTurnos.InsertarActualizarTurnoVariable(codigoTurnoVariable, codigoCancha, fechaHoraDesde, fechaHoraHasta, codigoUsuarioApp, observaciones, string.Empty, 0.0);
-                return "ok";
+                if (ControladorTurnos.ValidarTurnoDesocupado(fechaHoraDesde, fechaHoraHasta, codigoCancha))
+                {
+                    ControladorTurnos.InsertarActualizarTurnoVariable(codigoTurnoVariable, codigoCancha, fechaHoraDesde, fechaHoraHasta, codigoUsuarioApp, observaciones, string.Empty, 0.0);
+                    return "ok";
+                }
+                else
+                {
+                    return "turnoOcupado";
+                }
             }
             catch (Exception ex)
             {

@@ -116,5 +116,40 @@ namespace BibliotecaLogica.Controladores
                 nhSesion.Dispose();
             }
         }
+
+        public static bool ValidarTurnoDesocupado(DateTime fechaHoraDesde, DateTime fechaHoraHasta, int codigoCancha)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                TurnoVariable turnoV = CatalogoTurnoVariable.RecuperarTurnoPorCanchaYFechas(fechaHoraDesde, fechaHoraHasta, codigoCancha, nhSesion);
+
+                if (turnoV != null)
+                {
+                    return false;
+                }
+                else
+                {
+                    TurnoFijo turnoF = CatalogoGenerico<TurnoFijo>.RecuperarPor(x => x.Cancha.Codigo == codigoCancha && x.FechaHasta == null && x.CodigoDiaSemana == Convert.ToInt32(fechaHoraDesde.DayOfWeek) && x.HoraDesde <= fechaHoraDesde.Hour && x.HoraHasta >= fechaHoraHasta.Hour, nhSesion);
+
+                    if (turnoF != null)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
     }
 }

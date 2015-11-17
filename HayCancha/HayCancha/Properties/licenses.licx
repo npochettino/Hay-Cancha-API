@@ -2,3 +2,4 @@ DevExpress.Patch.InMemoryPatch, DevExpress.Patch.Common, Version=6.2.0.0, Cultur
 DevExpress.Web.ASPxEditors.ASPxTimeEdit, DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
 DevExpress.Web.ASPxGridView.ASPxGridView, DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
 DevExpress.Web.ASPxEditors.ASPxTextBox, DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
+DevExpress.Registration.LicenseHelper, DevExpress.Registration, Version=12.2.4.0, Culture=neutral, PublicKeyToken=940cfcde86f32efd
