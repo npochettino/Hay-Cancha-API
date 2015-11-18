@@ -20,8 +20,8 @@ namespace BibliotecaDatos.Clases
         public virtual string Mail { get; set; }
         public virtual int HoraApertura { get; set; }
         public virtual int HoraCierre { get; set; }
-        public virtual double Latitud { get; set; }
-        public virtual double Longitud { get; set; }
+        public virtual Decimal Latitud { get; set; }
+        public virtual Decimal Longitud { get; set; }
 
         public virtual IList<ValoracionComplejo> ValoracionesComplejo { get; set; }
     }

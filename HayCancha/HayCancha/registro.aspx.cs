@@ -20,7 +20,8 @@ namespace HayCancha
             ControladorUsuarios.InsertarActualizarUsuarioWeb(0, string.Empty, string.Empty, txtEmail.Value, txtContraseña.Value);
             Session.Add("contraseñaUsuarioActual", txtContraseña.Value);
             Session.Add("mailUsuarioActual", txtEmail.Value);
-            Response.Redirect("admin\\complejo.aspx");    
+            //Response.Redirect("bienvenido.aspx");
+            Response.Redirect("login.aspx");    
         }
     }
 }

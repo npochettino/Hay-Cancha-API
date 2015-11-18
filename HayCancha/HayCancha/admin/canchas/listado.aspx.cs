@@ -28,6 +28,7 @@ namespace HayCancha.admin.canchas
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
+            Session["canchaActual"] = null;
             Response.Redirect("cancha.aspx");
         }
 
@@ -56,8 +57,11 @@ namespace HayCancha.admin.canchas
             canchaActual.PrecioMañana = Convert.ToDouble(gvCanchas.GetRowValues(gvCanchas.FocusedRowIndex, "precioMañana"));
             canchaActual.PrecioTarde = Convert.ToDouble(gvCanchas.GetRowValues(gvCanchas.FocusedRowIndex, "precioTarde"));
             canchaActual.PrecioNoche = Convert.ToDouble(gvCanchas.GetRowValues(gvCanchas.FocusedRowIndex, "precioMañana"));
-            canchaActual.TipoCancha.Codigo = int.Parse(gvCanchas.GetRowValues(gvCanchas.FocusedRowIndex, "codigoTipoCancha").ToString());
-            canchaActual.TipoCancha.Descripcion = gvCanchas.GetRowValues(gvCanchas.FocusedRowIndex, "descripcionTipoCancha").ToString();
+            
+            TipoCancha tpActual = new TipoCancha();
+            tpActual.Codigo = int.Parse(gvCanchas.GetRowValues(gvCanchas.FocusedRowIndex, "codigoTipoCancha").ToString());
+            tpActual.Descripcion = gvCanchas.GetRowValues(gvCanchas.FocusedRowIndex, "descripcionTipoCancha").ToString();
+            canchaActual.TipoCancha = tpActual;
            
             Session.Add("canchaActual", canchaActual);
         }

@@ -1,5 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/adminMaster.Master" AutoEventWireup="true" CodeBehind="complejo.aspx.cs" Inherits="HayCancha.admin.complejo.complejo" %>
 
+<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxFileManager" TagPrefix="dx" %>
+
+<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
+
+<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxUploadControl" TagPrefix="dx" %>
+
+<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxImageSlider" TagPrefix="dx" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
@@ -133,11 +141,19 @@
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Dirección</label>
                                             <div class="input-group">
-                                                <asp:TextBox type="text" class="form-control" ID="txtDireccion" runat="server" placeholder="Dirección en Google Maps"></asp:TextBox>
+                                                <asp:TextBox type="text" class="form-control" ID="txtPlaces" runat="server" placeholder="Dirección en Google Maps"></asp:TextBox>
                                                 <span onclick="showGoogleMapsModal()" class="input-group-addon">
                                                     <i class="fa fa-map-marker"></i>
                                                 </span>
                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Latitud</label>
+                                            <asp:TextBox type="text" class="form-control" placeholder="Mail Complejo" runat="server" ID="txtLatitud"></asp:TextBox>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Longitud</label>
+                                            <asp:TextBox type="text" class="form-control" placeholder="Mail Complejo" runat="server" ID="txtLongitud"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
                                             <label>Hora Apertura</label>
@@ -184,7 +200,7 @@
                                     </div>
                                     <div class="form-actions">
                                         <asp:Button type="submit" class="btn blue" ID="btnGuardar" OnClientClick="return validateForm()" OnClick="btnGuardar_Click" runat="server" Text="Guardar" />
-                                        <button type="button" class="btn default">Cancelar</button>
+                                        <button type="button" onclick="location.href='complejo.aspx'" class="btn default">Cancelar</button>
                                     </div>
                                 </form>
                             </div>
@@ -197,96 +213,116 @@
         </div>
     </div>
 
-    <%--<object type="text/html" data="../template/google.html" style="overflow:hidden;" width="800" height="600"></object>--%>
 
     <!--Init Modal Form Google Maps
       ============================================-->
+    <%--<div id="responsive" class="modal fade" tabindex="-1" data-width="760">--%>
+    <div class="page-content">
+        <div class="container-fluid">
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="../../admin/index.aspx">Inicio</a><i class="fa fa-circle"></i>
+                </li>
+                <li class="active">Complejo
+                </li>
+            </ul>
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BEGIN SAMPLE FORM PORTLET-->
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-cogs font-green-sharp"></i>
+                                <span class="caption-subject font-green-sharp bold uppercase">Imagenes del Complejo</span>
+                            </div>
+                        </div>
+                        <div class="modal-header">
+                            <div class="form-actions">
+                                <asp:Button type="submit" class="btn blue" ID="Button1" OnClientClick="return validateForm()" OnClick="btnGuardar_Click" runat="server" Text="Nueva Imagen" />
+                                <button type="button" class="btn red">Eliminar</button>
+                                <a class="btn default" data-toggle="modal" href="#responsive">Add Image</a>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <%--ImageSourceFolder="~\admin\assets\images\complejos\1\" --%>
+                                    <dx:ASPxImageSlider ID="isComplejo" runat="server" EnableTheming="False">
+                                    </dx:ASPxImageSlider>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                            <button type="button" class="btn blue">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-    
-    <label id="direccion"></label>
-    <div id="map"></div>
-    <script>
-        // This example adds a search box to a map, using the Google Place Autocomplete
-        // feature. People can enter geographical searches. The search box will return a
-        // pick list containing a mix of places and predicted search terms.
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script type="text/javascript">
+        google.maps.event.addDomListener(window, 'load', function () {
+            var places = new google.maps.places.Autocomplete(document.getElementById('ContentPlaceHolder1_txtPlaces'));
+            google.maps.event.addListener(places, 'place_changed', function () {
+                var place = places.getPlace();
+                var address = place.formatted_address;
+                var latitude = place.geometry.location.lat();
+                var longitude = place.geometry.location.lng();
+                var mesg = "Address: " + address;
+                mesg += "\nLatitude: " + latitude;
+                mesg += "\nLongitude: " + longitude;
+                //alert(mesg);
+                document.getElementById("ContentPlaceHolder1_txtLatitud").value = latitude;
+                document.getElementById("ContentPlaceHolder1_txtLongitud").value = longitude;
 
-        function initAutocomplete() {
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: -32.9522253, lng: -60.8382453 },
-                zoom: 10,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
             });
-
-            // Create the search box and link it to the UI element.
-            var input = document.getElementById('pac-input');
-            var searchBox = new google.maps.places.SearchBox(input);
-            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-            // Bias the SearchBox results towards current map's viewport.
-            map.addListener('bounds_changed', function () {
-                searchBox.setBounds(map.getBounds());
-            });
-
-            var markers = [];
-            // [START region_getplaces]
-            // Listen for the event fired when the user selects a prediction and retrieve
-            // more details for that place.
-            searchBox.addListener('places_changed', function () {
-                var places = searchBox.getPlaces();
-
-                if (places.length == 0) {
-                    return;
-                }
-
-                // Clear out the old markers.
-                markers.forEach(function (marker) {
-                    marker.setMap(null);
-                });
-                markers = [];
-
-                // For each place, get the icon, name and location.
-                var bounds = new google.maps.LatLngBounds();
-                places.forEach(function (place) {
-                    var icon = {
-                        url: place.icon,
-                        size: new google.maps.Size(71, 71),
-                        origin: new google.maps.Point(0, 0),
-                        anchor: new google.maps.Point(17, 34),
-                        scaledSize: new google.maps.Size(25, 25)
-                    };
-
-                    // Create a marker for each place.
-                    markers.push(new google.maps.Marker({
-                        map: map,
-                        icon: icon,
-                        title: place.name,
-                        position: place.geometry.location,
-                    }));
-
-                    if (place.geometry.viewport) {
-                        // Only geocodes have viewport.
-                        bounds.union(place.geometry.viewport);
-                    } else {
-                        bounds.extend(place.geometry.location);
-                    }
-                });
-                map.fitBounds(bounds);
-            });
-            // [END region_getplaces]
-        }
-
-
+        });
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzdnFhHd9eZW0l8Z_MVRacUMk6Janm9ls&libraries=places&callback=initAutocomplete" async defer></script>
-
-
-
 
 
 
     <!--  Init Modal Form Google Maps
       ============================================-->
+    <div id="responsive" class="modal fade" tabindex="-1" data-width="760">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title">Responsive</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+
+
+                    <dx:ASPxFileManager ID="fileManager" runat="server">
+                        <Settings RootFolder="~/admin/assets/images/complejos/1/"  ThumbnailFolder="~/admin/assets/images/complejos/1/"
+                            AllowedFileExtensions=".jpg,.jpeg,.gif,.rtf,.txt,.avi,.png,.mp3,.xml,.doc,.pdf"
+                            />
+                        <SettingsEditing AllowCreate="true" AllowDelete="true" AllowMove="true" AllowRename="true" AllowCopy="true" AllowDownload="true" />
+                        <SettingsPermissions>
+                            <AccessRules>
+                                <dx:FileManagerFolderAccessRule Path="System" Edit="Deny" />
+                            </AccessRules>
+                        </SettingsPermissions>
+                        <SettingsUpload UseAdvancedUploadMode="true">
+                            <AdvancedModeSettings EnableMultiSelect="true" />
+                        </SettingsUpload>
+                    </dx:ASPxFileManager>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+            <button type="button" class="btn blue">Save changes</button>
+        </div>
+    </div>
+
+
+
 
 
 

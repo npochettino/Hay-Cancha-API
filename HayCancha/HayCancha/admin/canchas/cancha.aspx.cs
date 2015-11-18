@@ -32,8 +32,8 @@ namespace HayCancha.admin.canchas
 
         private void CargarDatosParaEditar(Cancha oCanchaActual)
         {
-            ddTipoCancha.Value = oCanchaActual.TipoCancha.Codigo;
-            ddTipoCancha.Text = oCanchaActual.TipoCancha.Descripcion;
+            cbTipoCancha.SelectedItem = cbTipoCancha.Items.FindByValue(oCanchaActual.TipoCancha.Codigo);
+            cbTipoCancha.Value = oCanchaActual.TipoCancha.Codigo;
 
             txtDescripcion.Text = oCanchaActual.Descripcion;
             txtPrecioMañana.Text = Convert.ToString(oCanchaActual.PrecioMañana);
@@ -43,8 +43,8 @@ namespace HayCancha.admin.canchas
 
         private void CargarComboTipoCancha()
         {
-            ddTipoCancha.DataSource = ControladorGeneral.RecuperarTodosTiposCancha();
-            ddTipoCancha.DataBind();
+            cbTipoCancha.DataSource = ControladorGeneral.RecuperarTodosTiposCancha();
+            cbTipoCancha.DataBind();
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -53,12 +53,12 @@ namespace HayCancha.admin.canchas
             if (Session["codigoOperacion"] == null)
             {
                 oCanchaActual = (Cancha)Session["canchaActual"];
-                ControladorGeneral.InsertarActualizarCancha(oCanchaActual.Codigo, Convert.ToInt32(Session["codigoComplejo"]), txtDescripcion.Text, Convert.ToInt32(ddTipoCancha.Value));
+                ControladorGeneral.InsertarActualizarCancha(oCanchaActual.Codigo, Convert.ToInt32(Session["codigoComplejo"]), txtDescripcion.Text, Convert.ToInt32(cbTipoCancha.Value));
             }
             //si el codigoOperacion es != null hago un insert.
             else
             {
-                ControladorGeneral.InsertarActualizarCancha(0, Convert.ToInt32(Session["codigoComplejo"]), txtDescripcion.Text, Convert.ToInt32(ddTipoCancha.Value));
+                ControladorGeneral.InsertarActualizarCancha(0, Convert.ToInt32(Session["codigoComplejo"]), txtDescripcion.Text, Convert.ToInt32(cbTipoCancha.Value));
             }
             Response.Redirect("listado.aspx");
         }

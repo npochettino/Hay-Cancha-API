@@ -49,13 +49,13 @@ namespace HayCancha.admin.canchas {
         protected global::System.Web.UI.WebControls.TextBox txtPrecioNoche;
         
         /// <summary>
-        /// Control ddTipoCancha.
+        /// Control cbTipoCancha.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxDropDownEdit ddTipoCancha;
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cbTipoCancha;
         
         /// <summary>
         /// Control btnGuardar.

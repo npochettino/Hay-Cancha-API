@@ -4889,6 +4889,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="admin\assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
+    <Folder Include="admin\assets\images\complejos\1\" />
     <Folder Include="admin\reservas\" />
     <Folder Include="include\twitter\cache\" />
   </ItemGroup>

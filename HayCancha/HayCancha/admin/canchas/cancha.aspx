@@ -63,12 +63,20 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Tipo de Cancha</label>
-                                            <dx:ASPxDropDownEdit ID="ddTipoCancha" CssClass="form-control" runat="server" ValueType="System.String"></dx:ASPxDropDownEdit>
+                                            <dx:ASPxComboBox ID="cbTipoCancha" runat="server" DropDownStyle="DropDown" CssClass="form-control"
+                                                    ValueField="codigo" TextField="descripcion" IncrementalFilteringMode="Contains" ValueType="System.Int32" Width="100%" 
+                                                EnableTheming="True" Theme="Metropolis" AutoPostBack="false">
+                                                <CaptionSettings ShowColon="false" RequiredMarkDisplayMode="Hidden" />
+                                                <%--<Columns>
+                                                        <dx:ListBoxColumn FieldName="codigo" Visible="false" Width="30%" />
+                                                        <dx:ListBoxColumn FieldName="descripcion" Caption="" />
+                                                </Columns>    --%>
+                                            </dx:ASPxComboBox>
                                         </div>
                                     </div>
                                     <div class="form-actions">
                                         <asp:Button type="submit" class="btn blue" ID="btnGuardar" OnClientClick="return validateForm()" OnClick="btnGuardar_Click" runat="server" Text="Guardar" />
-                                        <button type="button" class="btn default">Cancelar</button>
+                                        <button type="button" onclick="location.href='listado.aspx'" class="btn default">Cancelar</button>
                                     </div>
                                 </form>
                             </div>

@@ -155,7 +155,7 @@ namespace BibliotecaLogica.Controladores
 
         #region Complejo
 
-        public static void InsertarActualizarComplejo(int codigoComplejo, string descripcion, string direccion, int horaApertura, int horaCierre, string mail, string telefono, double latitud, double longitud)
+        public static void InsertarActualizarComplejo(int codigoComplejo, string descripcion, string direccion, int horaApertura, int horaCierre, string mail, string telefono, Decimal latitud, Decimal longitud)
         {
             ISession nhSesion = ManejoNHibernate.IniciarSesion();
 
@@ -206,8 +206,8 @@ namespace BibliotecaLogica.Controladores
                 tablaComplejo.Columns.Add("direccion", typeof(string));
                 tablaComplejo.Columns.Add("horaApertura", typeof(int));
                 tablaComplejo.Columns.Add("horaCierre", typeof(int));
-                tablaComplejo.Columns.Add("latitud", typeof(double));
-                tablaComplejo.Columns.Add("longitud", typeof(double));
+                tablaComplejo.Columns.Add("latitud", typeof(decimal));
+                tablaComplejo.Columns.Add("longitud", typeof(decimal));
                 tablaComplejo.Columns.Add("mail", typeof(string));
                 tablaComplejo.Columns.Add("telefono", typeof(string));
 
@@ -244,8 +244,8 @@ namespace BibliotecaLogica.Controladores
                 tablaComplejos.Columns.Add("direccion", typeof(string));
                 tablaComplejos.Columns.Add("horaApertura", typeof(int));
                 tablaComplejos.Columns.Add("horaCierre", typeof(int));
-                tablaComplejos.Columns.Add("latitud", typeof(double));
-                tablaComplejos.Columns.Add("longitud", typeof(double));
+                tablaComplejos.Columns.Add("latitud", typeof(decimal));
+                tablaComplejos.Columns.Add("longitud", typeof(decimal));
                 tablaComplejos.Columns.Add("mail", typeof(string));
                 tablaComplejos.Columns.Add("telefono", typeof(string));
 
