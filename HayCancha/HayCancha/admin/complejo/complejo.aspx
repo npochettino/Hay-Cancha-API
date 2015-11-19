@@ -11,73 +11,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-    <style>
-        html, body
-        {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        #map
-        {
-            height: 100%;
-        }
-
-        .controls
-        {
-            margin-top: 10px;
-            border: 1px solid transparent;
-            border-radius: 2px 0 0 2px;
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            height: 32px;
-            outline: none;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        #pac-input
-        {
-            background-color: #fff;
-            font-family: Roboto;
-            font-size: 15px;
-            font-weight: 300;
-            margin-left: 12px;
-            padding: 0 11px 0 13px;
-            text-overflow: ellipsis;
-            width: 300px;
-        }
-
-            #pac-input:focus
-            {
-                border-color: #4d90fe;
-            }
-
-        .pac-container
-        {
-            font-family: Roboto;
-        }
-
-        #type-selector
-        {
-            color: #fff;
-            background-color: #4d90fe;
-            padding: 5px 11px 0px 11px;
-        }
-
-            #type-selector label
-            {
-                font-family: Roboto;
-                font-size: 13px;
-                font-weight: 300;
-            }
-    </style>
-    <style>
-        #target
-        {
-            width: 345px;
-        }
-    </style>
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="../../admin/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+    <link href="../../admin/assets/admin/pages/css/profile.css" rel="stylesheet" type="text/css" />
+    <link href="../../admin/assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL STYLES -->
 
 
     <!-- BEGIN PAGE LEVEL STYLES -->
@@ -242,6 +180,7 @@
                                 <asp:Button type="submit" class="btn blue" ID="Button1" OnClientClick="return validateForm()" OnClick="btnGuardar_Click" runat="server" Text="Nueva Imagen" />
                                 <button type="button" class="btn red">Eliminar</button>
                                 <a class="btn default" data-toggle="modal" href="#responsive">Add Image</a>
+
                             </div>
                         </div>
                         <div class="modal-body">
@@ -262,6 +201,54 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+    <!--  Init Modal Form Google Maps
+      ============================================-->
+    <div id="responsive" class="modal fade" tabindex="-1" data-width="760">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title">Responsive</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="form-group">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
+                            </div>
+                            <div>
+                                <span class="btn default btn-file">
+                                    <span class="fileinput-new">Select image </span>
+                                    <span class="fileinput-exists">Change </span>
+                                    <input type="file" name="...">
+                                </span>
+                                <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput">Remove </a>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-top-10">
+                            <span class="label label-danger">NOTE! </span>
+                            <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+            <asp:Button ID="btnUploadImage" UseSubmitBehavior="false" runat="server" Text="Subir Imagen" />
+        </div>
+    </div>
+
+
 
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
     <script type="text/javascript">
@@ -284,48 +271,6 @@
     </script>
 
 
-
-    <!--  Init Modal Form Google Maps
-      ============================================-->
-    <div id="responsive" class="modal fade" tabindex="-1" data-width="760">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-            <h4 class="modal-title">Responsive</h4>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-12">
-
-
-                    <dx:ASPxFileManager ID="fileManager" runat="server">
-                        <Settings RootFolder="~/admin/assets/images/complejos/1/"  ThumbnailFolder="~/admin/assets/images/complejos/1/"
-                            AllowedFileExtensions=".jpg,.jpeg,.gif,.rtf,.txt,.avi,.png,.mp3,.xml,.doc,.pdf"
-                            />
-                        <SettingsEditing AllowCreate="true" AllowDelete="true" AllowMove="true" AllowRename="true" AllowCopy="true" AllowDownload="true" />
-                        <SettingsPermissions>
-                            <AccessRules>
-                                <dx:FileManagerFolderAccessRule Path="System" Edit="Deny" />
-                            </AccessRules>
-                        </SettingsPermissions>
-                        <SettingsUpload UseAdvancedUploadMode="true">
-                            <AdvancedModeSettings EnableMultiSelect="true" />
-                        </SettingsUpload>
-                    </dx:ASPxFileManager>
-
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-            <button type="button" class="btn blue">Save changes</button>
-        </div>
-    </div>
-
-
-
-
-
-
     <script type="text/javascript">
         function validateForm() {
             if (document.getElementById("ContentPlaceHolder1_txtNombreComplejo").value == "")
@@ -339,6 +284,10 @@
 
     </script>
 
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="../../admin/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    <script src="../../admin/assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
     <script src="../../admin/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
     <script src="../../admin/assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
     <!-- BEGIN PAGE LEVEL PLUGINS -->

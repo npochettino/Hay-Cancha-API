@@ -4173,10 +4173,10 @@
     <Content Include="admin\canchas\cancha.aspx" />
     <Content Include="admin\canchas\listado.aspx" />
     <Content Include="admin\complejo\complejo.aspx" />
-    <Content Include="admin\map2.html" />
+    <Content Include="admin\extra.html" />
+    <Content Include="admin\form_dropzone.html" />
+    <Content Include="admin\form_fileupload.html" />
     <Content Include="admin\index.aspx" />
-    <Content Include="admin\map.html" />
-    <Content Include="admin\test.html" />
     <Content Include="admin\usuario\perfil.aspx" />
     <Content Include="admin\reservas.aspx" />
     <Content Include="css\animate.css" />
@@ -4407,7 +4407,6 @@
     <Content Include="css\style-import.css" />
     <Content Include="css\style.css" />
     <Content Include="template\maps_google.html" />
-    <Content Include="admin\modals.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\canchas\cancha.aspx.cs">

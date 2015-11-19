@@ -115,8 +115,8 @@ namespace BibliotecaLogica.Controladores
                     complejo.HoraCierre = 0;
                     complejo.Mail = "";
                     complejo.Telefono = "";
-                    complejo.Latitud = decimal.Parse("");
-                    complejo.Longitud = decimal.Parse("");                        
+                    complejo.Latitud = decimal.Parse("00.0000");
+                    complejo.Longitud = decimal.Parse("00.0000");                        
 
                     usuario.Complejo = complejo;
                 }

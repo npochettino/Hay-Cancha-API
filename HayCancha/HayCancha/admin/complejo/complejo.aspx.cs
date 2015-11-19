@@ -44,7 +44,16 @@ namespace HayCancha.admin.complejo
             txtLatitud.Text = dtComplejoActual.Rows[0]["latitud"].ToString();
             txtLongitud.Text = dtComplejoActual.Rows[0]["longitud"].ToString();
 
+            string path = Server.MapPath("..") + "\\assets\\images\\complejos\\" + Session["codigoComplejo"].ToString();
+            if(!Directory.Exists(path))
+            {
+                DirectoryInfo di = Directory.CreateDirectory(path);
+                File.Copy(Server.MapPath("..") + "\\assets\\images\\complejos\\HayCancha.png",path + "\\HayCancha.png");
+            }                
+            
             isComplejo.ImageSourceFolder = "~\\admin\\assets\\images\\complejos\\" + Convert.ToString(Session["codigoComplejo"]) + "\\";
+            
+            
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -60,5 +69,7 @@ namespace HayCancha.admin.complejo
         const string UploadDirectory = "~/admin/assets/images/complejos/1/";
 
         
+
+                            
     }
 }
