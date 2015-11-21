@@ -1,8 +1,44 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/adminMaster.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="HayCancha.admin.index" %>
 
+<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxMenu" TagPrefix="dx" %>
+
 <%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dx" %>
 
+<%@ Register assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxEditors" tagprefix="dx" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <script type="text/javascript">
+        function grid_ContextMenu(s, e) {
+            if (e.objectType == "row")
+                pmRowMenu.ShowAtPos(ASPxClientUtils.GetEventX(e.htmlEvent), ASPxClientUtils.GetEventY(e.htmlEvent));
+        }
+    </script>
+
+    <script type="text/javascript">
+        function InitPopupMenuHandler(s, e) {
+            var gridCell = document.getElementById('ContentPlaceHolder1_gvTurnos');
+            ASPxClientUtils.AttachEventToElement(gridCell, 'contextmenu', OnGridContextMenu);
+            var imgButton = document.getElementById('ImgButton1');
+            ASPxClientUtils.AttachEventToElement(imgButton, 'contextmenu', OnPreventContextMenu);
+        }
+        function OnGridContextMenu(evt) {
+            ASPxPopupMenuClientControl.ShowAtPos(evt.clientX + ASPxClientUtils.GetDocumentScrollLeft(), evt.clientY + ASPxClientUtils.GetDocumentScrollTop());
+            return OnPreventContextMenu(evt);
+        }
+        function OnPreventContextMenu(evt) {
+            return ASPxClientUtils.PreventEventAndBubble(evt);
+        }
+    </script>
+    <script type="text/javascript">
+        var doProcessClick;
+        var visibleIndex;
+        function ProcessClick() {
+            if (doProcessClick) {
+                alert("Here is the RowClick action in the " + visibleIndex.toString() + "-th row");
+            }
+        }
+    </script>
     <div class="page-container">
         <!-- BEGIN PAGE HEAD -->
         <div class="page-head">
@@ -51,9 +87,51 @@
                             </div>
                             <div class="portlet-body">
                                 <div class="table-scrollable table-scrollable-borderless">
-                                    <dx:ASPxGridView ID="gvTurnos" runat="server" Width="100%" EnableTheming="True" Theme="Metropolis">
+                                    <dx:ASPxGridView ID="gvTurnos" runat="server" KeyFieldName="Id" Width="100%" EnableTheming="True" Theme="Metropolis"
+                                         OnBeforeGetCallbackResult="GridView1_PreRender" OnPreRender="GridView1_PreRender">
 
+                                        <SettingsPager Mode="ShowAllRecords">
+                                        </SettingsPager>
+
+                                        <SettingsEditing Mode="Inline" />
+                                        <settingsbehavior AllowFocusedRow="True" />
+                                            <clientsideevents RowClick="function(s, e) {
+                                                 doProcessClick = true;
+                                                 visibleIndex = e.visibleIndex+1;
+                                                 window.setTimeout(ProcessClick,500);
+                                                        }" RowDblClick="function(s, e) {
+                                                doProcessClick = false;
+                                                var key = s.GetRowKey(e.visibleIndex);
+                                                alert('Here is the RowDoubleClick action in a row with the Key = '+key);
+                                                        }" />
+                                            <styles>
+                                                <focusedrow BackColor="#C0FFC0" ForeColor="Black">
+                                                </focusedrow>
+                                            </styles>
                                     </dx:ASPxGridView>
+                                   
+                                     <dx:ASPxPopupMenu ID="pmRowMenu" runat="server" ClientInstanceName="pmRowMenu">
+                                        <Items>
+                                            <dx:MenuItem Text="Ver" Name="cmdExport">
+                                            </dx:MenuItem>
+                                        </Items>
+                                        <ClientSideEvents ItemClick="function(s, e) {
+	                                        if(e.item.name == 'cmdExport')
+                                                alert('Export simulation.');
+                                        }" />
+                                      </dx:ASPxPopupMenu>
+                                        
+                                    <dx:ASPxPopupMenu ID="ASPxPopupMenu1" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
+                                        PopupElementID="ImgButton1" ShowPopOutImages="True" AutoPostBack="True" OnItemClick="ASPxPopupMenu1_ItemClick"
+                                        PopupHorizontalAlign="OutsideRight" PopupVerticalAlign="TopSides" PopupAction="LeftMouseClick">
+                                        <Items>
+                                            <dx:MenuItem Text="Ver Turno" Name="Ver Turno">
+                                            </dx:MenuItem>
+                                        </Items>
+                                        <ClientSideEvents Init="InitPopupMenuHandler" />
+                                        <ItemStyle Width="143px"></ItemStyle>
+                                    </dx:ASPxPopupMenu>
+
                                 </div>
                             </div>
                         </div>

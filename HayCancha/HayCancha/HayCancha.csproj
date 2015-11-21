@@ -4234,6 +4234,19 @@
     <Content Include="css\nivo-slider.css" />
     <Content Include="css\responsive.css" />
     <Content Include="css\vmap.css" />
+    <Content Include="email\emailPasswordApp.html" />
+    <Content Include="email\emailPasswordWeb.html" />
+    <Content Include="email\emailRegistroApp.html" />
+    <Content Include="email\emailRegistroWeb.html" />
+    <Content Include="email\images\confirm-reg.gif" />
+    <Content Include="email\images\disfrazate2015.jpg" />
+    <Content Include="email\images\dot.gif" />
+    <Content Include="email\images\dribbble.gif" />
+    <Content Include="email\images\facebook.gif" />
+    <Content Include="email\images\logo-sempait-200x200.png" />
+    <Content Include="email\images\logo.gif" />
+    <Content Include="email\images\rouss.png" />
+    <Content Include="email\images\twitter.gif" />
     <Content Include="images\appshowcase\1.jpg" />
     <Content Include="images\appshowcase\ipad-section.png" />
     <Content Include="images\appshowcase\iphone-solid.png" />
@@ -4889,6 +4902,7 @@
   <ItemGroup>
     <Folder Include="admin\assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
     <Folder Include="admin\assets\images\complejos\1\" />
+    <Folder Include="admin\assets\images\usuariosApp\" />
     <Folder Include="admin\reservas\" />
     <Folder Include="include\twitter\cache\" />
   </ItemGroup>
@@ -4897,6 +4911,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />
+    <Content Include="email\images\Thumbs.db" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
