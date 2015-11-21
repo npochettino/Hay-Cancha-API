@@ -37,5 +37,18 @@ namespace BibliotecaDatos.Catalogos
                 throw ex;
             }
         }
+
+        public static List<TurnoFijo> RecuperarTurnoPorCanchaYFecha(DateTime fecha, int codigoCancha, ISession nhSesion)
+        {
+            try
+            {
+                List<TurnoFijo> turnoV = CatalogoGenerico<TurnoFijo>.RecuperarLista(x => x.Cancha.Codigo == codigoCancha && x.CodigoDiaSemana == Convert.ToInt32(fecha.DayOfWeek), nhSesion);
+                return turnoV;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

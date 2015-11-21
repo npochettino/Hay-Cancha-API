@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Catalogos\CatalogoCancha.cs" />
     <Compile Include="Catalogos\CatalogoGenerico.cs" />
     <Compile Include="Catalogos\CatalogoTurnoFijo.cs" />
     <Compile Include="Catalogos\CatalogoTurnoVariable.cs" />

@@ -68,13 +68,13 @@ namespace BibliotecaLogica.Controladores
                 tablaCanchas.Columns.Add("codigoTipoCancha");
                 tablaCanchas.Columns.Add("descripcionTipoCancha");
 
-                Cancha canchas = CatalogoGenerico<Cancha>.RecuperarPorCodigo(codigoComplejo, nhSesion);
-
-                if (canchas != null)
+                List<Cancha> listaCanchas = CatalogoCancha.RecuperarPorCodigoComplejo(codigoComplejo, nhSesion);
+                
+                (from p in listaCanchas select p).Aggregate(tablaCanchas, (dt, r) =>
                 {
-                    tablaCanchas.Rows.Add(new object[] { canchas.Complejo.Codigo, canchas.Codigo, canchas.Descripcion, canchas.PrecioMañana, canchas.PrecioTarde,canchas.PrecioNoche,
-                        canchas.TipoCancha.Codigo,canchas.TipoCancha.Descripcion});
-                }
+                    dt.Rows.Add(r.Complejo.Codigo, r.Codigo, r.Descripcion, r.PrecioMañana, r.PrecioTarde, r.PrecioNoche,
+                        r.TipoCancha.Codigo, r.TipoCancha.Descripcion); return dt;
+                });
 
                 return tablaCanchas;
             }
@@ -350,5 +350,6 @@ namespace BibliotecaLogica.Controladores
         }
 
         #endregion
+
     }
 }
