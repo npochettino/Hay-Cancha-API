@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +18,7 @@ namespace BibliotecaLogica.Controladores
     {
         #region UsuarioApp
 
-        public static void InsertarActualizarUsuarioApp(int codigoUsuario, string nombre, string apellido, string mail, string contraseña, string telefono, int codigoPosicion)
+        public static void InsertarActualizarUsuarioApp(int codigoUsuario, string nombre, string apellido, string mail, string contraseña, string telefono, int codigoPosicion, string imagen, string codigoTelefono, bool isActivo)
         {
             ISession nhSesion = ManejoNHibernate.IniciarSesion();
 
@@ -38,7 +41,9 @@ namespace BibliotecaLogica.Controladores
                 usuario.Contraseña = contraseña;
                 usuario.Telefono = telefono;
                 usuario.Posicion = CatalogoGenerico<Posicion>.RecuperarPorCodigo(codigoPosicion, nhSesion);
-                usuario.IsActivo = true;
+                usuario.Imagen = imagen;
+                usuario.CodigoTelefono = codigoTelefono;
+                usuario.IsActivo = isActivo;
 
                 CatalogoGenerico<UsuarioApp>.InsertarActualizar(usuario, nhSesion);
             }
@@ -68,6 +73,8 @@ namespace BibliotecaLogica.Controladores
                 tablaUsuario.Columns.Add("telefono", typeof(string));
                 tablaUsuario.Columns.Add("codigoPosicion", typeof(int));
                 tablaUsuario.Columns.Add("descripcionPosicion", typeof(string));
+                tablaUsuario.Columns.Add("codigoTelefono", typeof(string));
+                tablaUsuario.Columns.Add("imagen", typeof(string));
                 tablaUsuario.Columns.Add("isActivo", typeof(bool));
 
                 UsuarioApp usuario = CatalogoGenerico<UsuarioApp>.RecuperarPor(x => x.Mail == mail && x.Contraseña == contraseña, nhSesion);
@@ -75,7 +82,7 @@ namespace BibliotecaLogica.Controladores
                 if (usuario != null)
                 {
                     tablaUsuario.Rows.Add(new object[] { usuario.Codigo, usuario.Nombre, usuario.Apellido, usuario.Mail, usuario.Contraseña, usuario.Telefono, 
-                                                     usuario.Posicion.Codigo, usuario.Posicion.Descripcion, usuario.IsActivo });
+                                                     usuario.Posicion.Codigo, usuario.Posicion.Descripcion, usuario.CodigoTelefono, usuario.Imagen, usuario.IsActivo });
                 }
 
                 return tablaUsuario;
@@ -91,46 +98,221 @@ namespace BibliotecaLogica.Controladores
             }
         }
 
-        #endregion
-
-        #region UsuarioWeb
-
-        public static void InsertarActualizarUsuarioWeb(int codigoUsuario, string nombre, string apellido, string mail, string contraseña)
+        public static DataTable RecuperarUsuarioAppPorCodigo(int codigoUsuarioApp)
         {
             ISession nhSesion = ManejoNHibernate.IniciarSesion();
 
             try
             {
-                UsuarioWeb usuario;
+                DataTable tablaUsuario = new DataTable();
+                tablaUsuario.Columns.Add("codigoUsuario", typeof(int));
+                tablaUsuario.Columns.Add("nombre", typeof(string));
+                tablaUsuario.Columns.Add("apellido", typeof(string));
+                tablaUsuario.Columns.Add("mail", typeof(string));
+                tablaUsuario.Columns.Add("contraseña", typeof(string));
+                tablaUsuario.Columns.Add("telefono", typeof(string));
+                tablaUsuario.Columns.Add("codigoPosicion", typeof(int));
+                tablaUsuario.Columns.Add("descripcionPosicion", typeof(string));
+                tablaUsuario.Columns.Add("codigoTelefono", typeof(string));
+                tablaUsuario.Columns.Add("imagen", typeof(string));
+                tablaUsuario.Columns.Add("isActivo", typeof(bool));
+                tablaUsuario.Columns.Add("puntaje", typeof(int));
 
-                if (codigoUsuario == 0)
+                UsuarioApp usuario = CatalogoGenerico<UsuarioApp>.RecuperarPorCodigo(codigoUsuarioApp, nhSesion);
+
+                if (usuario != null)
                 {
-                    usuario = new UsuarioWeb();
+                    tablaUsuario.Rows.Add(new object[] { usuario.Codigo, usuario.Nombre, usuario.Apellido, usuario.Mail, usuario.Contraseña, usuario.Telefono, 
+                                                     usuario.Posicion.Codigo, usuario.Posicion.Descripcion, usuario.CodigoTelefono, usuario.Imagen, usuario.IsActivo, 4 });
+                }
 
-                    Complejo complejo = new Complejo();
+                return tablaUsuario;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
 
-                    complejo.Descripcion = "";
-                    complejo.Direccion = "";
-                    complejo.HoraApertura = 0;
-                    complejo.HoraCierre = 0;
-                    complejo.Mail = "";
-                    complejo.Telefono = "";
-                    complejo.Latitud = decimal.Parse("00.0000");
-                    complejo.Longitud = decimal.Parse("00.0000");                        
+        public static DataTable RecuperarUsuariosAppActivosPorPosicion(int codigoPosicion, int codigoUsuarioApp)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
 
-                    usuario.Complejo = complejo;
+            try
+            {
+                DataTable tablaUsuarios = new DataTable();
+                tablaUsuarios.Columns.Add("codigoUsuario", typeof(int));
+                tablaUsuarios.Columns.Add("nombre", typeof(string));
+                tablaUsuarios.Columns.Add("apellido", typeof(string));
+                tablaUsuarios.Columns.Add("mail", typeof(string));
+                tablaUsuarios.Columns.Add("contraseña", typeof(string));
+                tablaUsuarios.Columns.Add("telefono", typeof(string));
+                tablaUsuarios.Columns.Add("codigoPosicion", typeof(int));
+                tablaUsuarios.Columns.Add("descripcionPosicion", typeof(string));
+                tablaUsuarios.Columns.Add("codigoTelefono", typeof(string));
+                tablaUsuarios.Columns.Add("imagen", typeof(string));
+                tablaUsuarios.Columns.Add("isActivo", typeof(bool));
+
+                List<UsuarioApp> listaUsuariosApp;
+
+                if (codigoPosicion == 0)
+                {
+                    listaUsuariosApp = CatalogoGenerico<UsuarioApp>.RecuperarLista(x => x.IsActivo && x.Codigo != codigoUsuarioApp, nhSesion);
                 }
                 else
                 {
-                    usuario = CatalogoGenerico<UsuarioWeb>.RecuperarPorCodigo(codigoUsuario, nhSesion);
+                    listaUsuariosApp = CatalogoGenerico<UsuarioApp>.RecuperarLista(x => x.IsActivo && x.Posicion.Codigo == codigoPosicion && x.Codigo != codigoUsuarioApp, nhSesion);
                 }
 
-                usuario.Nombre = nombre;
-                usuario.Apellido = apellido;
-                usuario.Mail = mail;
-                usuario.Contraseña = contraseña;
+                listaUsuariosApp.Aggregate(tablaUsuarios, (dt, r) =>
+                {
+                    dt.Rows.Add(r.Codigo, r.Nombre, r.Apellido, r.Mail, r.Contraseña, r.Telefono, r.Posicion.Codigo, r.Posicion.Descripcion,
+                        r.CodigoTelefono, r.Imagen, r.IsActivo); return dt;
+                });
 
-                CatalogoGenerico<UsuarioWeb>.InsertarActualizar(usuario, nhSesion);
+                return tablaUsuarios;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
+        public static string InsertarActualizarImagenUsuarioApp(int codigoUsuarioApp, string imagenBase64)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                System.Drawing.Image imagen = Base64ToImage(imagenBase64);
+
+                Bitmap original = (Bitmap)imagen;
+                int reducedWidth = 250;
+                int reducedHeight = 250;
+
+                Bitmap imagenReducida = new Bitmap(reducedWidth, reducedHeight);
+
+                using (var dc = Graphics.FromImage(imagenReducida))
+                {
+                    // you might want to change properties like
+                    dc.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    dc.DrawImage(original, new Rectangle(0, 0, reducedWidth, reducedHeight), new Rectangle(0, 0, original.Width, original.Height), GraphicsUnit.Pixel);
+                }
+
+                string rutaGuardar = AppDomain.CurrentDomain.BaseDirectory + "\\Imagenes\\" + codigoUsuarioApp + ".jpg";
+
+                imagenReducida.Save(rutaGuardar, ImageFormat.Jpeg);
+
+                UsuarioApp usu = CatalogoGenerico<UsuarioApp>.RecuperarPorCodigo(codigoUsuarioApp, nhSesion);
+                usu.Imagen = "http://haycancha.sempait.com.ar/Imagenes/" + codigoUsuarioApp + ".jpg";
+                CatalogoGenerico<UsuarioApp>.InsertarActualizar(usu, nhSesion);
+
+                return "http://haycancha.sempait.com.ar/Imagenes/" + codigoUsuarioApp + ".jpg";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
+        private static Image Base64ToImage(string base64String)
+        {
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+            using (var ms = new MemoryStream(imageBytes, 0,
+                                             imageBytes.Length))
+            {
+                ms.Write(imageBytes, 0, imageBytes.Length);
+                Image image = Image.FromStream(ms, true);
+                return image;
+            }
+        }
+
+        public Bitmap ReduceBitmap(Bitmap original, int reducedWidth, int reducedHeight)
+        {
+            try
+            {
+                var reduced = new Bitmap(reducedWidth, reducedHeight);
+                using (var dc = Graphics.FromImage(reduced))
+                {
+                    // you might want to change properties like
+                    dc.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    dc.DrawImage(original, new Rectangle(0, 0, reducedWidth, reducedHeight), new Rectangle(0, 0, original.Width, original.Height), GraphicsUnit.Pixel);
+                }
+
+                return reduced;
+            }
+            catch (Exception ex)
+            {
+                ex.Data["Parametros"] = "original" + original.ToString() + ";reducedWidth" + reducedWidth.ToString() + ";reducedHeight" + reducedHeight.ToString();
+                throw ex;
+            }
+        }
+
+        #endregion
+
+        #region UsuarioWeb
+
+        public static string InsertarActualizarUsuarioWeb(int codigoUsuario, string nombre, string apellido, string mail, string contraseña)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                UsuarioWeb usuarioMailRepetido = CatalogoGenerico<UsuarioWeb>.RecuperarPor(x => x.Mail == mail && x.Codigo != codigoUsuario, nhSesion);
+
+                if (usuarioMailRepetido == null)
+                {
+                    UsuarioWeb usuario;
+
+                    if (codigoUsuario == 0)
+                    {
+                        usuario = new UsuarioWeb();
+
+                        Complejo complejo = new Complejo();
+
+                        complejo.Descripcion = "";
+                        complejo.Direccion = "";
+                        complejo.HoraApertura = 0;
+                        complejo.HoraCierre = 0;
+                        complejo.Mail = "";
+                        complejo.Telefono = "";
+                        complejo.Latitud = 0.0;
+                        complejo.Longitud = 0.0;
+
+                        usuario.Complejo = complejo;
+                    }
+                    else
+                    {
+                        usuario = CatalogoGenerico<UsuarioWeb>.RecuperarPorCodigo(codigoUsuario, nhSesion);
+                    }
+
+                    usuario.Nombre = nombre;
+                    usuario.Apellido = apellido;
+                    usuario.Mail = mail;
+                    usuario.Contraseña = contraseña;
+
+                    CatalogoGenerico<UsuarioWeb>.InsertarActualizar(usuario, nhSesion);
+                    return "ok";
+                }
+                else
+                {
+                    return "mailRepetido";
+                }
             }
             catch (Exception ex)
             {

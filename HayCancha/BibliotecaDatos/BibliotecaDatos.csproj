@@ -55,16 +55,18 @@
   <ItemGroup>
     <Compile Include="Catalogos\CatalogoCancha.cs" />
     <Compile Include="Catalogos\CatalogoGenerico.cs" />
+    <Compile Include="Catalogos\CatalogoSolicitud.cs" />
     <Compile Include="Catalogos\CatalogoTurnoFijo.cs" />
     <Compile Include="Catalogos\CatalogoTurnoVariable.cs" />
     <Compile Include="ClasesComplementarias\Constantes.cs" />
     <Compile Include="ClasesComplementarias\ManejoNHibernate.cs" />
     <Compile Include="Clases\Cancha.cs" />
     <Compile Include="Clases\Complejo.cs" />
+    <Compile Include="Clases\EstadoSolicitud.cs" />
     <Compile Include="Clases\EstadoTurno.cs" />
     <Compile Include="Clases\HistorialTurnoFijo.cs" />
     <Compile Include="Clases\Posicion.cs" />
-    <Compile Include="Clases\SolicitudPendiente.cs" />
+    <Compile Include="Clases\Solicitud.cs" />
     <Compile Include="Clases\TipoCancha.cs" />
     <Compile Include="Clases\TurnoFijo.cs" />
     <Compile Include="Clases\TurnoVariable.cs" />
@@ -74,10 +76,11 @@
     <Compile Include="Clases\ValoracionUsuarioApp.cs" />
     <Compile Include="Mapeos\CanchaMap.cs" />
     <Compile Include="Mapeos\ComplejoMap.cs" />
+    <Compile Include="Mapeos\EstadoSolicitudMap.cs" />
     <Compile Include="Mapeos\EstadoTurnoMap.cs" />
     <Compile Include="Mapeos\HistorialTurnoFijoMap.cs" />
     <Compile Include="Mapeos\PosicionMap.cs" />
-    <Compile Include="Mapeos\SolicitudPendienteMap.cs" />
+    <Compile Include="Mapeos\SolicitudMap.cs" />
     <Compile Include="Mapeos\TipoCanchaMap.cs" />
     <Compile Include="Mapeos\TurnoFijoMap.cs" />
     <Compile Include="Mapeos\TurnoVariableMap.cs" />

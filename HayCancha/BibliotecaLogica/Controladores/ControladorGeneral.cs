@@ -69,7 +69,7 @@ namespace BibliotecaLogica.Controladores
                 tablaCanchas.Columns.Add("descripcionTipoCancha");
 
                 List<Cancha> listaCanchas = CatalogoCancha.RecuperarPorCodigoComplejo(codigoComplejo, nhSesion);
-                
+
                 (from p in listaCanchas select p).Aggregate(tablaCanchas, (dt, r) =>
                 {
                     dt.Rows.Add(r.Complejo.Codigo, r.Codigo, r.Descripcion, r.PrecioMañana, r.PrecioTarde, r.PrecioNoche,
@@ -155,7 +155,7 @@ namespace BibliotecaLogica.Controladores
 
         #region Complejo
 
-        public static void InsertarActualizarComplejo(int codigoComplejo, string descripcion, string direccion, int horaApertura, int horaCierre, string mail, string telefono, Decimal latitud, Decimal longitud)
+        public static void InsertarActualizarComplejo(int codigoComplejo, string descripcion, string direccion, int horaApertura, int horaCierre, string mail, string telefono, double latitud, double longitud, string rutaLogo)
         {
             ISession nhSesion = ManejoNHibernate.IniciarSesion();
 
@@ -180,6 +180,7 @@ namespace BibliotecaLogica.Controladores
                 complejo.Longitud = longitud;
                 complejo.Mail = mail;
                 complejo.Telefono = telefono;
+                complejo.Logo = "http://haycancha.sempait.com.ar/Imagenes/" + rutaLogo;
 
                 CatalogoGenerico<Complejo>.InsertarActualizar(complejo, nhSesion);
             }
@@ -210,13 +211,14 @@ namespace BibliotecaLogica.Controladores
                 tablaComplejo.Columns.Add("longitud", typeof(decimal));
                 tablaComplejo.Columns.Add("mail", typeof(string));
                 tablaComplejo.Columns.Add("telefono", typeof(string));
+                tablaComplejo.Columns.Add("logo", typeof(string));
 
                 Complejo complejo = CatalogoGenerico<Complejo>.RecuperarPorCodigo(codigoComplejo, nhSesion);
 
                 if (complejo != null)
                 {
                     tablaComplejo.Rows.Add(new object[] { complejo.Codigo, complejo.Descripcion, complejo.Direccion, complejo.HoraApertura, complejo.HoraCierre,
-                        complejo.Latitud, complejo.Longitud, complejo.Mail, complejo.Telefono });
+                        complejo.Latitud, complejo.Longitud, complejo.Mail, complejo.Telefono, complejo.Logo });
                 }
 
                 return tablaComplejo;
@@ -277,7 +279,7 @@ namespace BibliotecaLogica.Controladores
 
         #region ValoracionComplejo
 
-        public static DataTable RecuperarValoracionesComplejo(int codigoComplejo)
+        public static DataTable RecuperarValoracionesComplejo(int codigoComplejo, int codigoUsuarioApp)
         {
             ISession nhSesion = ManejoNHibernate.IniciarSesion();
 
@@ -289,16 +291,18 @@ namespace BibliotecaLogica.Controladores
                 tablaValoracionesComplejo.Columns.Add("puntaje", typeof(int));
                 tablaValoracionesComplejo.Columns.Add("comentario", typeof(string));
                 tablaValoracionesComplejo.Columns.Add("titulo", typeof(string));
-                tablaValoracionesComplejo.Columns.Add("fechaHoraValoracion", typeof(DateTime));
+                tablaValoracionesComplejo.Columns.Add("fechaHoraValoracion", typeof(string));
                 tablaValoracionesComplejo.Columns.Add("codigoUsuarioApp", typeof(int));
                 tablaValoracionesComplejo.Columns.Add("nombreApellidoUsuarioApp", typeof(string));
+                tablaValoracionesComplejo.Columns.Add("myComment", typeof(bool));
+                tablaValoracionesComplejo.Columns.Add("logoComplejo", typeof(string));
 
                 Complejo complejo = CatalogoGenerico<Complejo>.RecuperarPorCodigo(codigoComplejo, nhSesion);
 
-                complejo.ValoracionesComplejo.Aggregate(tablaValoracionesComplejo, (dt, r) =>
+                complejo.ValoracionesComplejo.OrderByDescending(x => x.FechaHoraValoracionComplejo).Aggregate(tablaValoracionesComplejo, (dt, r) =>
                 {
-                    dt.Rows.Add(complejo.Codigo, complejo.Descripcion, r.Puntaje, r.Comentario, r.Titulo, r.FechaHoraValoracionComplejo,
-                        r.UsuarioApp.Codigo, r.UsuarioApp.Nombre + " " + r.UsuarioApp.Apellido); return dt;
+                    dt.Rows.Add(complejo.Codigo, complejo.Descripcion, r.Puntaje, r.Comentario, r.Titulo, r.FechaHoraValoracionComplejo.ToString("dd/MM/yyyy"),
+                        r.UsuarioApp.Codigo, r.UsuarioApp.Nombre + " " + r.UsuarioApp.Apellido, r.UsuarioApp.Codigo == codigoUsuarioApp ? true : false, complejo.Logo); return dt;
                 });
 
                 return tablaValoracionesComplejo;
@@ -351,5 +355,189 @@ namespace BibliotecaLogica.Controladores
 
         #endregion
 
+        #region Solicitud
+
+        public static void InsertarActualizarSolicitud(int codigoSolicitud, int codigoTurno, bool isVariable, int codigoUsuarioAppInvitado, int codigoEstadoSolicitud)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                Solicitud solicitud;
+
+                if (codigoSolicitud == 0)
+                {
+                    solicitud = new Solicitud();
+                }
+                else
+                {
+                    solicitud = CatalogoGenerico<Solicitud>.RecuperarPorCodigo(codigoSolicitud, nhSesion);
+                }
+
+                if (isVariable)
+                {
+                    solicitud.TurnoVariable = CatalogoGenerico<TurnoVariable>.RecuperarPorCodigo(codigoTurno, nhSesion);
+                }
+                else
+                {
+                    solicitud.TurnoFijo = CatalogoGenerico<TurnoFijo>.RecuperarPorCodigo(codigoTurno, nhSesion);
+                }
+
+                solicitud.UsuarioAppInvitado = CatalogoGenerico<UsuarioApp>.RecuperarPorCodigo(codigoUsuarioAppInvitado, nhSesion);
+                solicitud.EstadoSolicitud = CatalogoGenerico<EstadoSolicitud>.RecuperarPorCodigo(codigoEstadoSolicitud, nhSesion);
+
+                CatalogoGenerico<Solicitud>.InsertarActualizar(solicitud, nhSesion);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
+        public static DataTable RecuperarSolicitudesPorUsuario(int codigoUsuarioApp, int codigoEstadoSolicitud)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                DataTable tablaSolicitudes = new DataTable();
+                tablaSolicitudes.Columns.Add("codigoSolicitud", typeof(int));
+                tablaSolicitudes.Columns.Add("codigoEstadoSolicitud", typeof(int));
+                tablaSolicitudes.Columns.Add("descripcionEstadoSolicitud", typeof(string));
+                tablaSolicitudes.Columns.Add("codigoCancha", typeof(int));
+                tablaSolicitudes.Columns.Add("descripcionCancha", typeof(string));
+                tablaSolicitudes.Columns.Add("codigoComplejo", typeof(int));
+                tablaSolicitudes.Columns.Add("descripcionComplejo", typeof(string));
+                tablaSolicitudes.Columns.Add("fecha", typeof(string));
+                tablaSolicitudes.Columns.Add("horaDesde", typeof(string));
+                tablaSolicitudes.Columns.Add("horaHasta", typeof(string));
+                tablaSolicitudes.Columns.Add("imagenUsuario", typeof(string));
+                tablaSolicitudes.Columns.Add("nombreApellidoUsuario", typeof(string));
+                tablaSolicitudes.Columns.Add("isCreator", typeof(bool));
+
+                List<Solicitud> listaSolicitudesInvitado;
+
+                if (codigoEstadoSolicitud == 0)
+                {
+                    listaSolicitudesInvitado = CatalogoGenerico<Solicitud>.RecuperarLista(x => x.UsuarioAppInvitado.Codigo == codigoUsuarioApp, nhSesion);
+                }
+                else
+                {
+                    listaSolicitudesInvitado = CatalogoGenerico<Solicitud>.RecuperarLista(x => x.EstadoSolicitud.Codigo == codigoEstadoSolicitud && x.UsuarioAppInvitado.Codigo == codigoUsuarioApp, nhSesion);
+                }
+
+                foreach (Solicitud solicitud in listaSolicitudesInvitado)
+                {
+                    int codigoCancha;
+                    string descripcionCancha;
+                    int codigoComplejo;
+                    string descripcionComplejo;
+                    DateTime fechaHoraDesde = new DateTime();
+                    DateTime fechaHoraHasta = new DateTime();
+
+                    if (solicitud.TurnoFijo != null)
+                    {
+                        codigoCancha = solicitud.TurnoFijo.Cancha.Codigo;
+                        descripcionCancha = solicitud.TurnoFijo.Cancha.Descripcion;
+                        codigoComplejo = solicitud.TurnoFijo.Cancha.Complejo.Codigo;
+                        descripcionComplejo = solicitud.TurnoFijo.Cancha.Complejo.Descripcion;
+
+                        for (int i = 0; i < 6; i++)
+                        {
+                            DateTime fecha = DateTime.Now.AddDays(i);
+                            if (Convert.ToInt32(fecha.DayOfWeek) == solicitud.TurnoFijo.CodigoDiaSemana)
+                            {
+                                fechaHoraDesde = Convert.ToDateTime(fecha.ToString("dd/MM/yyyy") + " " + solicitud.TurnoFijo.HoraDesde.ToString("00") + ":00:00");
+                                fechaHoraHasta = Convert.ToDateTime(fecha.ToString("dd/MM/yyyy") + " " + solicitud.TurnoFijo.HoraHasta.ToString("00") + ":00:00");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        codigoCancha = solicitud.TurnoVariable.Cancha.Codigo;
+                        descripcionCancha = solicitud.TurnoVariable.Cancha.Descripcion;
+                        codigoComplejo = solicitud.TurnoVariable.Cancha.Complejo.Codigo;
+                        descripcionComplejo = solicitud.TurnoVariable.Cancha.Complejo.Descripcion;
+                        fechaHoraDesde = solicitud.TurnoVariable.FechaHoraDesde;
+                        fechaHoraHasta = solicitud.TurnoVariable.FechaHoraHasta;
+                    }
+
+                    tablaSolicitudes.Rows.Add(new object[] { solicitud.Codigo, solicitud.EstadoSolicitud.Codigo, solicitud.EstadoSolicitud.Descripcion, codigoCancha,
+                    descripcionCancha, codigoComplejo, descripcionComplejo, fechaHoraDesde.ToString("dd/MM/yyyy"), fechaHoraDesde.Hour, fechaHoraHasta.Hour,
+                    solicitud.UsuarioAppInvitado.Imagen, solicitud.UsuarioAppInvitado.Nombre + " " + solicitud.UsuarioAppInvitado.Apellido, false});
+                }
+
+                List<int> listaTurnosVariables = CatalogoGenerico<TurnoVariable>.RecuperarLista(x => x.UsuarioApp.Codigo == codigoUsuarioApp, nhSesion).Select(x => x.Codigo).ToList();
+                List<Solicitud> listaSolicitud;
+
+                if (codigoEstadoSolicitud == 0)
+                {
+                    listaSolicitud = CatalogoSolicitud.RecuperarPorTurnos(listaTurnosVariables, nhSesion);
+                }
+                else
+                {
+                    listaSolicitud = CatalogoSolicitud.RecuperarPorTurnosYEstado(listaTurnosVariables, codigoEstadoSolicitud, nhSesion);
+                }
+
+                foreach (Solicitud solicitud in listaSolicitudesInvitado)
+                {
+                    int codigoCancha;
+                    string descripcionCancha;
+                    int codigoComplejo;
+                    string descripcionComplejo;
+                    DateTime fechaHoraDesde = new DateTime();
+                    DateTime fechaHoraHasta = new DateTime();
+
+                    if (solicitud.TurnoFijo != null)
+                    {
+                        codigoCancha = solicitud.TurnoFijo.Cancha.Codigo;
+                        descripcionCancha = solicitud.TurnoFijo.Cancha.Descripcion;
+                        codigoComplejo = solicitud.TurnoFijo.Cancha.Complejo.Codigo;
+                        descripcionComplejo = solicitud.TurnoFijo.Cancha.Complejo.Descripcion;
+
+                        for (int i = 0; i < 6; i++)
+                        {
+                            DateTime fecha = DateTime.Now.AddDays(i);
+                            if (Convert.ToInt32(fecha.DayOfWeek) == solicitud.TurnoFijo.CodigoDiaSemana)
+                            {
+                                fechaHoraDesde = Convert.ToDateTime(fecha.ToString("dd/MM/yyyy") + " " + solicitud.TurnoFijo.HoraDesde.ToString("00") + ":00:00");
+                                fechaHoraHasta = Convert.ToDateTime(fecha.ToString("dd/MM/yyyy") + " " + solicitud.TurnoFijo.HoraHasta.ToString("00") + ":00:00");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        codigoCancha = solicitud.TurnoVariable.Cancha.Codigo;
+                        descripcionCancha = solicitud.TurnoVariable.Cancha.Descripcion;
+                        codigoComplejo = solicitud.TurnoVariable.Cancha.Complejo.Codigo;
+                        descripcionComplejo = solicitud.TurnoVariable.Cancha.Complejo.Descripcion;
+                        fechaHoraDesde = solicitud.TurnoVariable.FechaHoraDesde;
+                        fechaHoraHasta = solicitud.TurnoVariable.FechaHoraHasta;
+                    }
+
+                    tablaSolicitudes.Rows.Add(new object[] { solicitud.Codigo, solicitud.EstadoSolicitud.Codigo, solicitud.EstadoSolicitud.Descripcion, codigoCancha,
+                    descripcionCancha, codigoComplejo, descripcionComplejo, fechaHoraDesde.ToString("dd/MM/yyyy"), fechaHoraDesde.Hour, fechaHoraHasta.Hour,
+                    solicitud.UsuarioAppInvitado.Imagen, solicitud.UsuarioAppInvitado.Nombre + " " + solicitud.UsuarioAppInvitado.Apellido, true});
+                }
+
+                return tablaSolicitudes;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
+        #endregion
     }
 }

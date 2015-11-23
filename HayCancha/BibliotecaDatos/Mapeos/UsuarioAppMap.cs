@@ -20,6 +20,8 @@ namespace BibliotecaDatos.Mapeos
             Map(x => x.Contraseña).Column("contraseña");
             Map(x => x.IsActivo).Column("isActivo");
             Map(x => x.Telefono).Column("telefono");
+            Map(x => x.Imagen).Column("imagen");
+            Map(x => x.CodigoTelefono).Column("codigoTelefono");
 
             References(x => x.Posicion).Column("codigoPosicion").Cascade.None().LazyLoad(Laziness.Proxy);
             HasMany<ValoracionUsuarioApp>(x => x.Valoraciones).Table("ValoracionesUsuariosApp").KeyColumn("codigoUsuarioAppEvaluado").Cascade.None();

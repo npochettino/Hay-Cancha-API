@@ -56,9 +56,15 @@ namespace BibliotecaLogica.Controladores
                             {
                                 bool isFavorito = usuarioApp.ComplejosFravoritos.Where(x => x.Codigo == cancha.Complejo.Codigo) == null ? false : true;
 
+                                double valoracion = 0;
+                                if (cancha.Complejo.ValoracionesComplejo.Count > 0)
+                                {
+                                    valoracion = (double)cancha.Complejo.ValoracionesComplejo.Sum(x => x.Puntaje) / (double)cancha.Complejo.ValoracionesComplejo.Count;
+                                }
+
                                 tablaTurnos.Rows.Add(new object[] { i, i + 1, cancha.Codigo, cancha.Descripcion, cancha.TipoCancha.Codigo, cancha.TipoCancha.Descripcion,
-                                        cancha.Complejo.Codigo, cancha.Complejo.Descripcion, "imagenComplejo", isFavorito, cancha.PrecioTarde, cancha.Complejo.Direccion,
-                                        3, cancha.Complejo.Latitud, cancha.Complejo.Longitud});
+                                        cancha.Complejo.Codigo, cancha.Complejo.Descripcion, cancha.Complejo.Logo, isFavorito, cancha.PrecioTarde, cancha.Complejo.Direccion,
+                                        valoracion, cancha.Complejo.Latitud, cancha.Complejo.Longitud});
                             }
                         }
                     }
@@ -77,34 +83,55 @@ namespace BibliotecaLogica.Controladores
             }
         }
 
-        public static void InsertarActualizarTurnoVariable(int codigoTurnoVariable, int codigoCancha, DateTime fechaHoraDesde, DateTime fechaHoraHasta, int codigoUsuarioApp, string observaciones, string responsable, double seña)
+        public static string InsertarActualizarTurnoVariable(int codigoTurnoVariable, int codigoCancha, DateTime fechaHoraDesde, DateTime fechaHoraHasta, int codigoUsuarioApp, string observaciones, string responsable, double seña)
         {
             ISession nhSesion = ManejoNHibernate.IniciarSesion();
 
             try
             {
-                TurnoVariable turno;
+                TurnoVariable turnoAnterior = CatalogoTurnoVariable.RecuperarPorFechaYHoraYCancha(fechaHoraDesde.Date, fechaHoraDesde.Hour, fechaHoraHasta.Hour, codigoCancha, nhSesion);
 
-                if (codigoTurnoVariable == 0)
+                if (turnoAnterior == null)
                 {
-                    turno = new TurnoVariable();
+                    TurnoVariable turno;
+
+                    if (codigoTurnoVariable == 0)
+                    {
+                        turno = new TurnoVariable();
+                    }
+                    else
+                    {
+                        turno = CatalogoGenerico<TurnoVariable>.RecuperarPorCodigo(codigoTurnoVariable, nhSesion);
+                    }
+
+                    turno.Cancha = CatalogoGenerico<Cancha>.RecuperarPorCodigo(codigoCancha, nhSesion);
+
+                    bool horaValida = ValidarHorario(turno.Cancha.Complejo, fechaHoraDesde.Hour, fechaHoraHasta.Hour);
+
+                    if (horaValida)
+                    {
+                        turno.FechaHoraDesde = fechaHoraDesde;
+                        turno.FechaHoraHasta = fechaHoraHasta;
+                        turno.Observaciones = observaciones;
+                        turno.Responsable = responsable;
+                        turno.Seña = seña;
+                        turno.UsuarioApp = CatalogoGenerico<UsuarioApp>.RecuperarPorCodigo(codigoUsuarioApp, nhSesion);
+                        turno.EstadoTurno = CatalogoGenerico<EstadoTurno>.RecuperarPorCodigo(Constantes.EstadosTurno.PENDIENTE, nhSesion);
+                        turno.UsuarioWeb = null;
+
+                        CatalogoGenerico<TurnoVariable>.InsertarActualizar(turno, nhSesion);
+
+                        return "ok";
+                    }
+                    else
+                    {
+                        return "HorarioInvalido";
+                    }
                 }
                 else
                 {
-                    turno = CatalogoGenerico<TurnoVariable>.RecuperarPorCodigo(codigoTurnoVariable, nhSesion);
+                    return "HorarioOcupado";
                 }
-
-                turno.Cancha = CatalogoGenerico<Cancha>.RecuperarPorCodigo(codigoCancha, nhSesion);
-                turno.FechaHoraDesde = fechaHoraDesde;
-                turno.FechaHoraHasta = fechaHoraHasta;
-                turno.Observaciones = observaciones;
-                turno.Responsable = responsable;
-                turno.Seña = seña;
-                turno.UsuarioApp = CatalogoGenerico<UsuarioApp>.RecuperarPorCodigo(codigoUsuarioApp, nhSesion);
-                turno.EstadoTurno = CatalogoGenerico<EstadoTurno>.RecuperarPorCodigo(Constantes.EstadosTurno.PENDIENTE, nhSesion);
-                turno.UsuarioWeb = null;
-
-                CatalogoGenerico<TurnoVariable>.InsertarActualizar(turno, nhSesion);
             }
             catch (Exception ex)
             {
@@ -114,6 +141,18 @@ namespace BibliotecaLogica.Controladores
             {
                 nhSesion.Close();
                 nhSesion.Dispose();
+            }
+        }
+
+        private static bool ValidarHorario(Complejo complejo, int horaDesde, int horaHasta)
+        {
+            if (horaDesde >= complejo.HoraApertura && horaHasta <= complejo.HoraCierre && horaDesde <= horaHasta)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -152,7 +191,7 @@ namespace BibliotecaLogica.Controladores
             }
         }
 
-        public static DataTable RecuperarTurnosPorFechaPorCancha(DateTime fecha, int codigoCancha)
+        public static DataTable RecuperarTurnosDisponiblesPorComplejoPorDia(DateTime fecha, int codigoComplejo)
         {
             ISession nhSesion = ManejoNHibernate.IniciarSesion();
 
@@ -167,35 +206,43 @@ namespace BibliotecaLogica.Controladores
                 tablaTurnos.Columns.Add("descripcionTipoCancha", typeof(string));
                 tablaTurnos.Columns.Add("codigoComplejo", typeof(int));
                 tablaTurnos.Columns.Add("descripcionComplejo", typeof(string));
-                
+                tablaTurnos.Columns.Add("imagenComplejo", typeof(string));
                 tablaTurnos.Columns.Add("precio", typeof(double));
                 tablaTurnos.Columns.Add("direccion", typeof(string));
                 tablaTurnos.Columns.Add("puntajeComplejo", typeof(int));
                 tablaTurnos.Columns.Add("latitud", typeof(double));
                 tablaTurnos.Columns.Add("longitud", typeof(double));
                 tablaTurnos.Columns.Add("estado", typeof(string));
-                
-                
-                Cancha cancha = CatalogoGenerico<Cancha>.RecuperarPorCodigo(codigoCancha, nhSesion);
-                Complejo complejo = CatalogoGenerico<Complejo>.RecuperarPorCodigo(cancha.Complejo.Codigo, nhSesion);
 
-                List<TurnoVariable> listaTurnosVariables = CatalogoTurnoVariable.RecuperarTurnoPorCanchaYFecha(fecha, codigoCancha, nhSesion);
-                List<TurnoFijo> listaTurnosFijos = CatalogoTurnoFijo.RecuperarTurnoPorCanchaYFecha(fecha, codigoCancha, nhSesion);
+                Complejo complejo = CatalogoGenerico<Complejo>.RecuperarPorCodigo(codigoComplejo, nhSesion);
 
-                (from p in listaTurnosFijos select p).Aggregate(tablaTurnos, (dt, r) =>
+                int horaDesde = complejo.HoraApertura;
+                int horaHasta = complejo.HoraCierre;
+
+                List<TurnoVariable> listaTurnosVariables = CatalogoTurnoVariable.RecuperarPorFechaYHora(fecha, horaDesde, horaHasta, nhSesion);
+                List<TurnoFijo> listaTurnosFijos = CatalogoTurnoFijo.RecuperarPorFechaYHora(fecha, horaDesde, horaHasta, nhSesion);
+                List<Cancha> listaCanchas = CatalogoGenerico<Cancha>.RecuperarTodos(nhSesion);
+
+                for (int i = horaDesde; i < horaHasta; i++)
                 {
-                    dt.Rows.Add( r.HoraDesde, r.HoraHasta, cancha.Codigo, cancha.Descripcion, cancha.TipoCancha.Codigo, cancha.TipoCancha.Descripcion,
-                    cancha.Complejo.Codigo, cancha.Complejo.Descripcion, cancha.PrecioTarde, cancha.Complejo.Direccion,
-                     3, cancha.Complejo.Latitud, cancha.Complejo.Longitud, Constantes.EstadosTurno.RESERVADO); return dt;
-                });
+                    foreach (Cancha cancha in listaCanchas)
+                    {
+                        TurnoFijo turnoFijo = (from tf in listaTurnosFijos where tf.HoraDesde == i && tf.Cancha.Codigo == cancha.Codigo select tf).SingleOrDefault();
 
-                (from p in listaTurnosVariables select p).Aggregate(tablaTurnos, (dt, r) =>
-                {
-                    dt.Rows.Add(r.FechaHoraDesde.Hour, r.FechaHoraHasta.Hour, cancha.Codigo, cancha.Descripcion, cancha.TipoCancha.Codigo, cancha.TipoCancha.Descripcion,
-                    cancha.Complejo.Codigo, cancha.Complejo.Descripcion, cancha.PrecioTarde, cancha.Complejo.Direccion,
-                     3, cancha.Complejo.Latitud, cancha.Complejo.Longitud, r.EstadoTurno.Descripcion); return dt;
-                });
-                
+                        if (turnoFijo == null)
+                        {
+                            TurnoVariable turnoVariable = (from tv in listaTurnosVariables where tv.FechaHoraDesde.Hour == i && tv.Cancha.Codigo == cancha.Codigo select tv).SingleOrDefault();
+
+                            if (turnoVariable == null)
+                            {
+                                tablaTurnos.Rows.Add(new object[] { i, i + 1, cancha.Codigo, cancha.Descripcion, cancha.TipoCancha.Codigo, cancha.TipoCancha.Descripcion,
+                                        cancha.Complejo.Codigo, cancha.Complejo.Descripcion, "imagenComplejo", cancha.PrecioTarde, cancha.Complejo.Direccion,
+                                        3, cancha.Complejo.Latitud, cancha.Complejo.Longitud});
+                            }
+                        }
+                    }
+                }
+
                 return tablaTurnos;
             }
             catch (Exception ex)
@@ -209,6 +256,120 @@ namespace BibliotecaLogica.Controladores
             }
         }
 
+        public static DataTable RecuperarTurnosVigentesPorUsuario(int codigoUsuarioApp)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
 
+            try
+            {
+                DataTable tablaTurnos = new DataTable();
+                tablaTurnos.Columns.Add("codigoTurno", typeof(int));
+                tablaTurnos.Columns.Add("horaDesde", typeof(int));
+                tablaTurnos.Columns.Add("horaHasta", typeof(int));
+                tablaTurnos.Columns.Add("codigoCancha", typeof(int));
+                tablaTurnos.Columns.Add("descripcionCancha", typeof(string));
+                tablaTurnos.Columns.Add("codigoTipoCancha", typeof(int));
+                tablaTurnos.Columns.Add("descripcionTipoCancha", typeof(string));
+                tablaTurnos.Columns.Add("codigoComplejo", typeof(int));
+                tablaTurnos.Columns.Add("descripcionComplejo", typeof(string));
+                tablaTurnos.Columns.Add("imagenComplejo", typeof(string));
+                tablaTurnos.Columns.Add("precio", typeof(double));
+                tablaTurnos.Columns.Add("direccion", typeof(string));
+                tablaTurnos.Columns.Add("puntajeComplejo", typeof(int));
+                tablaTurnos.Columns.Add("latitud", typeof(double));
+                tablaTurnos.Columns.Add("longitud", typeof(double));
+                tablaTurnos.Columns.Add("fecha", typeof(string));
+                tablaTurnos.Columns.Add("codigoEstado", typeof(int));
+                tablaTurnos.Columns.Add("descripcionEstado", typeof(string));
+
+                List<TurnoVariable> listaTurnosVariables = CatalogoGenerico<TurnoVariable>.RecuperarLista(x => x.UsuarioApp.Codigo == codigoUsuarioApp && (x.EstadoTurno.Codigo == Constantes.EstadosTurno.PENDIENTE || x.EstadoTurno.Codigo == Constantes.EstadosTurno.RESERVADO || x.EstadoTurno.Codigo == Constantes.EstadosTurno.CANCELADO), nhSesion);
+
+                listaTurnosVariables.Aggregate(tablaTurnos, (dt, r) =>
+                {
+                    dt.Rows.Add(r.Codigo, r.FechaHoraDesde.Hour, r.FechaHoraHasta.Hour, r.Cancha.Codigo, r.Cancha.Descripcion, r.Cancha.TipoCancha.Codigo,
+                        r.Cancha.TipoCancha.Descripcion, r.Cancha.Complejo.Codigo, r.Cancha.Complejo.Descripcion, "imagen", r.Cancha.PrecioTarde, r.Cancha.Complejo.Direccion,
+                        3, r.Cancha.Complejo.Latitud, r.Cancha.Complejo.Longitud, r.FechaHoraDesde.ToString("dd/MM/yyyy"), r.EstadoTurno.Codigo, r.EstadoTurno.Descripcion); return dt;
+                });
+
+                return tablaTurnos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
+        public static DataTable RecuperarTurnosPorComplejoPorDia(DateTime fecha, int codigoComplejo)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                Complejo complejo = CatalogoGenerico<Complejo>.RecuperarPorCodigo(codigoComplejo, nhSesion);
+                List<Cancha> listaCanchas = CatalogoGenerico<Cancha>.RecuperarLista(x => x.Complejo.Codigo == codigoComplejo, nhSesion);
+
+                DataTable tablaTurnos = new DataTable();
+                tablaTurnos.Columns.Add("hora");
+
+                foreach (Cancha cancha in listaCanchas)
+                {
+                    tablaTurnos.Columns.Add(cancha.Descripcion);
+                }
+
+                int horaDesde = complejo.HoraApertura;
+                int horaHasta = complejo.HoraCierre;
+
+                List<TurnoVariable> listaTurnosVariables = CatalogoTurnoVariable.RecuperarPorFechaYHoraYComplejo(fecha, horaDesde, horaHasta, codigoComplejo, nhSesion);
+                List<TurnoFijo> listaTurnosFijos = CatalogoTurnoFijo.RecuperarPorFechaYHoraYComplejo(fecha, horaDesde, horaHasta, codigoComplejo, nhSesion);
+
+                for (int i = horaDesde; i < horaHasta; i++)
+                {
+                    DataRow filaNueva = tablaTurnos.NewRow();
+                    filaNueva["hora"] = i + " a " + (i + 1);
+
+                    foreach (Cancha cancha in listaCanchas)
+                    {
+                        TurnoFijo turnoFijo = (from tf in listaTurnosFijos where tf.HoraDesde == i && tf.Cancha.Codigo == cancha.Codigo select tf).SingleOrDefault();
+
+                        if (turnoFijo == null)
+                        {
+                            TurnoVariable turnoVariable = (from tv in listaTurnosVariables where tv.FechaHoraDesde.Hour == i && tv.Cancha.Codigo == cancha.Codigo select tv).SingleOrDefault();
+
+                            if (turnoVariable == null)
+                            {
+                                filaNueva[cancha.Descripcion] = "Disponible";
+                            }
+                            else
+                            {
+                                string nombreReserva = turnoVariable.Responsable != string.Empty ? turnoVariable.Responsable : turnoVariable.UsuarioApp.Nombre + " " + turnoVariable.UsuarioApp.Apellido;
+                                filaNueva[cancha.Descripcion] = "Reservado - " + nombreReserva;
+                            }
+                        }
+                        else
+                        {
+                            filaNueva[cancha.Descripcion] = "Reservado - " + turnoFijo.Responsable;
+                        }
+                    }
+
+                    tablaTurnos.Rows.Add(filaNueva);
+                }
+
+                return tablaTurnos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
     }
 }

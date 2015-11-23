@@ -27,25 +27,25 @@ namespace HayCancha.admin
             int HoraApertura = Convert.ToInt32(dtComplejo.Rows[0]["horaApertura"]);
             int HoraCierre = Convert.ToInt32(dtComplejo.Rows[0]["horaCierre"]);
             DataTable dtTurnos = new DataTable();
-            
+
             if (dtCanchas.Rows.Count > 0)
             {
                 for (int i = 0; i < dtCanchas.Rows.Count; i++)
                 {
-                    DataTable dtTurnosPorCancha = ControladorTurnos.RecuperarTurnosPorFechaPorCancha(DateTime.Now, Convert.ToInt32(dtCanchas.Rows[i]["codigoCancha"]));
+                    DataTable dtTurnosPorCancha = new DataTable(); //ControladorTurnos.RecuperarTurnosPorFechaPorCancha(DateTime.Now, Convert.ToInt32(dtCanchas.Rows[i]["codigoCancha"]));
                     if (i == 0)
                     {
                         dtTurnos.Columns.Add("Id");
                         dtTurnos.Columns.Add("Hora");
-                        for (int h = HoraApertura; h <= HoraCierre; h ++ )
-                            dtTurnos.Rows.Add(h,h + ":00");
+                        for (int h = HoraApertura; h <= HoraCierre; h++)
+                            dtTurnos.Rows.Add(h, h + ":00");
 
                         dtTurnos.Columns.Add(dtCanchas.Rows[i]["descripcion"].ToString());
                         foreach (DataRow dr in dtTurnos.Rows)
                         {
                             int hora = Convert.ToInt32(dr.ItemArray[0]);
                             string contains = isContains(hora, dtTurnosPorCancha);
-                            dr[dtCanchas.Rows[i]["descripcion"].ToString()] = contains;                                
+                            dr[dtCanchas.Rows[i]["descripcion"].ToString()] = contains;
                         }
                     }
                     else
@@ -59,7 +59,7 @@ namespace HayCancha.admin
                         }
                     }
                 }
-                gvTurnos.DataSource = dtTurnos;                
+                gvTurnos.DataSource = dtTurnos;
                 gvTurnos.DataBind();
                 gvTurnos.Columns["Id"].Visible = false;
                 gvTurnos.DataBind();
@@ -68,7 +68,7 @@ namespace HayCancha.admin
             {
                 Response.Write("<script>alert('El complejo aun no tiene canchas. Crea una cancha para poder comenzar a gestionar tus reservas!');</script>");
             }
-            
+
         }
 
         private string isContains(int h, DataTable dtTurnosPorCancha)
@@ -89,7 +89,7 @@ namespace HayCancha.admin
 
         protected void gvTurnos_ContextMenuItemClick(object sender, ASPxGridViewContextMenuItemClickEventArgs e)
         {
-            
+
         }
 
         protected void ASPxPopupMenu1_ItemClick(object sender, MenuItemEventArgs e)

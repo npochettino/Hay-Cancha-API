@@ -24,6 +24,32 @@ namespace BibliotecaDatos.Catalogos
             }
         }
 
+        public static TurnoVariable RecuperarPorFechaYHoraYCancha(DateTime fecha, int horaDesde, int horaHasta, int codigoCancha, ISession nhSesion)
+        {
+            try
+            {
+                TurnoVariable turnoVariable = CatalogoGenerico<TurnoVariable>.RecuperarPor(x => x.FechaHoraDesde.Date == fecha.Date && x.FechaHoraDesde.Hour >= horaDesde && x.FechaHoraHasta.Hour <= horaHasta && x.Cancha.Codigo == codigoCancha, nhSesion);
+                return turnoVariable;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static List<TurnoVariable> RecuperarPorFechaYHoraYComplejo(DateTime fecha, int horaDesde, int horaHasta, int codigoComplejo, ISession nhSesion)
+        {
+            try
+            {
+                List<TurnoVariable> listaTurnos = nhSesion.QueryOver<TurnoVariable>().Where(x => x.FechaHoraDesde.Date == fecha.Date && x.FechaHoraDesde.Hour >= horaDesde && x.FechaHoraHasta.Hour <= horaHasta).JoinQueryOver(c => c.Cancha).Where(ch => ch.Complejo.Codigo == codigoComplejo).List().ToList();
+                return listaTurnos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static TurnoVariable RecuperarTurnoPorCanchaYFechas(DateTime fechaHoraDesde, DateTime fechaHoraHasta, int codigoCancha, ISession nhSesion)
         {
             try

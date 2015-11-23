@@ -21,6 +21,8 @@ namespace BibliotecaDatos.Clases
         public virtual string Contraseña { get; set; }
         public virtual string Telefono { get; set; }
         public virtual bool IsActivo { get; set; }
+        public virtual string Imagen { get; set; }
+        public virtual string CodigoTelefono { get; set; }
 
         public virtual Posicion Posicion { get; set; }
         public virtual IList<ValoracionUsuarioApp> Valoraciones { get; set; }

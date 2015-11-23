@@ -22,6 +22,7 @@ namespace BibliotecaDatos.Mapeos
             Map(x => x.HoraCierre).Column("horaCierre");
             Map(x => x.Latitud).Column("latitud");
             Map(x => x.Longitud).Column("longitud");
+            Map(x => x.Logo).Column("logo");
 
             HasMany<ValoracionComplejo>(x => x.ValoracionesComplejo).Table("ValoracionesComplejos").Not.KeyNullable().KeyColumn("codigoComplejo").Cascade.AllDeleteOrphan();
         }

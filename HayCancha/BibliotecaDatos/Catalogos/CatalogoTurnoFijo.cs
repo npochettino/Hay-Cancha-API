@@ -24,6 +24,18 @@ namespace BibliotecaDatos.Catalogos
             }
         }
 
+        public static List<TurnoFijo> RecuperarPorFechaYHoraYComplejo(DateTime fecha, int horaDesde, int horaHasta, int codigoComplejo, ISession nhSesion)
+        {
+            try
+            {
+                List<TurnoFijo> listaTurnos = nhSesion.QueryOver<TurnoFijo>().Where(x => x.FechaDesde <= fecha && x.FechaHasta == null && x.HoraDesde >= horaDesde && x.HoraHasta <= horaHasta && x.CodigoDiaSemana == Convert.ToInt32(fecha.DayOfWeek)).JoinQueryOver(c => c.Cancha).Where(ch => ch.Complejo.Codigo == codigoComplejo).List().ToList();
+                return listaTurnos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public static TurnoFijo RecuperarTurnoPorCanchaYFechas(DateTime fechaHoraDesde, DateTime fechaHoraHasta, int codigoCancha, ISession nhSesion)
         {
