@@ -13,6 +13,7 @@ using DevExpress.Web.Internal;
 using DevExpress.Web.ASPxUploadControl;
 using DevExpress.Web.ASPxClasses;
 using DevExpress.Web.ImageControls.Internal;
+using System.Web.Services;
 
 namespace HayCancha.admin.complejo
 {
@@ -67,34 +68,15 @@ namespace HayCancha.admin.complejo
 
         const string UploadDirectory = "~/admin/assets/images/complejos/1/";
 
-        protected void btnUploadImage_Click(object sender, EventArgs e)
+        protected void Upload(object sender, EventArgs e)
         {
-            if (fuImagen.HasFile && (fuImagen.PostedFile.ContentType == "image/jpg" || fuImagen.PostedFile.ContentType == "image/jpeg"))
+            if (FileUpload1.HasFile)
             {
-                string path = Server.MapPath("..") + "\\assets\\images\\complejos\\" + Session["codigoComplejo"].ToString();
-                fuImagen.PostedFile.SaveAs(path);
-                StreamReader reader = new StreamReader(fuImagen.FileContent);
-                string text = reader.ReadToEnd();
-            }
-            else 
-            {
- 
+                string fileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
+                FileUpload1.PostedFile.SaveAs(Server.MapPath("~/admin/assets/images/complejos/") + Session["codigoComplejo"].ToString() + "/" + fileName);
+                Response.Redirect(Request.Url.AbsoluteUri);
             }
         }
-
-        protected void btnSubirImagen_Click(object sender, EventArgs e)
-        {
-            if (fuImagen.HasFile && (fuImagen.PostedFile.ContentType == "image/jpg" || fuImagen.PostedFile.ContentType == "image/jpeg"))
-            {
-                string path = Server.MapPath("..") + "\\assets\\images\\complejos\\" + Session["codigoComplejo"].ToString();
-                fuImagen.PostedFile.SaveAs(path);
-                StreamReader reader = new StreamReader(fuImagen.FileContent);
-                string text = reader.ReadToEnd();
-            }
-            else
-            {
-
-            }
-        }
+        
     }
 }

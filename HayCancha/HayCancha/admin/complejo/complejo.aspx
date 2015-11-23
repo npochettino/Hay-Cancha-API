@@ -191,11 +191,9 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <asp:FileUpload ID="fuImagen" CssClass="form-control" runat="server" />
-                                <dx:ASPxButton ID="btnUploadImagen" runat="server" Text="Subir Imagen" AutoPostBack="False" CssClass="btn blue" class="btn blue" ClientSideEvents-Click="OnClickUploadImagen">
-                                            <ClientSideEvents Click="OnClickUploadImagen"></ClientSideEvents>
-                                        </dx:ASPxButton>
-                                <asp:Button type="button" class="btn blue" ID="btnSubirImagen" UseSubmitBehavior="false" OnClick="btnSubirImagen_Click" runat="server" Text="Guardar" />
+                                <asp:FileUpload ID="FileUpload1" runat="server" />
+        <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="Upload" />
+        <hr />
                             </div>
                         </div>
                     </div>
@@ -242,7 +240,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-            <asp:Button ID="btnUpload" UseSubmitBehavior="false" runat="server" Text="Subir Imagen" />
+            <asp:Button ID="btnUp" UseSubmitBehavior="false" runat="server" Text="Subir Imagen" />
         </div>
     </div>
 
@@ -282,19 +280,6 @@
 
     </script>
 
-    <script>
-        function OnClickUploadImagen(s, e) {
-            PageMethods.InsertarImagenComplejo(s, ContentPlaceHolder1_fuImagen.GetValue(), OnSucces, OnFail);
-        }
-
-        function OnSucces(s, e) {
-            alert("OK");
-        }
-
-        function OnFail(s, e) {
-            alert("Error");
-        }
-    </script>
 
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <script src="../../admin/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>

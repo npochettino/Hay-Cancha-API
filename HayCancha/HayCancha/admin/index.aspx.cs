@@ -18,9 +18,15 @@ namespace HayCancha.admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["codigoComplejo"] != null)
-                LoadGrillaTurnos();
+                LoadGrillaTurnosNew();
             else
                 Response.Redirect("../login.aspx");
+        }
+
+        private void LoadGrillaTurnosNew()
+        {
+            gvTurnosComplejo.DataSource = ControladorTurnos.RecuperarTurnosPorComplejoPorDia(DateTime.Now,Convert.ToInt32(Session["codigoComplejo"]));
+            gvTurnosComplejo.DataBind();
         }
 
         private void LoadGrillaTurnos()
@@ -145,8 +151,8 @@ namespace HayCancha.admin
                         idCanchaSeleccionada = Convert.ToInt32(dtCanchasActual.Rows[i]["codigoCancha"]);
                 }
                 
-                DataTable dtTurnoSeleccionado = ControladorTurnos.RecuperarTurnoPorCanchaYHora(idCanchaSeleccionada,visibleIndex);
-                LoadPopUp(dtTurnoSeleccionado);
+                //DataTable dtTurnoSeleccionado = ControladorTurnos.RecuperarTurnoPorCanchaYHora(idCanchaSeleccionada,visibleIndex);
+                //LoadPopUp(dtTurnoSeleccionado);
             }
         }
         
@@ -172,5 +178,43 @@ namespace HayCancha.admin
             }
         }
 
+        protected void btnNuevo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnConsultar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void OnRowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gvTurnosComplejo, "Select$" + e.Row.RowIndex);
+                e.Row.Attributes["style"] = "cursor:pointer";
+            }
+        }
+
+        protected void OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            string estado = gvTurnosComplejo.SelectedRow.Cells[1].Text;
+            if (estado == "Disponible")
+            {
+                pcTurno.ShowOnPageLoad = true;
+            }
+            else
+            {
+                string horaDesdeHasta = gvTurnosComplejo.SelectedRow.Cells[0].Text;
+                string nombreCancha = gvTurnosComplejo.HeaderRow.Cells[1].Text;
+
+                DateTime dt = DateTime.Now;
+                DataTable dtTurnoActual = ControladorTurnos.RecuperarTurnoPorNombreCanchayHora(Convert.ToInt32(Session["codigoComplejo"]),nombreCancha, dt);
+            }           
+            
+            
+            
+        }
     }
 }

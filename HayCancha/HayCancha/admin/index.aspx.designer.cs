@@ -22,6 +22,24 @@ namespace HayCancha.admin {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
+        /// Control btnNuevo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNuevo;
+        
+        /// <summary>
+        /// Control btnConsultar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnConsultar;
+        
+        /// <summary>
         /// Control gvTurnos.
         /// </summary>
         /// <remarks>
@@ -31,13 +49,13 @@ namespace HayCancha.admin {
         protected global::DevExpress.Web.ASPxGridView.ASPxGridView gvTurnos;
         
         /// <summary>
-        /// Control ASPxPopupMenu1.
+        /// Control gvTurnosComplejo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxMenu.ASPxPopupMenu ASPxPopupMenu1;
+        protected global::System.Web.UI.WebControls.GridView gvTurnosComplejo;
         
         /// <summary>
         /// Control pcTurno.

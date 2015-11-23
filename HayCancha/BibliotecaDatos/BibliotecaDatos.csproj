@@ -41,6 +41,10 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\disfrazatebackend\AppRouss\AppRouss\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
@@ -59,7 +63,9 @@
     <Compile Include="Catalogos\CatalogoTurnoFijo.cs" />
     <Compile Include="Catalogos\CatalogoTurnoVariable.cs" />
     <Compile Include="ClasesComplementarias\Constantes.cs" />
+    <Compile Include="ClasesComplementarias\JObject.cs" />
     <Compile Include="ClasesComplementarias\ManejoNHibernate.cs" />
+    <Compile Include="ClasesComplementarias\PushNotification.cs" />
     <Compile Include="Clases\Cancha.cs" />
     <Compile Include="Clases\Complejo.cs" />
     <Compile Include="Clases\EstadoSolicitud.cs" />
@@ -95,7 +101,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

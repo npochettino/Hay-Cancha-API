@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/adminMaster.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="HayCancha.admin.index" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/adminMaster.Master" AutoEventWireup="true" EnableEventValidation = "false" CodeBehind="index.aspx.cs" Inherits="HayCancha.admin.index" %>
 
 <%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxPanel" TagPrefix="dx" %>
 
@@ -17,14 +17,6 @@
         function onCellClick(rowIndex, fieldName, cell) {
             grid.PerformCallback(rowIndex + '|' + fieldName + '|' + cell);
             setTimeout(function () { pcTurno.Show(); }, 3000);
-            //PageMethods.ProcessPopUp(rowIndex,fieldName,cell);//, onSucess, onError);
-
-        }
-        function onSucess(result) {
-            alert(result);
-        }
-        function onError(result) {
-            alert('Something wrong.');
         }
     </script>
     <div class="page-container">
@@ -57,6 +49,12 @@
                         <!-- BEGIN PORTLET-->
                         <div class="portlet light ">
                             <div class="portlet-title">
+                                <div class="portlet-title">
+                                    <div class="form-actions">
+                                        <asp:Button type="button" class="btn blue" ID="btnNuevo" OnClick="btnNuevo_Click" runat="server" Text="Nuevo" />
+                                        <asp:Button type="button" class="btn green" ID="btnConsultar" OnClick="btnConsultar_Click" runat="server" Text="Consulta" />
+                                    </div>
+                                </div>
                                 <div class="caption caption-md">
                                     <i class="icon-bar-chart theme-font hide"></i>
                                     <span class="caption-subject theme-font bold uppercase">Turnos</span>
@@ -75,10 +73,9 @@
                             </div>
                             <div class="portlet-body">
                                 <div class="table-scrollable table-scrollable-borderless">
-                                    <dx:ASPxGridView ID="gvTurnos" runat="server" KeyFieldName="Id" Width="100%" EnableTheming="True" Theme="Metropolis"
+                                    <dx:ASPxGridView Visible="false" ID="gvTurnos" runat="server" KeyFieldName="hora" Width="100%" EnableTheming="True" Theme="Metropolis"
                                         OnCustomCallback="gridView_CustomCallback" ClientInstanceName="grid"
                                         OnHtmlDataCellPrepared="gridView_HtmlDataCellPrepared">
-                                        <%--OnHtmlDataCellPrepared="gvTurnos_HtmlDataCellPrepared" OnCustomJSProperties="gvTurnos_CustomJSProperties"--%>
 
                                         <SettingsPager Mode="ShowAllRecords">
                                         </SettingsPager>
@@ -90,16 +87,11 @@
                                         </Styles>
                                     </dx:ASPxGridView>
 
-                                    <dx:ASPxPopupMenu ID="ASPxPopupMenu1" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
-                                        PopupElementID="ImgButton1" ShowPopOutImages="True" AutoPostBack="True" OnItemClick="ASPxPopupMenu1_ItemClick"
-                                        PopupHorizontalAlign="OutsideRight" PopupVerticalAlign="TopSides" PopupAction="LeftMouseClick">
-                                        <Items>
-                                            <dx:MenuItem Text="Ver Turno" Name="Ver Turno">
-                                            </dx:MenuItem>
-                                        </Items>
-                                        <ClientSideEvents Init="InitPopupMenuHandler" />
-                                        <ItemStyle Width="143px"></ItemStyle>
-                                    </dx:ASPxPopupMenu>
+                                    <asp:GridView ID="gvTurnosComplejo" Width="100%" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
+                                        runat="server" AutoGenerateColumns="true" OnRowDataBound="OnRowDataBound"
+                                        OnSelectedIndexChanged="OnSelectedIndexChanged">
+                                    </asp:GridView>
+
 
 
                                     <!-- BEGIN POPUP ELIMINAR ARTICULO -->
