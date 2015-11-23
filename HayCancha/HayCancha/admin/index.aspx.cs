@@ -9,6 +9,7 @@ using BibliotecaLogica.Controladores;
 using DevExpress.Web.ASPxGridView;
 using DevExpress.Web.ASPxMenu;
 using DevExpress.Data;
+using System.Web.Services;
 
 namespace HayCancha.admin
 {
@@ -16,13 +17,17 @@ namespace HayCancha.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadGrillaTurnos();
+            if (Session["codigoComplejo"] != null)
+                LoadGrillaTurnos();
+            else
+                Response.Redirect("../login.aspx");
         }
 
         private void LoadGrillaTurnos()
         {
             DataTable dtComplejo = ControladorGeneral.RecuperarComplejo(Convert.ToInt32(Session["codigoComplejo"]));
             DataTable dtCanchas = ControladorGeneral.RecuperarCanchasPorComplejo(Convert.ToInt32(Session["codigoComplejo"]));
+            Session.Add("dtCanchasActual", dtCanchas);
 
             int HoraApertura = Convert.ToInt32(dtComplejo.Rows[0]["horaApertura"]);
             int HoraCierre = Convert.ToInt32(dtComplejo.Rows[0]["horaCierre"]);
@@ -62,6 +67,7 @@ namespace HayCancha.admin
                 gvTurnos.DataSource = dtTurnos;
                 gvTurnos.DataBind();
                 gvTurnos.Columns["Id"].Visible = false;
+                gvTurnos.Columns["Hora"].Width = 20;
                 gvTurnos.DataBind();
             }
             else
@@ -100,12 +106,69 @@ namespace HayCancha.admin
             GridViewDataColumn clickedColumn = (GridViewDataColumn)gvTurnos.Columns[e.Item.Name];
         }
 
-        protected void GridView1_PreRender(object sender, EventArgs e)
+
+        //protected void gvTurnos_CustomJSProperties(object sender, ASPxGridViewClientJSPropertiesEventArgs e)
+        //{
+        //    e.Properties["cpDataColumnMap"] = gvTurnos.DataColumns.ToDictionary(c => gvTurnos.DataColumns.IndexOf(c), c => c.FieldName);
+        //}
+
+        //protected void gvTurnos_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
+        //{
+        //    e.Cell.Attributes["data-CI"] = string.Format("{0}_{1}", e.VisibleIndex, gvTurnos.DataColumns.IndexOf(e.DataColumn)); // cell info
+        //}
+        protected void gridView_HtmlDataCellPrepared(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewTableDataCellEventArgs e)
         {
-            foreach (GridViewColumn column in gvTurnos.Columns)
+            e.Cell.Attributes.Add("onclick", String.Format("onCellClick({0}, '{1}', '{2}')", e.KeyValue, e.DataColumn.FieldName, e.CellValue.ToString()));
+        }
+        protected void gridView_CustomCallback(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs e)
+        {
+            string[] parameter = e.Parameters.Split('|');
+            int visibleIndex = int.Parse(parameter[0]);
+            string fieldName = parameter[1];
+            string status = parameter[2];
+
+            Session.Add("horaSeleccionada", visibleIndex);
+            Session.Add("canchaSeleccionada", fieldName);
+            Session.Add("estadoSeleccionada", status);
+
+            if (status == "Libre")
             {
-                GridViewDataColumn dataColumn = column as GridViewDataColumn;
-                column.CellStyle.Font.Bold = dataColumn.SortOrder != ColumnSortOrder.None;
+                LoadPopUp();
+            }
+            else
+            {
+                DataTable dtCanchasActual = (DataTable)Session["dtCanchasActual"];
+                int idCanchaSeleccionada = 1;
+                for (int i = 0; i < dtCanchasActual.Rows.Count; i++)
+                {
+                    if (dtCanchasActual.Rows[i]["descripcion"].ToString().Contains(fieldName.ToString()))
+                        idCanchaSeleccionada = Convert.ToInt32(dtCanchasActual.Rows[i]["codigoCancha"]);
+                }
+                
+                DataTable dtTurnoSeleccionado = ControladorTurnos.RecuperarTurnoPorCanchaYHora(idCanchaSeleccionada,visibleIndex);
+                LoadPopUp(dtTurnoSeleccionado);
+            }
+        }
+        
+        private void LoadPopUp()
+        {
+            Response.Write("<script>alert('Muestro PopUp para cargar nuevo turno .....!');</script>");
+        }
+
+        private void LoadPopUp(DataTable dtTurnoSeleccionado)
+        {
+            pcTurno.ShowOnPageLoad = true;
+        }
+        
+        protected void pcTurno_PreRender(object sender, EventArgs e)
+        {
+            if (Session["horaSeleccionada"] != null)
+            {
+                //lblNombre.Text = "pepepe";
+                //lblApellido.Text = "apelll";
+                //lblDireccion.InnerText = "innertext";
+                //lblDireccion.InnerHtml = "innerhtml";
+
             }
         }
 

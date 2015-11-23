@@ -77,5 +77,18 @@ namespace BibliotecaDatos.Catalogos
             }
         }
 
+        public static TurnoVariable RecuperarTurnoPorCanchaYHora(int HoraDesde, int codigoCancha, ISession nhSesion)
+        {
+            try
+            {
+                TurnoVariable turnoV = CatalogoGenerico<TurnoVariable>.RecuperarPor(x => x.Cancha.Codigo == codigoCancha && x.FechaHoraDesde.Hour == HoraDesde, nhSesion);
+                return turnoV;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

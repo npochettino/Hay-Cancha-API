@@ -62,13 +62,7 @@
                                             <ul class="nav nav-tabs">
                                                 <li class="active">
                                                     <a href="#tab_1_1" data-toggle="tab">Info Personal</a>
-                                                </li>
-                                                <%--<li>
-                                                    <a href="#tab_1_2" data-toggle="tab">Cambiar Imagen</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#tab_1_3" data-toggle="tab">Cambiar Contraseña</a>
-                                                </li>--%>
+                                                </li>                                              
                                             </ul>
                                         </div>
                                         <div class="portlet-body">

@@ -355,7 +355,6 @@ namespace BibliotecaLogica.Controladores
                             filaNueva[cancha.Descripcion] = "Reservado - " + turnoFijo.Responsable;
                         }
                     }
-
                     tablaTurnos.Rows.Add(filaNueva);
                 }
 

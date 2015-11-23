@@ -166,45 +166,43 @@
                 </li>
             </ul>
             <div class="row">
-                <div class="col-md-12">
-                    <!-- BEGIN SAMPLE FORM PORTLET-->
-                    <div class="portlet light">
-                        <div class="portlet-title">
-                            <div class="caption">
-                                <i class="fa fa-cogs font-green-sharp"></i>
-                                <span class="caption-subject font-green-sharp bold uppercase">Imagenes del Complejo</span>
-                            </div>
-                        </div>
-                        <div class="modal-header">
-                            <div class="form-actions">
-                                <asp:Button type="submit" class="btn blue" ID="Button1" OnClientClick="return validateForm()" OnClick="btnGuardar_Click" runat="server" Text="Nueva Imagen" />
-                                <button type="button" class="btn red">Eliminar</button>
-                                <a class="btn default" data-toggle="modal" href="#responsive">Add Image</a>
-
-                            </div>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <%--ImageSourceFolder="~\admin\assets\images\complejos\1\" --%>
-                                    <dx:ASPxImageSlider ID="isComplejo" runat="server" EnableTheming="False">
-                                    </dx:ASPxImageSlider>
+                <form>
+                    <div class="col-md-12">
+                        <!-- BEGIN SAMPLE FORM PORTLET-->
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-cogs font-green-sharp"></i>
+                                    <span class="caption-subject font-green-sharp bold uppercase">Imagenes del Complejo</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                            <button type="button" class="btn blue">Save changes</button>
+                            <div class="modal-header">
+                                <div class="form-actions">
+                                    <button type="button" class="btn red">Eliminar</button>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <%--ImageSourceFolder="~\admin\assets\images\complejos\1\" --%>
+                                        <dx:ASPxImageSlider ID="isComplejo" runat="server" EnableTheming="False">
+                                        </dx:ASPxImageSlider>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <asp:FileUpload ID="fuImagen" CssClass="form-control" runat="server" />
+                                <dx:ASPxButton ID="btnUploadImagen" runat="server" Text="Subir Imagen" AutoPostBack="False" CssClass="btn blue" class="btn blue" ClientSideEvents-Click="OnClickUploadImagen">
+                                            <ClientSideEvents Click="OnClickUploadImagen"></ClientSideEvents>
+                                        </dx:ASPxButton>
+                                <asp:Button type="button" class="btn blue" ID="btnSubirImagen" UseSubmitBehavior="false" OnClick="btnSubirImagen_Click" runat="server" Text="Guardar" />
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-
-
-
-
 
     <!--  Init Modal Form Google Maps
       ============================================-->
@@ -244,7 +242,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-            <asp:Button ID="btnUploadImage" UseSubmitBehavior="false" runat="server" Text="Subir Imagen" />
+            <asp:Button ID="btnUpload" UseSubmitBehavior="false" runat="server" Text="Subir Imagen" />
         </div>
     </div>
 
@@ -282,6 +280,20 @@
             alert("Show Modal Google Maps......");
         }
 
+    </script>
+
+    <script>
+        function OnClickUploadImagen(s, e) {
+            PageMethods.InsertarImagenComplejo(s, ContentPlaceHolder1_fuImagen.GetValue(), OnSucces, OnFail);
+        }
+
+        function OnSucces(s, e) {
+            alert("OK");
+        }
+
+        function OnFail(s, e) {
+            alert("Error");
+        }
     </script>
 
     <!-- BEGIN PAGE LEVEL PLUGINS -->

@@ -8,7 +8,6 @@ using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BibliotecaLogica.Controladores;
-using System.Drawing;
 using DevExpress.Web;
 using DevExpress.Web.Internal;
 using DevExpress.Web.ASPxUploadControl;
@@ -68,8 +67,34 @@ namespace HayCancha.admin.complejo
 
         const string UploadDirectory = "~/admin/assets/images/complejos/1/";
 
+        protected void btnUploadImage_Click(object sender, EventArgs e)
+        {
+            if (fuImagen.HasFile && (fuImagen.PostedFile.ContentType == "image/jpg" || fuImagen.PostedFile.ContentType == "image/jpeg"))
+            {
+                string path = Server.MapPath("..") + "\\assets\\images\\complejos\\" + Session["codigoComplejo"].ToString();
+                fuImagen.PostedFile.SaveAs(path);
+                StreamReader reader = new StreamReader(fuImagen.FileContent);
+                string text = reader.ReadToEnd();
+            }
+            else 
+            {
+ 
+            }
+        }
 
+        protected void btnSubirImagen_Click(object sender, EventArgs e)
+        {
+            if (fuImagen.HasFile && (fuImagen.PostedFile.ContentType == "image/jpg" || fuImagen.PostedFile.ContentType == "image/jpeg"))
+            {
+                string path = Server.MapPath("..") + "\\assets\\images\\complejos\\" + Session["codigoComplejo"].ToString();
+                fuImagen.PostedFile.SaveAs(path);
+                StreamReader reader = new StreamReader(fuImagen.FileContent);
+                string text = reader.ReadToEnd();
+            }
+            else
+            {
 
-
+            }
+        }
     }
 }

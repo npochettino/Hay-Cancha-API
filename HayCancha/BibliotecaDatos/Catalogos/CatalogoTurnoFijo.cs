@@ -62,5 +62,18 @@ namespace BibliotecaDatos.Catalogos
                 throw ex;
             }
         }
+
+        public static TurnoFijo RecuperarTurnoPorCanchaYHora(int HoraDesde, int codigoCancha, ISession nhSesion)
+        {
+            try
+            {
+                TurnoFijo turnoF = CatalogoGenerico<TurnoFijo>.RecuperarPor(x => x.Cancha.Codigo == codigoCancha && x.FechaHasta == null && x.HoraDesde == HoraDesde, nhSesion);
+                return turnoF;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
