@@ -21,9 +21,9 @@ namespace BibliotecaDatos.ClasesComplementarias
                 {
                     singleton = Fluently.Configure()
                       .Database(MsSqlConfiguration.MsSql2008
-                      //.ConnectionString("data source=TSIS0220\\SQLEXPRESS;initial catalog=HayCancha;Integrated Security=SSPI;"))
-                        .ConnectionString("data source=localhost;initial catalog=HayCancha;Integrated Security=SSPI;"))
-                        //.ConnectionString("data source=localhost;initial catalog=w1402088_HayCancha;user=w1402088_HayCancha;password=Algoritmos2015;"))
+                        //.ConnectionString("data source=TSIS0220\\SQLEXPRESS;initial catalog=HayCancha;Integrated Security=SSPI;"))
+                        //.ConnectionString("data source=localhost;initial catalog=HayCancha;Integrated Security=SSPI;"))
+                        .ConnectionString("data source=localhost;initial catalog=w1402088_HayCancha;user=w1402088_HayCancha;password=Algoritmos2015;"))
                       .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Program>())
                       .BuildSessionFactory();
                 }

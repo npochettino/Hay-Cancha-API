@@ -439,6 +439,8 @@ namespace BibliotecaLogica.Controladores
                     string descripcionComplejo;
                     DateTime fechaHoraDesde = new DateTime();
                     DateTime fechaHoraHasta = new DateTime();
+                    string imagenUsuario;
+                    string nombreApellido;
 
                     if (solicitud.TurnoFijo != null)
                     {
@@ -446,6 +448,8 @@ namespace BibliotecaLogica.Controladores
                         descripcionCancha = solicitud.TurnoFijo.Cancha.Descripcion;
                         codigoComplejo = solicitud.TurnoFijo.Cancha.Complejo.Codigo;
                         descripcionComplejo = solicitud.TurnoFijo.Cancha.Complejo.Descripcion;
+                        nombreApellido = solicitud.TurnoFijo.Responsable;
+                        imagenUsuario = string.Empty;
 
                         for (int i = 0; i < 6; i++)
                         {
@@ -465,11 +469,13 @@ namespace BibliotecaLogica.Controladores
                         descripcionComplejo = solicitud.TurnoVariable.Cancha.Complejo.Descripcion;
                         fechaHoraDesde = solicitud.TurnoVariable.FechaHoraDesde;
                         fechaHoraHasta = solicitud.TurnoVariable.FechaHoraHasta;
+                        nombreApellido = solicitud.TurnoVariable.UsuarioApp.Nombre + " " + solicitud.TurnoVariable.UsuarioApp.Apellido;
+                        imagenUsuario = solicitud.TurnoVariable.UsuarioApp.Imagen;
                     }
 
                     tablaSolicitudes.Rows.Add(new object[] { solicitud.Codigo, solicitud.EstadoSolicitud.Codigo, solicitud.EstadoSolicitud.Descripcion, codigoCancha,
                     descripcionCancha, codigoComplejo, descripcionComplejo, fechaHoraDesde.ToString("dd/MM/yyyy"), fechaHoraDesde.Hour, fechaHoraHasta.Hour,
-                    solicitud.UsuarioAppInvitado.Imagen, solicitud.UsuarioAppInvitado.Nombre + " " + solicitud.UsuarioAppInvitado.Apellido, false});
+                    imagenUsuario, nombreApellido, false});
                 }
 
                 List<int> listaTurnosVariables = CatalogoGenerico<TurnoVariable>.RecuperarLista(x => x.UsuarioApp.Codigo == codigoUsuarioApp, nhSesion).Select(x => x.Codigo).ToList();
@@ -484,7 +490,7 @@ namespace BibliotecaLogica.Controladores
                     listaSolicitud = CatalogoSolicitud.RecuperarPorTurnosYEstado(listaTurnosVariables, codigoEstadoSolicitud, nhSesion);
                 }
 
-                foreach (Solicitud solicitud in listaSolicitudesInvitado)
+                foreach (Solicitud solicitud in listaSolicitud)
                 {
                     int codigoCancha;
                     string descripcionCancha;

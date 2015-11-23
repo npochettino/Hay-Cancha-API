@@ -14,6 +14,7 @@ namespace BibliotecaDatos.ClasesComplementarias
             public const int CANCELADO = 2;
             public const int PENDIENTE = 3;
             public const int AUSENTE = 4;
+            public const int CERRADO = 5;
         }
 
         public class EstadosSolicitud
