@@ -10,6 +10,7 @@ using DevExpress.Web.ASPxGridView;
 using DevExpress.Web.ASPxMenu;
 using DevExpress.Data;
 using System.Web.Services;
+using BibliotecaDatos.ClasesComplementarias;
 
 namespace HayCancha.admin
 {
@@ -17,204 +18,177 @@ namespace HayCancha.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["codigoComplejo"] != null)
-                LoadGrillaTurnosNew();
-            else
+            if (Session["codigoComplejo"] == null)
                 Response.Redirect("../login.aspx");
+
+            if (!IsPostBack)
+                LoadGrillaTurnosNew();
+            //if (Session["codigoComplejo"] != null)
+            //    LoadGrillaTurnosNew();
+            //else
+            //    Response.Redirect("../login.aspx");
         }
 
         private void LoadGrillaTurnosNew()
         {
-            gvTurnosComplejo.DataSource = ControladorTurnos.RecuperarTurnosPorComplejoPorDia(DateTime.Now,Convert.ToInt32(Session["codigoComplejo"]));
-            gvTurnosComplejo.DataBind();
+            if (txtFechaGrillaTurnos.Date < DateTime.Now.AddYears(-50))
+                txtFechaGrillaTurnos.Date = DateTime.Now;
+
+            gvTurnos.DataSource = ControladorTurnos.RecuperarTurnosPorComplejoPorDia(txtFechaGrillaTurnos.Date, Convert.ToInt32(Session["codigoComplejo"]));
+            gvTurnos.DataBind();
+            
         }
 
-        private void LoadGrillaTurnos()
-        {
-            DataTable dtComplejo = ControladorGeneral.RecuperarComplejo(Convert.ToInt32(Session["codigoComplejo"]));
-            DataTable dtCanchas = ControladorGeneral.RecuperarCanchasPorComplejo(Convert.ToInt32(Session["codigoComplejo"]));
-            Session.Add("dtCanchasActual", dtCanchas);
-
-            int HoraApertura = Convert.ToInt32(dtComplejo.Rows[0]["horaApertura"]);
-            int HoraCierre = Convert.ToInt32(dtComplejo.Rows[0]["horaCierre"]);
-            DataTable dtTurnos = new DataTable();
-
-            if (dtCanchas.Rows.Count > 0)
-            {
-                for (int i = 0; i < dtCanchas.Rows.Count; i++)
-                {
-                    DataTable dtTurnosPorCancha = new DataTable(); //ControladorTurnos.RecuperarTurnosPorFechaPorCancha(DateTime.Now, Convert.ToInt32(dtCanchas.Rows[i]["codigoCancha"]));
-                    if (i == 0)
-                    {
-                        dtTurnos.Columns.Add("Id");
-                        dtTurnos.Columns.Add("Hora");
-                        for (int h = HoraApertura; h <= HoraCierre; h++)
-                            dtTurnos.Rows.Add(h, h + ":00");
-
-                        dtTurnos.Columns.Add(dtCanchas.Rows[i]["descripcion"].ToString());
-                        foreach (DataRow dr in dtTurnos.Rows)
-                        {
-                            int hora = Convert.ToInt32(dr.ItemArray[0]);
-                            string contains = isContains(hora, dtTurnosPorCancha);
-                            dr[dtCanchas.Rows[i]["descripcion"].ToString()] = contains;
-                        }
-                    }
-                    else
-                    {
-                        dtTurnos.Columns.Add(dtCanchas.Rows[i]["descripcion"].ToString());
-                        foreach (DataRow dr in dtTurnos.Rows)
-                        {
-                            int hora = Convert.ToInt32(dr.ItemArray[0]);
-                            string contains = isContains(hora, dtTurnosPorCancha);
-                            dr[dtCanchas.Rows[i]["descripcion"].ToString()] = contains;
-                        }
-                    }
-                }
-                gvTurnos.DataSource = dtTurnos;
-                gvTurnos.DataBind();
-                gvTurnos.Columns["Id"].Visible = false;
-                gvTurnos.Columns["Hora"].Width = 20;
-                gvTurnos.DataBind();
-            }
-            else
-            {
-                Response.Write("<script>alert('El complejo aun no tiene canchas. Crea una cancha para poder comenzar a gestionar tus reservas!');</script>");
-            }
-
-        }
-
-        private string isContains(int h, DataTable dtTurnosPorCancha)
-        {
-            for (int i = 0; i < dtTurnosPorCancha.Rows.Count; i++)
-            {
-                if (dtTurnosPorCancha.Rows[i]["horaDesde"].ToString().Contains(h.ToString()))
-                    return dtTurnosPorCancha.Rows[i]["estado"].ToString();
-            }
-            return "Libre";
-        }
-
-        protected void gvTurnos_FillContextMenuItems(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewContextMenuEventArgs e)
-        {
-            e.Items.Add("PDF", "ExportToPDF");
-            e.Items.Add("XLS", "ExportToXLS");
-        }
-
-        protected void gvTurnos_ContextMenuItemClick(object sender, ASPxGridViewContextMenuItemClickEventArgs e)
-        {
-
-        }
-
-        protected void ASPxPopupMenu1_ItemClick(object sender, MenuItemEventArgs e)
-        {
-            if (e.Item == null)
-                return;
-            gvTurnos.ClearSort();
-            GridViewDataColumn clickedColumn = (GridViewDataColumn)gvTurnos.Columns[e.Item.Name];
-        }
-
-
-        //protected void gvTurnos_CustomJSProperties(object sender, ASPxGridViewClientJSPropertiesEventArgs e)
+        //private void LoadGrillaTurnos()
         //{
-        //    e.Properties["cpDataColumnMap"] = gvTurnos.DataColumns.ToDictionary(c => gvTurnos.DataColumns.IndexOf(c), c => c.FieldName);
+        //    DataTable dtComplejo = ControladorGeneral.RecuperarComplejo(Convert.ToInt32(Session["codigoComplejo"]));
+        //    DataTable dtCanchas = ControladorGeneral.RecuperarCanchasPorComplejo(Convert.ToInt32(Session["codigoComplejo"]));
+        //    Session.Add("dtCanchasActual", dtCanchas);
+
+        //    int HoraApertura = Convert.ToInt32(dtComplejo.Rows[0]["horaApertura"]);
+        //    int HoraCierre = Convert.ToInt32(dtComplejo.Rows[0]["horaCierre"]);
+        //    DataTable dtTurnos = new DataTable();
+
+        //    if (dtCanchas.Rows.Count > 0)
+        //    {
+        //        for (int i = 0; i < dtCanchas.Rows.Count; i++)
+        //        {
+        //            DataTable dtTurnosPorCancha = new DataTable(); //ControladorTurnos.RecuperarTurnosPorFechaPorCancha(DateTime.Now, Convert.ToInt32(dtCanchas.Rows[i]["codigoCancha"]));
+        //            if (i == 0)
+        //            {
+        //                dtTurnos.Columns.Add("Id");
+        //                dtTurnos.Columns.Add("Hora");
+        //                for (int h = HoraApertura; h <= HoraCierre; h++)
+        //                    dtTurnos.Rows.Add(h, h + ":00");
+
+        //                dtTurnos.Columns.Add(dtCanchas.Rows[i]["descripcion"].ToString());
+        //                foreach (DataRow dr in dtTurnos.Rows)
+        //                {
+        //                    int hora = Convert.ToInt32(dr.ItemArray[0]);
+        //                    string contains = isContains(hora, dtTurnosPorCancha);
+        //                    dr[dtCanchas.Rows[i]["descripcion"].ToString()] = contains;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                dtTurnos.Columns.Add(dtCanchas.Rows[i]["descripcion"].ToString());
+        //                foreach (DataRow dr in dtTurnos.Rows)
+        //                {
+        //                    int hora = Convert.ToInt32(dr.ItemArray[0]);
+        //                    string contains = isContains(hora, dtTurnosPorCancha);
+        //                    dr[dtCanchas.Rows[i]["descripcion"].ToString()] = contains;
+        //                }
+        //            }
+        //        }
+        //        gvTurnos.DataSource = dtTurnos;
+        //        gvTurnos.DataBind();
+        //        gvTurnos.Columns["Id"].Visible = false;
+        //        gvTurnos.Columns["Hora"].Width = 20;
+        //        gvTurnos.DataBind();
+        //    }
+        //    else
+        //    {
+        //        Response.Write("<script>alert('El complejo aun no tiene canchas. Crea una cancha para poder comenzar a gestionar tus reservas!');</script>");
+        //    }
+
         //}
 
-        //protected void gvTurnos_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
+        //private string isContains(int h, DataTable dtTurnosPorCancha)
         //{
-        //    e.Cell.Attributes["data-CI"] = string.Format("{0}_{1}", e.VisibleIndex, gvTurnos.DataColumns.IndexOf(e.DataColumn)); // cell info
+        //    for (int i = 0; i < dtTurnosPorCancha.Rows.Count; i++)
+        //    {
+        //        if (dtTurnosPorCancha.Rows[i]["horaDesde"].ToString().Contains(h.ToString()))
+        //            return dtTurnosPorCancha.Rows[i]["estado"].ToString();
+        //    }
+        //    return "Libre";
         //}
+
+
         protected void gridView_HtmlDataCellPrepared(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewTableDataCellEventArgs e)
         {
-            e.Cell.Attributes.Add("onclick", String.Format("onCellClick({0}, '{1}', '{2}')", e.KeyValue, e.DataColumn.FieldName, e.CellValue.ToString()));
-        }
-        protected void gridView_CustomCallback(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs e)
-        {
-            string[] parameter = e.Parameters.Split('|');
-            int visibleIndex = int.Parse(parameter[0]);
-            string fieldName = parameter[1];
-            string status = parameter[2];
-
-            Session.Add("horaSeleccionada", visibleIndex);
-            Session.Add("canchaSeleccionada", fieldName);
-            Session.Add("estadoSeleccionada", status);
-
-            if (status == "Libre")
+            if (e.Cell != null)
             {
-                LoadPopUp();
-            }
-            else
-            {
-                DataTable dtCanchasActual = (DataTable)Session["dtCanchasActual"];
-                int idCanchaSeleccionada = 1;
-                for (int i = 0; i < dtCanchasActual.Rows.Count; i++)
-                {
-                    if (dtCanchasActual.Rows[i]["descripcion"].ToString().Contains(fieldName.ToString()))
-                        idCanchaSeleccionada = Convert.ToInt32(dtCanchasActual.Rows[i]["codigoCancha"]);
-                }
-                
-                //DataTable dtTurnoSeleccionado = ControladorTurnos.RecuperarTurnoPorCanchaYHora(idCanchaSeleccionada,visibleIndex);
-                //LoadPopUp(dtTurnoSeleccionado);
-            }
-        }
-        
-        private void LoadPopUp()
-        {
-            Response.Write("<script>alert('Muestro PopUp para cargar nuevo turno .....!');</script>");
-        }
-
-        private void LoadPopUp(DataTable dtTurnoSeleccionado)
-        {
-            pcTurno.ShowOnPageLoad = true;
-        }
-        
-        protected void pcTurno_PreRender(object sender, EventArgs e)
-        {
-            if (Session["horaSeleccionada"] != null)
-            {
-                //lblNombre.Text = "pepepe";
-                //lblApellido.Text = "apelll";
-                //lblDireccion.InnerText = "innertext";
-                //lblDireccion.InnerHtml = "innerhtml";
-
+                e.Cell.Attributes.Add("onclick", "ShowEditPopup('" + e.Cell.ID + "','" + e.DataColumn.FieldName + "','" + e.KeyValue + "','" + e.CellValue + "');");
             }
         }
 
-        protected void btnNuevo_Click(object sender, EventArgs e)
+        protected void ASPxCallbackPanel1_Callback1(object sender, DevExpress.Web.ASPxClasses.CallbackEventArgsBase e)
         {
+            string[] parameter = e.Parameter.Split(',');
+            string nombreCancha = parameter[0];
+            string horaDesdeHasta = parameter[1];
+            string estado = parameter[2];
+            
+            Session.Add("horaSeleccionada", horaDesdeHasta);
+            Session.Add("canchaSeleccionada", nombreCancha);
+            Session.Add("estadoSeleccionada", estado);
 
-        }
-
-        protected void btnConsultar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void OnRowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gvTurnosComplejo, "Select$" + e.Row.RowIndex);
-                e.Row.Attributes["style"] = "cursor:pointer";
-            }
-        }
-
-        protected void OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            string estado = gvTurnosComplejo.SelectedRow.Cells[1].Text;
             if (estado == "Disponible")
             {
-                pcTurno.ShowOnPageLoad = true;
+                btnAceptar.Visible = false;
+                btnRechazar.Visible = false;
+                btnGuardarTurno.Visible = true;
+                //Muestro Pop Up en blanco....
             }
             else
             {
-                string horaDesdeHasta = gvTurnosComplejo.SelectedRow.Cells[0].Text;
-                string nombreCancha = gvTurnosComplejo.HeaderRow.Cells[1].Text;
+                btnAceptar.Visible = true;
+                btnRechazar.Visible = true;
+                btnGuardarTurno.Visible = false;
 
-                DateTime dt = DateTime.Now;
-                DataTable dtTurnoActual = ControladorTurnos.RecuperarTurnoPorNombreCanchayHora(Convert.ToInt32(Session["codigoComplejo"]),nombreCancha, dt);
-            }           
-            
-            
-            
+                int codigoTurno = int.Parse(gvTurnos.GetRowValues(gvTurnos.FocusedRowIndex, "codigoTurno" + nombreCancha).ToString());
+                Session.Add("codigoTurno", codigoTurno);
+                DataTable dtTurnoActual = ControladorTurnos.RecuperarTurnoPorCodigo(codigoTurno);
+                //tablaTurnos.Columns.Add("horaDesde", typeof(int));
+                //tablaTurnos.Columns.Add("horaHasta", typeof(int));
+                //tablaTurnos.Columns.Add("codigoCancha", typeof(int));
+                //tablaTurnos.Columns.Add("descripcionCancha", typeof(string));
+                //tablaTurnos.Columns.Add("codigoTipoCancha", typeof(int));
+                //tablaTurnos.Columns.Add("descripcionTipoCancha", typeof(string));
+                //tablaTurnos.Columns.Add("codigoComplejo", typeof(int));
+                //tablaTurnos.Columns.Add("descripcionComplejo", typeof(string));
+                //tablaTurnos.Columns.Add("precio", typeof(double));
+                //tablaTurnos.Columns.Add("direccion", typeof(string));
+                //tablaTurnos.Columns.Add("codigoUsuarioApp", typeof(string));
+                //tablaTurnos.Columns.Add("nombreUsuarioApp", typeof(string));
+                //tablaTurnos.Columns.Add("apellidoUsuarioApp", typeof(string));
+                //tablaTurnos.Columns.Add("telefonoUsuarioApp", typeof(string));
+                lblNombreDelUsuario.Text = dtTurnoActual.Rows[0]["nombreUsuarioApp"].ToString();
+                txtNombreUsuario.Text = dtTurnoActual.Rows[0]["nombreUsuarioApp"].ToString();
+                txtApellidoUsuario.Text = dtTurnoActual.Rows[0]["apellidoUsuarioApp"].ToString();
+                txtDireccionUsuario.Text = dtTurnoActual.Rows[0]["direccionUsuarioApp"].ToString();
+                txtTelefono.Text = dtTurnoActual.Rows[0]["telefonoUsuarioApp"].ToString();
+                ddlHoraDesde.SelectedValue = dtTurnoActual.Rows[0]["horaDesde"].ToString();
+                ddlHoraHasta.SelectedValue = dtTurnoActual.Rows[0]["horaHasta"].ToString();
+            }
         }
+
+        protected void txtFechaGrillaTurnos_DateChanged(object sender, EventArgs e)
+        {
+            LoadGrillaTurnosNew();
+        }
+
+        protected void btnAceptar_Click(object sender, EventArgs e)
+        {
+            cambiarEstadoDelTurno(Constantes.EstadosTurno.RESERVADO);
+        }
+
+        private void cambiarEstadoDelTurno(int estado)
+        {
+            string rta = "";
+            if (ControladorTurnos.CambiarEstadoDelTurno(Convert.ToInt32(Session["codigoTurno"]), estado))
+                rta = "Se cambio el estado del turno";
+            else
+                rta = "ERROR";
+
+            pcTurno.ShowOnPageLoad = false;
+            LoadGrillaTurnosNew();
+        }
+
+        protected void btnRechazar_Click(object sender, EventArgs e)
+        {
+            cambiarEstadoDelTurno(Constantes.EstadosTurno.CANCELADO);
+        }
+
     }
 }

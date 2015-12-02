@@ -67,7 +67,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                     <!-- BEGIN LOGO -->
                     <div class="page-logo">
                         <a href="index.html">
-                            <img src="../../admin/assets/admin/layout3/img/logo-default.png" alt="logo" class="logo-default"></a>
+                            <%--<img src="../images/hay_cancha.png" alt="logo" class="logo-default"></a>--%>
                     </div>
                     <!-- END LOGO -->
                     <!-- BEGIN RESPONSIVE MENU TOGGLER -->

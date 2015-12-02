@@ -54,8 +54,8 @@
                         <div class="container vertical-middle divcenter clearfix">
 
                             <div class="row center" >
-                                <a href="index.aspx">
-                                    <img src="images/logo-dark.png" alt="Hay Cancha Logo"></a>
+                                <%--<a href="index.aspx">
+                                    <img src="images/hay_cancha.png" alt="Hay Cancha Logo"></a>--%>
                             </div>
 
                             <div class="panel panel-default divcenter noradius noborder" style="max-width: 400px; background-color: rgba(255,255,255,0.93);">

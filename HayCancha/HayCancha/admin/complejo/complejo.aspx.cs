@@ -44,14 +44,19 @@ namespace HayCancha.admin.complejo
             txtLatitud.Text = dtComplejoActual.Rows[0]["latitud"].ToString();
             txtLongitud.Text = dtComplejoActual.Rows[0]["longitud"].ToString();
 
-            string path = Server.MapPath("..") + "\\assets\\images\\complejos\\" + Session["codigoComplejo"].ToString();
-            if (!Directory.Exists(path))
+            //string path = Server.MapPath("..") + "\\assets\\images\\complejos\\" + Session["codigoComplejo"].ToString();
+            string pathLogoComplejo = "~\\ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "_logo\\";
+            string pathImagenesComplejo = "~\\ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "\\";
+            if (!Directory.Exists(pathImagenesComplejo))
             {
-                DirectoryInfo di = Directory.CreateDirectory(path);
-                File.Copy(Server.MapPath("..") + "\\assets\\images\\complejos\\HayCancha.png", path + "\\HayCancha.png");
+                DirectoryInfo di = Directory.CreateDirectory(pathImagenesComplejo);
+                //File.Copy(Server.MapPath("..") + "\\assets\\images\\complejos\\HayCancha.png", pathImagenesComplejo + "\\HayCancha.png");
+
+                DirectoryInfo di2 = Directory.CreateDirectory(pathLogoComplejo);
+                //File.Copy(pathLogoComplejo + Convert.ToString(Session["codigoComplejo"]) + ".png", pathLogoComplejo + "\\HayCancha.png");
             }
 
-            isComplejo.ImageSourceFolder = "~\\admin\\assets\\images\\complejos\\" + Convert.ToString(Session["codigoComplejo"]) + "\\";
+            isComplejo.ImageSourceFolder = "~\\ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "\\";
 
 
         }
@@ -66,14 +71,12 @@ namespace HayCancha.admin.complejo
                 Convert.ToInt32(ddlHoraApertura.SelectedValue), Convert.ToInt32(ddlHoraCierre.SelectedValue), txtMailComplejo.Text, txtTelefono.Text, (double)lat, (double)lon, "");
         }
 
-        const string UploadDirectory = "~/admin/assets/images/complejos/1/";
-
         protected void Upload(object sender, EventArgs e)
         {
             if (FileUpload1.HasFile)
             {
                 string fileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
-                FileUpload1.PostedFile.SaveAs(Server.MapPath("~/admin/assets/images/complejos/") + Session["codigoComplejo"].ToString() + "/" + fileName);
+                FileUpload1.PostedFile.SaveAs("~\\ImagenesComplejos\\" + Session["codigoComplejo"].ToString() + "\\" + fileName);
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
         }

@@ -18,7 +18,7 @@ namespace BibliotecaLogica.Controladores
     {
         #region UsuarioApp
 
-        public static void InsertarActualizarUsuarioApp(int codigoUsuario, string nombre, string apellido, string mail, string contraseña, string telefono, int codigoPosicion, string imagen, string codigoTelefono, bool isActivo)
+        public static void InsertarActualizarUsuarioApp(int codigoUsuario, string nombre, string apellido, string mail, string contraseña, string telefono, int codigoPosicion, string codigoTelefono, bool isActivo)
         {
             ISession nhSesion = ManejoNHibernate.IniciarSesion();
 
@@ -41,7 +41,6 @@ namespace BibliotecaLogica.Controladores
                 usuario.Contraseña = contraseña;
                 usuario.Telefono = telefono;
                 usuario.Posicion = CatalogoGenerico<Posicion>.RecuperarPorCodigo(codigoPosicion, nhSesion);
-                usuario.Imagen = imagen;
                 usuario.CodigoTelefono = codigoTelefono;
                 usuario.IsActivo = isActivo;
 

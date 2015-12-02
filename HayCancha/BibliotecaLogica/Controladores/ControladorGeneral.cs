@@ -419,6 +419,11 @@ namespace BibliotecaLogica.Controladores
                 tablaSolicitudes.Columns.Add("imagenUsuario", typeof(string));
                 tablaSolicitudes.Columns.Add("nombreApellidoUsuario", typeof(string));
                 tablaSolicitudes.Columns.Add("isCreator", typeof(bool));
+                tablaSolicitudes.Columns.Add("codigoTurno", typeof(int));
+                tablaSolicitudes.Columns.Add("codigoUsuarioAppInvitado", typeof(int));
+                tablaSolicitudes.Columns.Add("direccionComplejo", typeof(string));
+                tablaSolicitudes.Columns.Add("precio", typeof(double));
+                tablaSolicitudes.Columns.Add("codigoTelefono", typeof(string));
 
                 List<Solicitud> listaSolicitudesInvitado;
 
@@ -437,10 +442,15 @@ namespace BibliotecaLogica.Controladores
                     string descripcionCancha;
                     int codigoComplejo;
                     string descripcionComplejo;
+                    string direccionComplejo;
+                    double precio;
                     DateTime fechaHoraDesde = new DateTime();
                     DateTime fechaHoraHasta = new DateTime();
                     string imagenUsuario;
                     string nombreApellido;
+                    int codigoTurno;
+                    bool isVariable;
+                    string codigoTelefono = string.Empty;
 
                     if (solicitud.TurnoFijo != null)
                     {
@@ -450,6 +460,10 @@ namespace BibliotecaLogica.Controladores
                         descripcionComplejo = solicitud.TurnoFijo.Cancha.Complejo.Descripcion;
                         nombreApellido = solicitud.TurnoFijo.Responsable;
                         imagenUsuario = string.Empty;
+                        codigoTurno = solicitud.TurnoFijo.Codigo;
+                        isVariable = false;
+                        direccionComplejo = solicitud.TurnoFijo.Cancha.Complejo.Direccion;
+                        precio = solicitud.TurnoFijo.Cancha.PrecioTarde;
 
                         for (int i = 0; i < 6; i++)
                         {
@@ -471,11 +485,16 @@ namespace BibliotecaLogica.Controladores
                         fechaHoraHasta = solicitud.TurnoVariable.FechaHoraHasta;
                         nombreApellido = solicitud.TurnoVariable.UsuarioApp.Nombre + " " + solicitud.TurnoVariable.UsuarioApp.Apellido;
                         imagenUsuario = solicitud.TurnoVariable.UsuarioApp.Imagen;
+                        codigoTurno = solicitud.TurnoVariable.Codigo;
+                        isVariable = true;
+                        direccionComplejo = solicitud.TurnoVariable.Cancha.Complejo.Direccion;
+                        precio = solicitud.TurnoVariable.Cancha.PrecioTarde;
+                        codigoTelefono = solicitud.TurnoVariable.UsuarioApp.CodigoTelefono;
                     }
 
                     tablaSolicitudes.Rows.Add(new object[] { solicitud.Codigo, solicitud.EstadoSolicitud.Codigo, solicitud.EstadoSolicitud.Descripcion, codigoCancha,
                     descripcionCancha, codigoComplejo, descripcionComplejo, fechaHoraDesde.ToString("dd/MM/yyyy"), fechaHoraDesde.Hour, fechaHoraHasta.Hour,
-                    imagenUsuario, nombreApellido, false});
+                    imagenUsuario, nombreApellido, false, codigoTurno, codigoUsuarioApp, direccionComplejo, precio, codigoTelefono });
                 }
 
                 List<int> listaTurnosVariables = CatalogoGenerico<TurnoVariable>.RecuperarLista(x => x.UsuarioApp.Codigo == codigoUsuarioApp, nhSesion).Select(x => x.Codigo).ToList();
@@ -498,6 +517,11 @@ namespace BibliotecaLogica.Controladores
                     string descripcionComplejo;
                     DateTime fechaHoraDesde = new DateTime();
                     DateTime fechaHoraHasta = new DateTime();
+                    string direccionComplejo;
+                    double precio;
+                    int codigoTurno;
+                    bool isVariable;
+                    string codigoTelefono = string.Empty;
 
                     if (solicitud.TurnoFijo != null)
                     {
@@ -505,6 +529,10 @@ namespace BibliotecaLogica.Controladores
                         descripcionCancha = solicitud.TurnoFijo.Cancha.Descripcion;
                         codigoComplejo = solicitud.TurnoFijo.Cancha.Complejo.Codigo;
                         descripcionComplejo = solicitud.TurnoFijo.Cancha.Complejo.Descripcion;
+                        codigoTurno = solicitud.TurnoFijo.Codigo;
+                        isVariable = false;
+                        direccionComplejo = solicitud.TurnoFijo.Cancha.Complejo.Direccion;
+                        precio = solicitud.TurnoFijo.Cancha.PrecioTarde;
 
                         for (int i = 0; i < 6; i++)
                         {
@@ -524,11 +552,17 @@ namespace BibliotecaLogica.Controladores
                         descripcionComplejo = solicitud.TurnoVariable.Cancha.Complejo.Descripcion;
                         fechaHoraDesde = solicitud.TurnoVariable.FechaHoraDesde;
                         fechaHoraHasta = solicitud.TurnoVariable.FechaHoraHasta;
+                        codigoTurno = solicitud.TurnoVariable.Codigo;
+                        isVariable = true;
+                        direccionComplejo = solicitud.TurnoVariable.Cancha.Complejo.Direccion;
+                        precio = solicitud.TurnoVariable.Cancha.PrecioTarde;
+                        codigoTelefono = solicitud.TurnoVariable.UsuarioApp.CodigoTelefono;
                     }
 
                     tablaSolicitudes.Rows.Add(new object[] { solicitud.Codigo, solicitud.EstadoSolicitud.Codigo, solicitud.EstadoSolicitud.Descripcion, codigoCancha,
                     descripcionCancha, codigoComplejo, descripcionComplejo, fechaHoraDesde.ToString("dd/MM/yyyy"), fechaHoraDesde.Hour, fechaHoraHasta.Hour,
-                    solicitud.UsuarioAppInvitado.Imagen, solicitud.UsuarioAppInvitado.Nombre + " " + solicitud.UsuarioAppInvitado.Apellido, true});
+                    solicitud.UsuarioAppInvitado.Imagen, solicitud.UsuarioAppInvitado.Nombre + " " + solicitud.UsuarioAppInvitado.Apellido, true, 
+                    codigoTurno, codigoUsuarioApp, direccionComplejo, precio, codigoTelefono });
                 }
 
                 return tablaSolicitudes;

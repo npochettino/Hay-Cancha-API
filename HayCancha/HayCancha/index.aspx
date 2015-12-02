@@ -52,10 +52,10 @@
                         <!-- Logo
 					============================================= -->
                         <div id="logo">
-                            <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png">
-                                <img src="images/logo.png" alt="Canvas Logo"></a>
-                            <a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png">
-                                <img src="images/logo@2x.png" alt="Canvas Logo"></a>
+                            <a href="index.aspx" class="standard-logo" data-dark-logo="images/logo-dark.png">
+                                <img src="images/hay_cancha.png" alt="Canvas Logo"></a>
+                            <a href="index.aspx" class="retina-logo" data-dark-logo="images/logo-dark@2x.png">
+                                <img src="images/hay_cancha.png" alt="Canvas Logo"></a>
                         </div>
                         <!-- #logo end -->
                         <!-- Primary Navigation
@@ -83,7 +83,7 @@
                 <div class="full-screen" style="height: 513px; background: url('images/appshowcase/1.jpg'); background-size: cover;">
                     <div class="container clearfix">
 
-                        <img src="images/appshowcase/iphone-solid.png" alt="Image" class="hidden-sm hidden-xs" style="padding-top: 100px" data-style-lg="position: absolute; left: 0; bottom: 0; height: auto;padding-top" data-style-md="position: absolute; left: 0; bottom: 0; height: 450px;">
+                        <img src="images/boton_buscar_cancha.png" alt="Image" class="hidden-sm hidden-xs" style="padding-top: 100px" data-style-lg="position: absolute; left: 0; bottom: 0; height: auto;padding-top" data-style-md="position: absolute; left: 0; bottom: 0; height: 450px;">
 
                         <div class="vertical-middle no-fade">
                             <div class="col-md-6 dark fright nobottommargin" data-animate="fadeIn">
@@ -111,7 +111,7 @@
 
             <!-- Content
 		============================================= -->
-            <section id="content">
+        <%--    <section id="content">
 
                 <div class="content-wrap">
 
@@ -341,7 +341,7 @@
 
                 </div>
 
-            </section>
+            </section>--%>
             <!-- #content end -->
 
             <!-- Footer

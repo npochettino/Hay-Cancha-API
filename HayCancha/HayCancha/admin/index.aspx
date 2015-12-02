@@ -1,4 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/adminMaster.Master" AutoEventWireup="true" EnableEventValidation = "false" CodeBehind="index.aspx.cs" Inherits="HayCancha.admin.index" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/adminMaster.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="index.aspx.cs" Inherits="HayCancha.admin.index" %>
+
+<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxCallbackPanel" TagPrefix="dx" %>
 
 <%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxPanel" TagPrefix="dx" %>
 
@@ -11,14 +13,29 @@
 <%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
 
     <script type="text/javascript">
-        function onCellClick(rowIndex, fieldName, cell) {
-            grid.PerformCallback(rowIndex + '|' + fieldName + '|' + cell);
-            setTimeout(function () { pcTurno.Show(); }, 3000);
+
+        var keyValue = new Array();
+        function ShowEditPopup(element, FieldName, ticketId, isMultipleSelected) {
+            callbackPanel.SetContentHtml("");
+            pcTurno.ShowAtElement(eval(element));
+            keyValue[0] = FieldName;
+            keyValue[1] = ticketId;
+            keyValue[2] = isMultipleSelected;
         }
+        function pcTurno_Shown(s, e) {
+            callbackPanel.PerformCallback(keyValue);
+        }
+
+        function OnInit(s, e) {
+            ASPxClientUtils.AttachEventToElement(s.GetInputElement(), "click", function (event) {
+                s.ShowDropDown();
+            });
+        }
+        
     </script>
+
     <div class="page-container">
         <!-- BEGIN PAGE HEAD -->
         <div class="page-head">
@@ -51,8 +68,7 @@
                             <div class="portlet-title">
                                 <div class="portlet-title">
                                     <div class="form-actions">
-                                        <asp:Button type="button" class="btn blue" ID="btnNuevo" OnClick="btnNuevo_Click" runat="server" Text="Nuevo" />
-                                        <asp:Button type="button" class="btn green" ID="btnConsultar" OnClick="btnConsultar_Click" runat="server" Text="Consulta" />
+                                        
                                     </div>
                                 </div>
                                 <div class="caption caption-md">
@@ -62,46 +78,48 @@
                                 </div>
                                 <div class="actions">
                                     <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                        <label class="btn btn-transparent grey-salsa btn-circle btn-sm ">
-                                            <input type="radio" name="options" class="toggle" id="Radio2">Anterior</label>
+                                        <%--<label class="btn btn-transparent grey-salsa btn-circle btn-sm ">
+                                            <input type="radio" name="options" onclick="setPreviosDate()" class="toggle" id="Radio2">Anterior</label>
                                         <label class="btn btn-transparent grey-salsa btn-circle btn-sm active">
-                                            <input type="radio" name="options" class="toggle" id="Radio3">Hoy</label>
+                                            <input type="radio" name="options" onclick="setCurrentDate()" class="toggle" id="Radio3">Hoy</label>
                                         <label class="btn btn-transparent grey-salsa btn-circle btn-sm">
-                                            <input type="radio" name="options" class="toggle" id="Radio4">Siguiente</label>
+                                            <input type="radio" name="options" onclick="setNextDate()" class="toggle" id="Radio4">Siguiente</label>--%>
+                                        <dx:ASPxDateEdit ID="txtFechaGrillaTurnos" runat="server" CssClass="form-control" ClientInstanceName="txtFechaGrillaTurnos" 
+                                            DropDownStyle="DropDownList" EnableTheming="True" Theme="Metropolis" Width="100%" 
+                                            EditFormat="Date" AutoPostBack="true" OnDateChanged="txtFechaGrillaTurnos_DateChanged">
+                                            <ClientSideEvents Init="OnInit" />
+                                            <TimeSectionProperties Visible="false">
+                                            </TimeSectionProperties>
+                                        </dx:ASPxDateEdit>
                                     </div>
                                 </div>
                             </div>
                             <div class="portlet-body">
                                 <div class="table-scrollable table-scrollable-borderless">
-                                    <dx:ASPxGridView Visible="false" ID="gvTurnos" runat="server" KeyFieldName="hora" Width="100%" EnableTheming="True" Theme="Metropolis"
-                                        OnCustomCallback="gridView_CustomCallback" ClientInstanceName="grid"
-                                        OnHtmlDataCellPrepared="gridView_HtmlDataCellPrepared">
+                                    <dx:ASPxGridView ID="gvTurnos" runat="server" KeyFieldName="Hora" Width="100%" EnableTheming="True"
+                                        Theme="Metropolis" OnHtmlDataCellPrepared="gridView_HtmlDataCellPrepared">
 
+                                        <SettingsBehavior AllowFocusedRow="True" />
                                         <SettingsPager Mode="ShowAllRecords">
                                         </SettingsPager>
                                         <SettingsEditing Mode="Inline" />
-                                        <SettingsBehavior AllowFocusedRow="True" />
                                         <Styles>
                                             <FocusedRow BackColor="#C0FFC0" ForeColor="Black">
                                             </FocusedRow>
                                         </Styles>
                                     </dx:ASPxGridView>
 
-                                    <asp:GridView ID="gvTurnosComplejo" Width="100%" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
-                                        runat="server" AutoGenerateColumns="true" OnRowDataBound="OnRowDataBound"
-                                        OnSelectedIndexChanged="OnSelectedIndexChanged">
-                                    </asp:GridView>
-
-
 
                                     <!-- BEGIN POPUP ELIMINAR ARTICULO -->
                                     <dx:ASPxPopupControl ID="pcTurno" runat="server" CloseAction="OuterMouseClick" CloseOnEscape="true"
-                                        PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="pcTurno"
+                                        PopupHorizontalAlign="WindowCenter" ClientInstanceName="pcTurno"
                                         HeaderText="Turno" AllowDragging="True" Modal="True" PopupAnimationType="Fade" Width="800" Height="600"
-                                        EnableViewState="False" Theme="Metropolis" OnPreRender="pcTurno_PreRender">
+                                        EnableViewState="False" Theme="Metropolis">
+                                        <ClientSideEvents Shown="pcTurno_Shown" />
                                         <ContentCollection>
                                             <dx:PopupControlContentControl ID="PopupControlContentControl3" runat="server">
-                                                <dx:ASPxPanel ID="ASPxPanel1" runat="server" DefaultButton="">
+                                                <dx:ASPxCallbackPanel ID="ASPxCallbackPanel1" runat="server" ClientInstanceName="callbackPanel"
+                                                    OnCallback="ASPxCallbackPanel1_Callback1">
                                                     <PanelCollection>
                                                         <dx:PanelContent ID="PanelContent3" runat="server">
                                                             <div class="page-content">
@@ -114,7 +132,7 @@
                                                                                 <div class="portlet light profile-sidebar-portlet">
                                                                                     <!-- SIDEBAR USERPIC -->
                                                                                     <div class="profile-userpic">
-                                                                                        <img src="assets/admin/pages/media/profile/profile_user.jpg" class="img-responsive" alt="">
+                                                                                        <img src="assets/admin/pages/media/profile/profile_user.jpg" runat="server" id="imgProfileUserApp" class="img-responsive" alt="">
                                                                                     </div>
                                                                                     <!-- END SIDEBAR USERPIC -->
                                                                                     <!-- SIDEBAR USER TITLE -->
@@ -153,15 +171,15 @@
                                                                                                             </div>
                                                                                                             <div class="form-group">
                                                                                                                 <label class="control-label"><strong>Apellido: </strong></label>
-                                                                                                                <asp:TextBox type="text" placeholder="Lio" class="form-control" ID="TextBox1" runat="server"></asp:TextBox>
+                                                                                                                <asp:TextBox type="text" placeholder="Lio" class="form-control" ID="txtApellidoUsuario" runat="server"></asp:TextBox>
                                                                                                             </div>
                                                                                                             <div class="form-group">
                                                                                                                 <label class="control-label"><strong>Direccion: </strong></label>
-                                                                                                                <asp:TextBox type="text" placeholder="Lio" class="form-control" ID="TextBox2" runat="server"></asp:TextBox>
+                                                                                                                <asp:TextBox type="text" placeholder="Lio" class="form-control" ID="txtDireccionUsuario" runat="server"></asp:TextBox>
                                                                                                             </div>
                                                                                                             <div class="form-group">
                                                                                                                 <label class="control-label"><strong>Telefono: </strong></label>
-                                                                                                                <asp:TextBox type="text" placeholder="Lio" class="form-control" ID="TextBox3" runat="server"></asp:TextBox>
+                                                                                                                <asp:TextBox type="text" placeholder="Lio" class="form-control" ID="txtTelefono" runat="server"></asp:TextBox>
                                                                                                             </div>
                                                                                                             <div class="form-group">
                                                                                                                 <label class="control-label"><strong>Fecha del Turno: </strong></label>
@@ -169,7 +187,7 @@
                                                                                                             </div>
                                                                                                             <div class="form-group">
                                                                                                                 <label class="control-label"><strong>Hora Desde: </strong></label>
-                                                                                                                <asp:DropDownList ID="ddlHoraCierre" class="form-control" runat="server">
+                                                                                                                <asp:DropDownList ID="ddlHoraDesde" class="form-control" runat="server">
                                                                                                                     <asp:ListItem Value="10" Text="10:00"></asp:ListItem>
                                                                                                                     <asp:ListItem Value="11" Text="11:00"></asp:ListItem>
                                                                                                                     <asp:ListItem Value="12" Text="12:00"></asp:ListItem>
@@ -190,7 +208,7 @@
                                                                                                             </div>
                                                                                                             <div class="form-group">
                                                                                                                 <label class="control-label"><strong>Hora Hasta: </strong></label>
-                                                                                                                <asp:DropDownList ID="DropDownList1" class="form-control" runat="server">
+                                                                                                                <asp:DropDownList ID="ddlHoraHasta" class="form-control" runat="server">
                                                                                                                     <asp:ListItem Value="10" Text="10:00"></asp:ListItem>
                                                                                                                     <asp:ListItem Value="11" Text="11:00"></asp:ListItem>
                                                                                                                     <asp:ListItem Value="12" Text="12:00"></asp:ListItem>
@@ -210,7 +228,9 @@
                                                                                                                 </asp:DropDownList>
                                                                                                             </div>
                                                                                                             <div class="modal-footer">
-                                                                                                                <button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>
+                                                                                                                <asp:Button ID="btnCerrar" OnClientClick="pcTurno.Hide();" runat="server" UseSubmitBehavior="false" CssClass="btn btn-default" Text="Cerrar" />
+                                                                                                                <asp:Button ID="btnAceptar" OnClick="btnAceptar_Click" UseSubmitBehavior="false" runat="server" CssClass="btn green" Text="Aceptar" />
+                                                                                                                <asp:Button ID="btnRechazar" OnClick="btnRechazar_Click" UseSubmitBehavior="false" runat="server" CssClass="btn red" Text="Rechazar" />
                                                                                                                 <asp:Button ID="btnGuardarTurno" UseSubmitBehavior="false" runat="server" CssClass="btn blue" Text="Guardar Turno" />
                                                                                                             </div>
                                                                                                         </form>
@@ -227,7 +247,7 @@
                                                             </div>
                                                         </dx:PanelContent>
                                                     </PanelCollection>
-                                                </dx:ASPxPanel>
+                                                </dx:ASPxCallbackPanel>
                                             </dx:PopupControlContentControl>
                                         </ContentCollection>
                                     </dx:ASPxPopupControl>

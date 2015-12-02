@@ -63,7 +63,6 @@
     <Compile Include="Catalogos\CatalogoTurnoFijo.cs" />
     <Compile Include="Catalogos\CatalogoTurnoVariable.cs" />
     <Compile Include="ClasesComplementarias\Constantes.cs" />
-    <Compile Include="ClasesComplementarias\JObject.cs" />
     <Compile Include="ClasesComplementarias\ManejoNHibernate.cs" />
     <Compile Include="ClasesComplementarias\PushNotification.cs" />
     <Compile Include="Clases\Cancha.cs" />

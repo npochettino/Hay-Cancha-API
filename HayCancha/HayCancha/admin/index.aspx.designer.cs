@@ -13,31 +13,13 @@ namespace HayCancha.admin {
     public partial class index {
         
         /// <summary>
-        /// Control ScriptManager1.
+        /// Control txtFechaGrillaTurnos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
-        /// <summary>
-        /// Control btnNuevo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNuevo;
-        
-        /// <summary>
-        /// Control btnConsultar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnConsultar;
+        protected global::DevExpress.Web.ASPxEditors.ASPxDateEdit txtFechaGrillaTurnos;
         
         /// <summary>
         /// Control gvTurnos.
@@ -47,15 +29,6 @@ namespace HayCancha.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.ASPxGridView.ASPxGridView gvTurnos;
-        
-        /// <summary>
-        /// Control gvTurnosComplejo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvTurnosComplejo;
         
         /// <summary>
         /// Control pcTurno.
@@ -76,13 +49,13 @@ namespace HayCancha.admin {
         protected global::DevExpress.Web.ASPxPopupControl.PopupControlContentControl PopupControlContentControl3;
         
         /// <summary>
-        /// Control ASPxPanel1.
+        /// Control ASPxCallbackPanel1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxPanel.ASPxPanel ASPxPanel1;
+        protected global::DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel ASPxCallbackPanel1;
         
         /// <summary>
         /// Control PanelContent3.
@@ -92,6 +65,15 @@ namespace HayCancha.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.ASPxPanel.PanelContent PanelContent3;
+        
+        /// <summary>
+        /// Control imgProfileUserApp.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgProfileUserApp;
         
         /// <summary>
         /// Control lblNombreDelUsuario.
@@ -112,31 +94,31 @@ namespace HayCancha.admin {
         protected global::System.Web.UI.WebControls.TextBox txtNombreUsuario;
         
         /// <summary>
-        /// Control TextBox1.
+        /// Control txtApellidoUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtApellidoUsuario;
         
         /// <summary>
-        /// Control TextBox2.
+        /// Control txtDireccionUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox txtDireccionUsuario;
         
         /// <summary>
-        /// Control TextBox3.
+        /// Control txtTelefono.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::System.Web.UI.WebControls.TextBox txtTelefono;
         
         /// <summary>
         /// Control txtFechaDelTurno.
@@ -148,22 +130,49 @@ namespace HayCancha.admin {
         protected global::DevExpress.Web.ASPxEditors.ASPxDateEdit txtFechaDelTurno;
         
         /// <summary>
-        /// Control ddlHoraCierre.
+        /// Control ddlHoraDesde.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlHoraCierre;
+        protected global::System.Web.UI.WebControls.DropDownList ddlHoraDesde;
         
         /// <summary>
-        /// Control DropDownList1.
+        /// Control ddlHoraHasta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList ddlHoraHasta;
+        
+        /// <summary>
+        /// Control btnCerrar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCerrar;
+        
+        /// <summary>
+        /// Control btnAceptar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAceptar;
+        
+        /// <summary>
+        /// Control btnRechazar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRechazar;
         
         /// <summary>
         /// Control btnGuardarTurno.

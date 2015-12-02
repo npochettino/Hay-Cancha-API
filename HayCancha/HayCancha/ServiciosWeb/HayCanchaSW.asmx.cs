@@ -16,11 +16,11 @@ namespace HayCancha.ServiciosWeb
     public class HayCanchaSW : System.Web.Services.WebService
     {
         [WebMethod]
-        public string InsertarActualizarUsuarioApp(int codigoUsuario, string nombre, string apellido, string mail, string contraseña, string telefono, int codigoPosicion, string imagen, string codigoTelefono, bool isActivo)
+        public string InsertarActualizarUsuarioApp(int codigoUsuario, string nombre, string apellido, string mail, string contraseña, string telefono, int codigoPosicion, string codigoTelefono, bool isActivo)
         {
             try
             {
-                ControladorUsuarios.InsertarActualizarUsuarioApp(codigoUsuario, nombre, apellido, mail, contraseña, telefono, codigoPosicion, imagen, codigoTelefono, isActivo);
+                ControladorUsuarios.InsertarActualizarUsuarioApp(codigoUsuario, nombre, apellido, mail, contraseña, telefono, codigoPosicion, codigoTelefono, isActivo);
                 return "ok";
             }
             catch (Exception ex)

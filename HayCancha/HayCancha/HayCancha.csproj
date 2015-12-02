@@ -4247,6 +4247,12 @@
     <Content Include="email\images\logo.gif" />
     <Content Include="email\images\rouss.png" />
     <Content Include="email\images\twitter.gif" />
+    <Content Include="Imagenes\10.jpg" />
+    <Content Include="Imagenes\11.jpg" />
+    <Content Include="Imagenes\19.jpg" />
+    <Content Include="Imagenes\7.jpg" />
+    <Content Include="Imagenes\8.jpg" />
+    <Content Include="Imagenes\9.jpg" />
     <Content Include="images\appshowcase\1.jpg" />
     <Content Include="images\appshowcase\ipad-section.png" />
     <Content Include="images\appshowcase\iphone-solid.png" />
@@ -4904,6 +4910,7 @@
     <Folder Include="admin\assets\images\complejos\1\" />
     <Folder Include="admin\assets\images\usuariosApp\" />
     <Folder Include="admin\reservas\" />
+    <Folder Include="ImagenesCompejos\" />
     <Folder Include="include\twitter\cache\" />
   </ItemGroup>
   <ItemGroup>
