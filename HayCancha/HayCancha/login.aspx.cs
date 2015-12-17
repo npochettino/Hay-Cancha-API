@@ -26,6 +26,7 @@ namespace HayCancha
                 Session.Add("mailUsuarioActual", dtUsuarioActual.Rows[0]["mail"].ToString());
                 Session.Add("codigoUsuario", dtUsuarioActual.Rows[0]["codigoUsuario"]);
                 Session.Add("codigoComplejo", dtUsuarioActual.Rows[0]["codigoComplejo"]);
+                Session.Add("logoComplejo", dtUsuarioActual.Rows[0]["logoComplejo"]);
 
                 Response.Redirect("admin\\index.aspx");
             }

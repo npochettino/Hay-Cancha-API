@@ -17,11 +17,17 @@ namespace HayCancha
 
         protected void btnRegistro_Click(object sender, EventArgs e)
         {
-            ControladorUsuarios.InsertarActualizarUsuarioWeb(0, string.Empty, string.Empty, txtEmail.Value, txtContraseña.Value);
-            Session.Add("contraseñaUsuarioActual", txtContraseña.Value);
-            Session.Add("mailUsuarioActual", txtEmail.Value);
-            //Response.Redirect("bienvenido.aspx");
-            Response.Redirect("login.aspx");    
+            if (ControladorUsuarios.InsertarActualizarUsuarioWeb(0, string.Empty, string.Empty, txtEmail.Value, txtContraseña.Value) == "ok")
+            {
+                Session.Add("contraseñaUsuarioActual", txtContraseña.Value);
+                Session.Add("mailUsuarioActual", txtEmail.Value);
+                //Response.Redirect("bienvenido.aspx");
+                Response.Redirect("login.aspx");
+            }
+            else
+            {
+                lblError.Style.Add("display", "block");
+            }
         }
     }
 }

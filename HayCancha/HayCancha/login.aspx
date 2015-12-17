@@ -34,6 +34,8 @@
 	============================================= -->
     <title>Hay Cancha | Login</title>
 
+    <link rel="shortcut icon" href="images/hayCancha/favicon.ico">
+
 </head>
 
 <body class="stretched">
@@ -54,8 +56,8 @@
                         <div class="container vertical-middle divcenter clearfix">
 
                             <div class="row center" >
-                                <%--<a href="index.aspx">
-                                    <img src="images/hay_cancha.png" alt="Hay Cancha Logo"></a>--%>
+                                <a href="index.aspx">
+                                    <img src="images/hayCancha/hay_cancha_login.png" alt="HayCancha!" class="logo-default"></a>
                             </div>
 
                             <div class="panel panel-default divcenter noradius noborder" style="max-width: 400px; background-color: rgba(255,255,255,0.93);">
@@ -78,14 +80,16 @@
                                             <div class="col_full nobottommargin">
                                                 <asp:Button class="button button-3d button-black nomargin" ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" name="login-form-submit" value="login" />
                                                 <a href="#" class="fright" onclick="showForgotPassword()">Recuperar Contraseña?</a>
+                                                <br />
+                                                <a href="registro.aspx" class="fright">Registrate</a>
                                             </div>
 
-                                            <div class="line line-sm"></div>
+                                            <%--<div class="line line-sm"></div>
 
                                             <div class="center">
                                                 <h4 style="margin-bottom: 15px;">o Ingresa con:</h4>
                                                 <a href="#" class="button button-rounded si-facebook si-colored">Facebook</a>
-                                            </div>
+                                            </div>--%>
 
                                         </section>
                                         <section id="form-reset-password" style="display: none">

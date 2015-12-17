@@ -4911,6 +4911,7 @@
     <Folder Include="admin\assets\images\usuariosApp\" />
     <Folder Include="admin\reservas\" />
     <Folder Include="ImagenesCompejos\" />
+    <Folder Include="images\hayCancha\" />
     <Folder Include="include\twitter\cache\" />
   </ItemGroup>
   <ItemGroup>

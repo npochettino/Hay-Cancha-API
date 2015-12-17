@@ -50,15 +50,15 @@ namespace HayCancha.admin.canchas
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             //si el codigoOperacion es Null es una edicion.
-            if (Session["codigoOperacion"] == null)
+            if ((Cancha)Session["canchaActual"] != null)
             {
                 oCanchaActual = (Cancha)Session["canchaActual"];
-                ControladorGeneral.InsertarActualizarCancha(oCanchaActual.Codigo, Convert.ToInt32(Session["codigoComplejo"]), txtDescripcion.Text, Convert.ToInt32(cbTipoCancha.Value));
+                ControladorGeneral.InsertarActualizarCancha(oCanchaActual.Codigo, Convert.ToInt32(Session["codigoComplejo"]), txtDescripcion.Text, Convert.ToDouble(txtPrecioMañana.Text), Convert.ToDouble(txtPrecioTarde.Text),Convert.ToDouble(txtPrecioNoche.Text), Convert.ToInt32(cbTipoCancha.Value));
             }
             //si el codigoOperacion es != null hago un insert.
             else
             {
-                ControladorGeneral.InsertarActualizarCancha(0, Convert.ToInt32(Session["codigoComplejo"]), txtDescripcion.Text, Convert.ToInt32(cbTipoCancha.Value));
+                ControladorGeneral.InsertarActualizarCancha(0, Convert.ToInt32(Session["codigoComplejo"]), txtDescripcion.Text, Convert.ToDouble(txtPrecioMañana.Text), Convert.ToDouble(txtPrecioTarde.Text), Convert.ToDouble(txtPrecioNoche.Text), Convert.ToInt32(cbTipoCancha.Value));
             }
             Response.Redirect("listado.aspx");
         }

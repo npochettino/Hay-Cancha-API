@@ -54,6 +54,7 @@ namespace BibliotecaLogica.Controladores
                 tablaTurnos.Columns.Add("apellidoUsuarioApp", typeof(string));
                 tablaTurnos.Columns.Add("direccionUsuarioApp", typeof(string));
                 tablaTurnos.Columns.Add("telefonoUsuarioApp", typeof(string));
+                tablaTurnos.Columns.Add("codigoTelefonoUsuarioApp", typeof(string));
 
                 TurnoVariable tv = CatalogoGenerico<TurnoVariable>.RecuperarPor(x => x.Codigo == codigoTurno, nhSesion);
 
@@ -61,7 +62,7 @@ namespace BibliotecaLogica.Controladores
                 {
                     tablaTurnos.Rows.Add(new object[] { tv.FechaHoraDesde.Hour, tv.FechaHoraHasta.Hour, tv.Cancha.Codigo, tv.Cancha.Descripcion, tv.Cancha.TipoCancha.Codigo, tv.Cancha.TipoCancha.Descripcion,
                         tv.Cancha.Complejo.Codigo, tv.Cancha.Complejo.Descripcion, tv.Cancha.PrecioTarde, 
-                        tv.Cancha.Complejo.Direccion, tv.UsuarioApp.Codigo, tv.UsuarioApp.Nombre,  tv.UsuarioApp.Apellido, tv.UsuarioApp.Telefono });
+                        tv.Cancha.Complejo.Direccion, tv.UsuarioApp.Codigo, tv.UsuarioApp.Nombre,  tv.UsuarioApp.Apellido, tv.UsuarioApp.Telefono, tv.UsuarioApp.CodigoTelefono });
                 }
 
                 return tablaTurnos;

@@ -292,6 +292,7 @@ namespace BibliotecaLogica.Controladores
                         complejo.Telefono = "";
                         complejo.Latitud = 0.0;
                         complejo.Longitud = 0.0;
+                        complejo.Logo = "";
 
                         usuario.Complejo = complejo;
                     }
@@ -306,6 +307,15 @@ namespace BibliotecaLogica.Controladores
                     usuario.Contraseña = contraseña;
 
                     CatalogoGenerico<UsuarioWeb>.InsertarActualizar(usuario, nhSesion);
+
+                    if (codigoUsuario == 0)
+                    {
+                        //inserto la foto del complejo
+                        DataTable dtUsuarioWebActual = RecuperarUsuarioWeb(mail, contraseña);
+                        Complejo complejoActual = CatalogoGenerico<Complejo>.RecuperarPorCodigo(Convert.ToInt32(dtUsuarioWebActual.Rows[0]["codigoComplejo"]), nhSesion);
+                        complejoActual.Logo = complejoActual.Codigo + ".png";
+                        CatalogoGenerico<Complejo>.InsertarActualizar(complejoActual,nhSesion);
+                    }
                     return "ok";
                 }
                 else
@@ -343,6 +353,7 @@ namespace BibliotecaLogica.Controladores
                 tablaUsuario.Columns.Add("horaCierre");
                 tablaUsuario.Columns.Add("mailComplejo");
                 tablaUsuario.Columns.Add("telefonoComplejo");
+                tablaUsuario.Columns.Add("logoComplejo");
 
                 UsuarioWeb usuario = CatalogoGenerico<UsuarioWeb>.RecuperarPor(x => x.Mail == mail && x.Contraseña == contraseña, nhSesion);
 
@@ -350,7 +361,7 @@ namespace BibliotecaLogica.Controladores
                 {
                     tablaUsuario.Rows.Add(new object[] { usuario.Codigo, usuario.Nombre, usuario.Apellido, usuario.Mail, usuario.Contraseña, usuario.Complejo.Codigo, 
                                                      usuario.Complejo.Descripcion, usuario.Complejo.Direccion, usuario.Complejo.HoraApertura, usuario.Complejo.HoraCierre,
-                                                     usuario.Complejo.Mail, usuario.Complejo.Telefono });
+                                                     usuario.Complejo.Mail, usuario.Complejo.Telefono, usuario.Complejo.Logo });
                 }
 
                 return tablaUsuario;

@@ -51,7 +51,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
     <link href="../../admin/assets/admin/layout3/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color">
     <link href="../../admin/assets/admin/layout3/css/custom.css" rel="stylesheet" type="text/css">
     <!-- END THEME STYLES -->
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="../../images/hayCancha/favicon.ico">
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -66,8 +66,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                 <div class="container-fluid">
                     <!-- BEGIN LOGO -->
                     <div class="page-logo">
-                        <a href="index.html">
-                            <%--<img src="../images/hay_cancha.png" alt="logo" class="logo-default"></a>--%>
+                        <a href="index.aspx">
+                            <img src="../../images/hayCancha/logo_backEnd.png" alt="HayCancha!" class="logo-default"></a>
                     </div>
                     <!-- END LOGO -->
                     <!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -93,7 +93,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                             <!-- BEGIN USER LOGIN DROPDOWN -->
                             <li class="dropdown dropdown-user dropdown-dark">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <img alt="" class="img-circle" src="../../admin/assets/admin/layout3/img/avatar9.jpg">
+                                    <asp:Image ID="imgLogoComplejo" CssClass="img-circle" runat="server" />
                                     <span class="username username-hide-mobile" runat="server" id="lblUsuarioLogueado"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-default">

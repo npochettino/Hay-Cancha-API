@@ -37,7 +37,7 @@
                                     <asp:Button type="submit" class="btn blue" ID="btnNuevo" OnClick="btnNuevo_Click" runat="server" Text="Nuevo" />
                                     <asp:Button type="submit" class="btn yellow" ID="btnEditar" OnClick="btnEditar_Click" runat="server" Text="Editar" />
                                     <asp:Button type="submit" class="btn red" ID="btnEliminar" OnClick="btnEliminar_Click" runat="server" Text="Eliminar" />
-                                    <asp:Button type="submit" class="btn green" ID="btnConsultar" OnClick="btnConsultar_Click" runat="server" Text="Consulta" />
+                                    <%--<asp:Button type="submit" class="btn green" ID="btnConsultar" OnClick="btnConsultar_Click" runat="server" Text="Consulta" />--%>
                                 </div>
                             </div>
                             <div class="portlet-body form">

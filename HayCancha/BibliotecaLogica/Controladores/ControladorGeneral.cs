@@ -15,7 +15,7 @@ namespace BibliotecaLogica.Controladores
     {
         #region Cancha
 
-        public static void InsertarActualizarCancha(int codigoCancha, int codigoComplejo, string descripcion, int codigoTipoCancha)
+        public static void InsertarActualizarCancha(int codigoCancha, int codigoComplejo, string descripcion, double precioMañana, double precioTarde, double precioNoche, int codigoTipoCancha)
         {
             ISession nhSesion = ManejoNHibernate.IniciarSesion();
 
@@ -35,9 +35,9 @@ namespace BibliotecaLogica.Controladores
                 cancha.Complejo = CatalogoGenerico<Complejo>.RecuperarPorCodigo(codigoComplejo, nhSesion);
                 cancha.Descripcion = descripcion;
                 cancha.TipoCancha = CatalogoGenerico<TipoCancha>.RecuperarPorCodigo(codigoTipoCancha, nhSesion);
-                cancha.PrecioMañana = 10;
-                cancha.PrecioTarde = 20;
-                cancha.PrecioNoche = 30;
+                cancha.PrecioMañana = precioMañana;
+                cancha.PrecioTarde = precioTarde;
+                cancha.PrecioNoche = precioNoche;
 
                 CatalogoGenerico<Cancha>.InsertarActualizar(cancha, nhSesion);
             }
@@ -180,7 +180,8 @@ namespace BibliotecaLogica.Controladores
                 complejo.Longitud = longitud;
                 complejo.Mail = mail;
                 complejo.Telefono = telefono;
-                complejo.Logo = "http://haycancha.sempait.com.ar/Imagenes/" + rutaLogo;
+                //complejo.Logo = "http://haycancha.sempait.com.ar/Imagenes/" + rutaLogo;
+                complejo.Logo = rutaLogo;
 
                 CatalogoGenerico<Complejo>.InsertarActualizar(complejo, nhSesion);
             }
@@ -429,11 +430,11 @@ namespace BibliotecaLogica.Controladores
 
                 if (codigoEstadoSolicitud == 0)
                 {
-                    listaSolicitudesInvitado = CatalogoGenerico<Solicitud>.RecuperarLista(x => x.UsuarioAppInvitado.Codigo == codigoUsuarioApp, nhSesion);
+                    listaSolicitudesInvitado = CatalogoGenerico<Solicitud>.RecuperarLista(x => x.UsuarioAppInvitado.Codigo == codigoUsuarioApp && x.TurnoVariable.FechaHoraDesde < DateTime.Now, nhSesion);
                 }
                 else
                 {
-                    listaSolicitudesInvitado = CatalogoGenerico<Solicitud>.RecuperarLista(x => x.EstadoSolicitud.Codigo == codigoEstadoSolicitud && x.UsuarioAppInvitado.Codigo == codigoUsuarioApp, nhSesion);
+                    listaSolicitudesInvitado = CatalogoGenerico<Solicitud>.RecuperarLista(x => x.EstadoSolicitud.Codigo == codigoEstadoSolicitud && x.UsuarioAppInvitado.Codigo == codigoUsuarioApp && x.TurnoVariable.FechaHoraDesde < DateTime.Now, nhSesion);
                 }
 
                 foreach (Solicitud solicitud in listaSolicitudesInvitado)

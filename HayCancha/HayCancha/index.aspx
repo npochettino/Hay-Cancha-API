@@ -33,6 +33,8 @@
 	============================================= -->
     <title>Hay Cancha</title>
 
+    <link rel="shortcut icon" href="images/hayCancha/favicon.ico">
+
 </head>
 
 <%--<body class="stretched">--%>
@@ -52,10 +54,10 @@
                         <!-- Logo
 					============================================= -->
                         <div id="logo">
-                            <a href="index.aspx" class="standard-logo" data-dark-logo="images/logo-dark.png">
-                                <img src="images/hay_cancha.png" alt="Canvas Logo"></a>
-                            <a href="index.aspx" class="retina-logo" data-dark-logo="images/logo-dark@2x.png">
-                                <img src="images/hay_cancha.png" alt="Canvas Logo"></a>
+                            <a href="index.aspx" class="standard-logo" data-dark-logo="images/hayCancha/logo-dark.png">
+                                <img src="images/hayCancha/hay_cancha.png" alt="Hay Cancha Logo"></a>
+                            <a href="index.aspx" class="retina-logo" data-dark-logo="images/hayCancha/logo-dark@2x.png">
+                                <img src="images/hayCancha/hay_cancha.png" alt="Hay Cancha Logo"></a>
                         </div>
                         <!-- #logo end -->
                         <!-- Primary Navigation
@@ -83,7 +85,7 @@
                 <div class="full-screen" style="height: 513px; background: url('images/appshowcase/1.jpg'); background-size: cover;">
                     <div class="container clearfix">
 
-                        <img src="images/boton_buscar_cancha.png" alt="Image" class="hidden-sm hidden-xs" style="padding-top: 100px" data-style-lg="position: absolute; left: 0; bottom: 0; height: auto;padding-top" data-style-md="position: absolute; left: 0; bottom: 0; height: 450px;">
+                        <img src="images/hayCancha/img_index_1.png" alt="Image" class="hidden-sm hidden-xs" style="padding-top: 100px" data-style-lg="position: absolute; left: 0; bottom: 0; height: auto;padding-top" data-style-md="position: absolute; left: 0; bottom: 0; height: 450px;">
 
                         <div class="vertical-middle no-fade">
                             <div class="col-md-6 dark fright nobottommargin" data-animate="fadeIn">
@@ -111,38 +113,13 @@
 
             <!-- Content
 		============================================= -->
-        <%--    <section id="content">
+            <section id="content">
 
                 <div class="content-wrap">
 
-                    <div class="container clearfix">
-
-                        <div class="col_one_third nobottommargin center">
-                            <a href="#">
-                                <img src="images/appshowcase/s1.png" alt="Image" class="bottommargin-sm"></a>
-                            <h4>Responsive Layout</h4>
-                            <p>Powerful Layout with Responsive functionality that can be adapted to any screen size. Resize browser to view.</p>
-                        </div>
-
-                        <div class="col_one_third nobottommargin center">
-                            <a href="#">
-                                <img src="images/appshowcase/s4.png" alt="Image" class="bottommargin-sm"></a>
-                            <h4>Retina Ready Graphics</h4>
-                            <p>Looks beautiful &amp; ultra-sharp on Retina Screen Displays. Retina Icons, Fonts &amp; all others graphics are optimized.</p>
-                        </div>
-
-                        <div class="col_one_third nobottommargin center col_last">
-                            <a href="#">
-                                <img src="images/appshowcase/s5.png" alt="Image" class="bottommargin-sm"></a>
-                            <h4>Powerful Performance</h4>
-                            <p>Canvas includes tons of optimized code that are completely customizable and deliver unmatched fast performance.</p>
-                        </div>
-
-                    </div>
-
                     <div class="section nobottommargin" style="padding-bottom: 150px;">
 
-                        <div class="hidden-sm hidden-xs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent url('images/appshowcase/ipad-section.png') bottom right no-repeat;"></div>
+                        <div class="hidden-sm hidden-xs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent url('images/haycancha/img_index_2.png') bottom right no-repeat;"></div>
 
                         <div class="container clearfix" style="z-index: 1;">
 
@@ -170,7 +147,7 @@
 
                             <div class="col_half nobottommargin topmargin-lg">
 
-                                <img src="images/appshowcase/iphone-solid.png" alt="Image" class="center-block">
+                                <img src="images/hayCancha/img_index_2.png" alt="Image" class="center-block">
                             </div>
 
                             <div class="col_half nobottommargin topmargin-lg col_last">
@@ -341,7 +318,7 @@
 
                 </div>
 
-            </section>--%>
+            </section>
             <!-- #content end -->
 
             <!-- Footer

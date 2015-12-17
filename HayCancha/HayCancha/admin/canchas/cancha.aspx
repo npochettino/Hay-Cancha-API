@@ -89,5 +89,19 @@
         </div>
     </div>
 
+     <script type="text/javascript">
+         function validateForm() {
+             if (document.getElementById("ContentPlaceHolder1_txtDescripcion").value == "")
+             { alert("Debe Ingresar la descripción de la cancha"); return false; }
+             if (document.getElementById("ContentPlaceHolder1_txtPrecioMañana").value == "")
+             { alert("Debe Ingresar el precio para el turno mañana"); return false; }
+             if (document.getElementById("ContentPlaceHolder1_txtPrecioTarde").value == "")
+             { alert("Debe Ingresar el precio para el turno tarde"); return false; }
+             if (document.getElementById("ContentPlaceHolder1_txtPrecioNoche").value == "")
+             { alert("Debe Ingresar el precio para el turno noche"); return false; }
+             return true;
+         }
+
+    </script>
 
 </asp:Content>

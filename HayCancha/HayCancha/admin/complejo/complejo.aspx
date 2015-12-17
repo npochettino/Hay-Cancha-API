@@ -10,7 +10,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <!-- BEGIN PAGE LEVEL STYLES -->
     <link href="../../admin/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
     <link href="../../admin/assets/admin/pages/css/profile.css" rel="stylesheet" type="text/css" />
@@ -35,18 +35,45 @@
             </div>
         </div>
         <!-- END PAGE HEAD -->
+
+
+        <!--Init Modal Form Google Maps
+      ============================================-->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <form>
+                    <div class="col-md-12">
+                        <!-- BEGIN SAMPLE FORM PORTLET-->
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-cogs font-green-sharp"></i>
+                                    <span class="caption-subject font-green-sharp bold uppercase">Logo del Complejo</span>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <dx:ASPxImageSlider ID="isLogoComplejo" runat="server" EnableTheming="False" Height="50%">
+                                        </dx:ASPxImageSlider>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <asp:FileUpload ID="fuLogo" runat="server" />
+                                <asp:Button ID="btnCargarLogo" runat="server" Text="Cargar Logo" OnClick="btnCargarLogo_Click" />
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
         <!-- BEGIN PAGE CONTENT -->
         <div class="page-content">
             <div class="container-fluid">
-                <!-- BEGIN PAGE BREADCRUMB -->
-                <ul class="page-breadcrumb breadcrumb">
-                    <li>
-                        <a href="../../admin/index.aspx">Inicio</a><i class="fa fa-circle"></i>
-                    </li>
-                    <li class="active">Complejo
-                    </li>
-                </ul>
-                <!-- END PAGE BREADCRUMB -->
                 <!-- BEGIN PAGE CONTENT INNER -->
                 <div class="row">
                     <div class="col-md-12 ">
@@ -85,11 +112,11 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div style="display:none" class="form-group">
                                             <label>Latitud</label>
                                             <asp:TextBox type="text" class="form-control" placeholder="Mail Complejo" runat="server" ID="txtLatitud"></asp:TextBox>
                                         </div>
-                                        <div class="form-group">
+                                        <div style="display:none" class="form-group">
                                             <label>Longitud</label>
                                             <asp:TextBox type="text" class="form-control" placeholder="Mail Complejo" runat="server" ID="txtLongitud"></asp:TextBox>
                                         </div>
@@ -154,17 +181,8 @@
 
     <!--Init Modal Form Google Maps
       ============================================-->
-    <%--<div id="responsive" class="modal fade" tabindex="-1" data-width="760">--%>
     <div class="page-content">
         <div class="container-fluid">
-            <!-- BEGIN PAGE BREADCRUMB -->
-            <ul class="page-breadcrumb breadcrumb">
-                <li>
-                    <a href="../../admin/index.aspx">Inicio</a><i class="fa fa-circle"></i>
-                </li>
-                <li class="active">Complejo
-                </li>
-            </ul>
             <div class="row">
                 <form>
                     <div class="col-md-12">
@@ -184,16 +202,15 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <%--ImageSourceFolder="~\admin\assets\images\complejos\1\" --%>
-                                        <dx:ASPxImageSlider ID="isComplejo" runat="server" EnableTheming="False">
+                                        <dx:ASPxImageSlider ID="ASPxImageSlider1" EnableTheming="false" runat="server">
                                         </dx:ASPxImageSlider>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <asp:FileUpload ID="FileUpload1" runat="server" />
-        <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="Upload" />
-        <hr />
+                                <asp:FileUpload ID="fileUploadImagenes" runat="server" />
+                                <asp:Button ID="btnFileUploadImages" runat="server" Text="Cargar Imagen" />
+                                <hr />
                             </div>
                         </div>
                     </div>
@@ -202,49 +219,7 @@
         </div>
     </div>
 
-    <!--  Init Modal Form Google Maps
-      ============================================-->
-    <div id="responsive" class="modal fade" tabindex="-1" data-width="760">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-            <h4 class="modal-title">Responsive</h4>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-12">
-
-                    <div class="form-group">
-                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
-                            </div>
-                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
-                            </div>
-                            <div>
-                                <span class="btn default btn-file">
-                                    <span class="fileinput-new">Select image </span>
-                                    <span class="fileinput-exists">Change </span>
-                                    <input type="file" name="...">
-                                </span>
-                                <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput">Remove </a>
-                            </div>
-                        </div>
-                        <div class="clearfix margin-top-10">
-                            <span class="label label-danger">NOTE! </span>
-                            <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only </span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-            <asp:Button ID="btnUp" UseSubmitBehavior="false" runat="server" Text="Subir Imagen" />
-        </div>
-    </div>
-
-
+    
 
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
     <script type="text/javascript">

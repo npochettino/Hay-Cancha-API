@@ -45,19 +45,23 @@ namespace HayCancha.admin.complejo
             txtLongitud.Text = dtComplejoActual.Rows[0]["longitud"].ToString();
 
             //string path = Server.MapPath("..") + "\\assets\\images\\complejos\\" + Session["codigoComplejo"].ToString();
-            string pathLogoComplejo = "~\\ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "_logo\\";
-            string pathImagenesComplejo = "~\\ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "\\";
+            string pathLogoComplejo = Server.MapPath("\\") + "ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "_logo\\";
+            string pathImagenesComplejo = Server.MapPath("\\") + "ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "\\";
+            if (!Directory.Exists(pathLogoComplejo))
+            {
+                DirectoryInfo di2 = Directory.CreateDirectory(pathLogoComplejo);
+                //File.Copy(pathLogoComplejo + Convert.ToString(Session["codigoComplejo"]) + ".png", Server.MapPath("\\") + "\\ImagenesComplejos" + "\\logo_complejo_default.png");
+                File.Copy(Server.MapPath("\\") + "ImagenesComplejos" + "\\logo_complejo_default.png", pathLogoComplejo + Convert.ToString(Session["codigoComplejo"]) + ".png");
+            }
             if (!Directory.Exists(pathImagenesComplejo))
             {
                 DirectoryInfo di = Directory.CreateDirectory(pathImagenesComplejo);
-                //File.Copy(Server.MapPath("..") + "\\assets\\images\\complejos\\HayCancha.png", pathImagenesComplejo + "\\HayCancha.png");
-
-                DirectoryInfo di2 = Directory.CreateDirectory(pathLogoComplejo);
-                //File.Copy(pathLogoComplejo + Convert.ToString(Session["codigoComplejo"]) + ".png", pathLogoComplejo + "\\HayCancha.png");
+                File.Copy(Server.MapPath("\\") + "ImagenesComplejos" + "\\complejo_default.jpg", pathImagenesComplejo + Convert.ToString(Session["codigoComplejo"]) + ".jpg");
             }
 
-            isComplejo.ImageSourceFolder = "~\\ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "\\";
-
+            //isComplejo.ImageSourceFolder = "~\\ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "\\";
+            ASPxImageSlider1.ImageSourceFolder = "~\\ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "\\";
+            isLogoComplejo.ImageSourceFolder = "~\\ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "_logo\\" + "\\";
 
         }
 
@@ -71,13 +75,23 @@ namespace HayCancha.admin.complejo
                 Convert.ToInt32(ddlHoraApertura.SelectedValue), Convert.ToInt32(ddlHoraCierre.SelectedValue), txtMailComplejo.Text, txtTelefono.Text, (double)lat, (double)lon, "");
         }
 
-        protected void Upload(object sender, EventArgs e)
+        protected void btnCargarLogo_Click(object sender, EventArgs e)
         {
-            if (FileUpload1.HasFile)
+            if (fuLogo.HasFile)
             {
-                string fileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
-                FileUpload1.PostedFile.SaveAs("~\\ImagenesComplejos\\" + Session["codigoComplejo"].ToString() + "\\" + fileName);
-                Response.Redirect(Request.Url.AbsoluteUri);
+                string fileName = Path.GetFileName(fuLogo.PostedFile.FileName);
+                fuLogo.PostedFile.SaveAs(Server.MapPath("\\") + "ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "_logo\\" + Session["codigoComplejo"].ToString() + ".png");
+                Response.Redirect("complejo.aspx");
+            }
+        }
+
+        protected void btnCargarImagenes_Click(object sender, EventArgs e)
+        {
+            if (fileUploadImagenes.HasFile)
+            {
+                string fileName = Path.GetFileName(fileUploadImagenes.PostedFile.FileName);
+                fileUploadImagenes.PostedFile.SaveAs(Server.MapPath("\\") + "ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "\\" + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + ".jpg");
+                Response.Redirect("complejo.aspx");
             }
         }
         

@@ -36,6 +36,13 @@ namespace HayCancha.admin
 
             gvTurnos.DataSource = ControladorTurnos.RecuperarTurnosPorComplejoPorDia(txtFechaGrillaTurnos.Date, Convert.ToInt32(Session["codigoComplejo"]));
             gvTurnos.DataBind();
+
+            DataTable dtCanchas = ControladorGeneral.RecuperarCanchasPorComplejo(Convert.ToInt32(Session["codigoComplejo"]));
+
+            for (int i = 0; i < dtCanchas.Rows.Count; i ++)
+                gvTurnos.Columns["codigo Turno " + dtCanchas.Rows[i]["descripcion"].ToString()].Visible = false;
+            
+            gvTurnos.DataBind();
             
         }
 
@@ -138,21 +145,12 @@ namespace HayCancha.admin
 
                 int codigoTurno = int.Parse(gvTurnos.GetRowValues(gvTurnos.FocusedRowIndex, "codigoTurno" + nombreCancha).ToString());
                 Session.Add("codigoTurno", codigoTurno);
+                
                 DataTable dtTurnoActual = ControladorTurnos.RecuperarTurnoPorCodigo(codigoTurno);
-                //tablaTurnos.Columns.Add("horaDesde", typeof(int));
-                //tablaTurnos.Columns.Add("horaHasta", typeof(int));
-                //tablaTurnos.Columns.Add("codigoCancha", typeof(int));
-                //tablaTurnos.Columns.Add("descripcionCancha", typeof(string));
-                //tablaTurnos.Columns.Add("codigoTipoCancha", typeof(int));
-                //tablaTurnos.Columns.Add("descripcionTipoCancha", typeof(string));
-                //tablaTurnos.Columns.Add("codigoComplejo", typeof(int));
-                //tablaTurnos.Columns.Add("descripcionComplejo", typeof(string));
-                //tablaTurnos.Columns.Add("precio", typeof(double));
-                //tablaTurnos.Columns.Add("direccion", typeof(string));
-                //tablaTurnos.Columns.Add("codigoUsuarioApp", typeof(string));
-                //tablaTurnos.Columns.Add("nombreUsuarioApp", typeof(string));
-                //tablaTurnos.Columns.Add("apellidoUsuarioApp", typeof(string));
-                //tablaTurnos.Columns.Add("telefonoUsuarioApp", typeof(string));
+                
+                Session.Add("descripcionComplejo",dtTurnoActual.Rows[0]["descripcionComplejo"].ToString());
+                Session.Add("telefonoUsuarioApp", dtTurnoActual.Rows[0]["telefonoUsuarioApp"].ToString());
+
                 lblNombreDelUsuario.Text = dtTurnoActual.Rows[0]["nombreUsuarioApp"].ToString();
                 txtNombreUsuario.Text = dtTurnoActual.Rows[0]["nombreUsuarioApp"].ToString();
                 txtApellidoUsuario.Text = dtTurnoActual.Rows[0]["apellidoUsuarioApp"].ToString();
@@ -177,7 +175,10 @@ namespace HayCancha.admin
         {
             string rta = "";
             if (ControladorTurnos.CambiarEstadoDelTurno(Convert.ToInt32(Session["codigoTurno"]), estado))
+            {
+                PushNotification.SendPersonalPush("reservation", Session["descripcionComplejo"].ToString() + " ha respondido!", Session["telefonoUsuarioApp"].ToString());
                 rta = "Se cambio el estado del turno";
+            }
             else
                 rta = "ERROR";
 
@@ -190,5 +191,6 @@ namespace HayCancha.admin
             cambiarEstadoDelTurno(Constantes.EstadosTurno.CANCELADO);
         }
 
+        
     }
 }
