@@ -81,7 +81,7 @@ namespace BibliotecaLogica.Controladores
                 if (usuario != null)
                 {
                     tablaUsuario.Rows.Add(new object[] { usuario.Codigo, usuario.Nombre, usuario.Apellido, usuario.Mail, usuario.Contraseña, usuario.Telefono, 
-                                                     usuario.Posicion.Codigo, usuario.Posicion.Descripcion, usuario.CodigoTelefono, usuario.Imagen, usuario.IsActivo });
+                                                     usuario.Posicion.Codigo, usuario.Posicion.Descripcion, usuario.CodigoTelefono, "http://haycancha.sempait.com.ar/Imagenes/" + usuario.Imagen, usuario.IsActivo });
                 }
 
                 return tablaUsuario;
@@ -122,7 +122,7 @@ namespace BibliotecaLogica.Controladores
                 if (usuario != null)
                 {
                     tablaUsuario.Rows.Add(new object[] { usuario.Codigo, usuario.Nombre, usuario.Apellido, usuario.Mail, usuario.Contraseña, usuario.Telefono, 
-                                                     usuario.Posicion.Codigo, usuario.Posicion.Descripcion, usuario.CodigoTelefono, usuario.Imagen, usuario.IsActivo, 4 });
+                                                     usuario.Posicion.Codigo, usuario.Posicion.Descripcion, usuario.CodigoTelefono, "http://haycancha.sempait.com.ar/Imagenes/" +  usuario.Imagen, usuario.IsActivo, 4 });
                 }
 
                 return tablaUsuario;
@@ -171,7 +171,7 @@ namespace BibliotecaLogica.Controladores
                 listaUsuariosApp.Aggregate(tablaUsuarios, (dt, r) =>
                 {
                     dt.Rows.Add(r.Codigo, r.Nombre, r.Apellido, r.Mail, r.Contraseña, r.Telefono, r.Posicion.Codigo, r.Posicion.Descripcion,
-                        r.CodigoTelefono, r.Imagen, r.IsActivo); return dt;
+                        r.CodigoTelefono, "http://haycancha.sempait.com.ar/Imagenes/" + r.Imagen, r.IsActivo); return dt;
                 });
 
                 return tablaUsuarios;
@@ -213,7 +213,7 @@ namespace BibliotecaLogica.Controladores
                 imagenReducida.Save(rutaGuardar, ImageFormat.Jpeg);
 
                 UsuarioApp usu = CatalogoGenerico<UsuarioApp>.RecuperarPorCodigo(codigoUsuarioApp, nhSesion);
-                usu.Imagen = "http://haycancha.sempait.com.ar/Imagenes/" + codigoUsuarioApp + ".jpg";
+                usu.Imagen = codigoUsuarioApp + ".jpg";
                 CatalogoGenerico<UsuarioApp>.InsertarActualizar(usu, nhSesion);
 
                 return "http://haycancha.sempait.com.ar/Imagenes/" + codigoUsuarioApp + ".jpg";

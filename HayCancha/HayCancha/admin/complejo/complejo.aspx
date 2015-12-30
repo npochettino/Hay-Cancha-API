@@ -1,5 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/adminMaster.Master" AutoEventWireup="true" CodeBehind="complejo.aspx.cs" Inherits="HayCancha.admin.complejo.complejo" %>
 
+<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxPanel" TagPrefix="dx" %>
+
+<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxPopupControl" TagPrefix="dx" %>
+
+<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxCallbackPanel" TagPrefix="dx" %>
+
 <%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxFileManager" TagPrefix="dx" %>
 
 <%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
@@ -37,40 +43,42 @@
         <!-- END PAGE HEAD -->
 
 
+
         <!--Init Modal Form Google Maps
       ============================================-->
-    <div class="page-content">
-        <div class="container-fluid">
-            <div class="row">
-                <form>
-                    <div class="col-md-12">
-                        <!-- BEGIN SAMPLE FORM PORTLET-->
-                        <div class="portlet light">
-                            <div class="portlet-title">
-                                <div class="caption">
-                                    <i class="fa fa-cogs font-green-sharp"></i>
-                                    <span class="caption-subject font-green-sharp bold uppercase">Logo del Complejo</span>
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <dx:ASPxImageSlider ID="isLogoComplejo" runat="server" EnableTheming="False" Height="50%">
-                                        </dx:ASPxImageSlider>
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <form>
+                        <div class="col-md-12">
+                            <!-- BEGIN SAMPLE FORM PORTLET-->
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-cogs font-green-sharp"></i>
+                                        <span class="caption-subject font-green-sharp bold uppercase">Logo del Complejo</span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <asp:FileUpload ID="fuLogo" runat="server" />
-                                <asp:Button ID="btnCargarLogo" runat="server" Text="Cargar Logo" OnClick="btnCargarLogo_Click" />
-                                <hr />
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <dx:ASPxImageSlider ID="isLogoComplejo" runat="server" EnableTheming="False" Height="50%">
+                                            </dx:ASPxImageSlider>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <asp:FileUpload ID="fuLogo" runat="server" />
+                                    <asp:Button ID="btnCargarLogo" runat="server" Text="Cargar Logo" OnClick="btnCargarLogo_Click" />
+                                    <asp:Button ID="Button1" runat="server" Text="Cargar Imagenes Complejo" CssClass="btn red" OnClientClick="showPcImagenes()" />
+                                    <hr />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
         <!-- BEGIN PAGE CONTENT -->
         <div class="page-content">
             <div class="container-fluid">
@@ -112,11 +120,11 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div style="display:none" class="form-group">
+                                        <div style="display: none" class="form-group">
                                             <label>Latitud</label>
                                             <asp:TextBox type="text" class="form-control" placeholder="Mail Complejo" runat="server" ID="txtLatitud"></asp:TextBox>
                                         </div>
-                                        <div style="display:none" class="form-group">
+                                        <div style="display: none" class="form-group">
                                             <label>Longitud</label>
                                             <asp:TextBox type="text" class="form-control" placeholder="Mail Complejo" runat="server" ID="txtLongitud"></asp:TextBox>
                                         </div>
@@ -179,47 +187,81 @@
     </div>
 
 
-    <!--Init Modal Form Google Maps
+
+
+
+    <!--BEGIN POPUP-->
+    <dx:ASPxPopupControl ID="pcImagenesComplejo" runat="server" CloseAction="OuterMouseClick" CloseOnEscape="true"
+        PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="pcImagenesComplejo"
+        HeaderText="Imagenes del Complejo" AllowDragging="True" Modal="True" PopupAnimationType="Fade" Width="600"
+        EnableViewState="False" Theme="Metropolis">
+        <ContentCollection>
+            <dx:PopupControlContentControl ID="PopupControlContentControl1" runat="server">
+                <dx:ASPxCallbackPanel ID="ASPxCallbackPanel2" runat="server">
+                    <PanelCollection>
+                        <dx:PanelContent ID="PanelContent1" runat="server">
+                            <!--Init Modal Form Google Maps
       ============================================-->
-    <div class="page-content">
-        <div class="container-fluid">
-            <div class="row">
-                <form>
-                    <div class="col-md-12">
-                        <!-- BEGIN SAMPLE FORM PORTLET-->
-                        <div class="portlet light">
-                            <div class="portlet-title">
-                                <div class="caption">
-                                    <i class="fa fa-cogs font-green-sharp"></i>
-                                    <span class="caption-subject font-green-sharp bold uppercase">Imagenes del Complejo</span>
-                                </div>
-                            </div>
-                            <div class="modal-header">
-                                <div class="form-actions">
-                                    <button type="button" class="btn red">Eliminar</button>
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <dx:ASPxImageSlider ID="ASPxImageSlider1" EnableTheming="false" runat="server">
-                                        </dx:ASPxImageSlider>
+                            <div class="page-content">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <form>
+                                            <div class="col-md-12">
+                                                <!-- BEGIN SAMPLE FORM PORTLET-->
+                                                <div class="portlet light">
+                                                    <div class="portlet-title">
+                                                        <div class="caption">
+                                                            <i class="fa fa-cogs font-green-sharp"></i>
+                                                            <span class="caption-subject font-green-sharp bold uppercase">Imagenes del Complejo</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-header">
+                                                        <div class="form-actions">
+                                                            <button type="button" class="btn red">Eliminar</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <dx:ASPxImageSlider ID="ASPxImageSlider1" EnableTheming="false" runat="server">
+                                                                </dx:ASPxImageSlider>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <asp:FileUpload ID="fileUploadImagenes" runat="server" />
+                                                        <%--<asp:Button ID="btnFileUploadImages" runat="server" UseSubmitBehavior="false" Text="Cargar Imagen" OnClientClick="beginPost();" />--%>
+                                                        <dx:ASPxButton ID="btnSubirImagenes" runat="server" Text="Subir Imagenes DX" OnClick="btnCargarImagenes_Click">
+                                                        </dx:ASPxButton>
+<%--                                                        <dx:ASPxCallbackPanel ID="ASPxCallbackPanel1" runat="server" ClientInstanceName="uploadImage"
+                                                            OnCallback="ASPxCallbackPanel1_Callback">
+                                                        </dx:ASPxCallbackPanel>--%>
+                                                        <hr />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <asp:FileUpload ID="fileUploadImagenes" runat="server" />
-                                <asp:Button ID="btnFileUploadImages" runat="server" Text="Cargar Imagen" />
-                                <hr />
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+                        </dx:PanelContent>
+                    </PanelCollection>
+                </dx:ASPxCallbackPanel>
+            </dx:PopupControlContentControl>
+        </ContentCollection>
+    </dx:ASPxPopupControl>
+    <!--END POPUP-->
 
-    
+    <script type="text/javascript">
+        function beginPost() {
+            uploadImage.SetContentHtml("");
+            uploadImage.PerformCallback(document.getElementById('ContentPlaceHolder1_fileUploadImagenes'));
+        }
+        function showPcImagenes() {
+            alert('aaala');
+            pcImagenesComplejo.Show();
+        }
+    </script>
 
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
     <script type="text/javascript">

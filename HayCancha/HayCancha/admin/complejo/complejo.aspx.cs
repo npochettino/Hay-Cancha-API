@@ -94,6 +94,18 @@ namespace HayCancha.admin.complejo
                 Response.Redirect("complejo.aspx");
             }
         }
+
+        protected void ASPxCallbackPanel1_Callback(object sender, CallbackEventArgsBase e)
+        {
+            string[] parameter = e.Parameter.Split(',');
+
+            if (fileUploadImagenes.HasFile)
+            {
+                string fileName = Path.GetFileName(fileUploadImagenes.PostedFile.FileName);
+                fileUploadImagenes.PostedFile.SaveAs(Server.MapPath("\\") + "ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "\\" + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + ".jpg");
+                Response.Redirect("complejo.aspx");
+            }
+        }
         
     }
 }

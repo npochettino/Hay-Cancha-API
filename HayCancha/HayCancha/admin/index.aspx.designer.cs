@@ -67,13 +67,22 @@ namespace HayCancha.admin {
         protected global::DevExpress.Web.ASPxPanel.PanelContent PanelContent3;
         
         /// <summary>
+        /// Control userProfile.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl userProfile;
+        
+        /// <summary>
         /// Control imgProfileUserApp.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage imgProfileUserApp;
+        protected global::System.Web.UI.WebControls.Image imgProfileUserApp;
         
         /// <summary>
         /// Control lblNombreDelUsuario.
@@ -83,6 +92,15 @@ namespace HayCancha.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNombreDelUsuario;
+        
+        /// <summary>
+        /// Control divValoracionTurno.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divValoracionTurno;
         
         /// <summary>
         /// Control txtNombreUsuario.
@@ -101,15 +119,6 @@ namespace HayCancha.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtApellidoUsuario;
-        
-        /// <summary>
-        /// Control txtDireccionUsuario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDireccionUsuario;
         
         /// <summary>
         /// Control txtTelefono.
@@ -166,6 +175,15 @@ namespace HayCancha.admin {
         protected global::System.Web.UI.WebControls.Button btnAceptar;
         
         /// <summary>
+        /// Control btnEliminarReserva.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEliminarReserva;
+        
+        /// <summary>
         /// Control btnRechazar.
         /// </summary>
         /// <remarks>
@@ -182,5 +200,41 @@ namespace HayCancha.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGuardarTurno;
+        
+        /// <summary>
+        /// Control pcValoracionUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxPopupControl.ASPxPopupControl pcValoracionUsuario;
+        
+        /// <summary>
+        /// Control PopupControlContentControl1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxPopupControl.PopupControlContentControl PopupControlContentControl1;
+        
+        /// <summary>
+        /// Control ASPxCallbackPanel2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel ASPxCallbackPanel2;
+        
+        /// <summary>
+        /// Control PanelContent1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxPanel.PanelContent PanelContent1;
     }
 }

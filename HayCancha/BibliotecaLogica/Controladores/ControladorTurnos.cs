@@ -39,6 +39,7 @@ namespace BibliotecaLogica.Controladores
             try
             {
                 DataTable tablaTurnos = new DataTable();
+                tablaTurnos.Columns.Add("fecha", typeof(DateTime));
                 tablaTurnos.Columns.Add("horaDesde", typeof(int));
                 tablaTurnos.Columns.Add("horaHasta", typeof(int));
                 tablaTurnos.Columns.Add("codigoCancha", typeof(int));
@@ -52,17 +53,18 @@ namespace BibliotecaLogica.Controladores
                 tablaTurnos.Columns.Add("codigoUsuarioApp", typeof(string));
                 tablaTurnos.Columns.Add("nombreUsuarioApp", typeof(string));
                 tablaTurnos.Columns.Add("apellidoUsuarioApp", typeof(string));
-                tablaTurnos.Columns.Add("direccionUsuarioApp", typeof(string));
                 tablaTurnos.Columns.Add("telefonoUsuarioApp", typeof(string));
                 tablaTurnos.Columns.Add("codigoTelefonoUsuarioApp", typeof(string));
+                tablaTurnos.Columns.Add("imagenUsuarioApp", typeof(string));
 
                 TurnoVariable tv = CatalogoGenerico<TurnoVariable>.RecuperarPor(x => x.Codigo == codigoTurno, nhSesion);
 
                 if (tablaTurnos != null)
                 {
-                    tablaTurnos.Rows.Add(new object[] { tv.FechaHoraDesde.Hour, tv.FechaHoraHasta.Hour, tv.Cancha.Codigo, tv.Cancha.Descripcion, tv.Cancha.TipoCancha.Codigo, tv.Cancha.TipoCancha.Descripcion,
+                    tablaTurnos.Rows.Add(new object[] { tv.FechaHoraDesde.Date, tv.FechaHoraDesde.Hour, tv.FechaHoraHasta.Hour, tv.Cancha.Codigo, tv.Cancha.Descripcion, tv.Cancha.TipoCancha.Codigo, tv.Cancha.TipoCancha.Descripcion,
                         tv.Cancha.Complejo.Codigo, tv.Cancha.Complejo.Descripcion, tv.Cancha.PrecioTarde, 
-                        tv.Cancha.Complejo.Direccion, tv.UsuarioApp.Codigo, tv.UsuarioApp.Nombre,  tv.UsuarioApp.Apellido, tv.UsuarioApp.Telefono, tv.UsuarioApp.CodigoTelefono });
+                        tv.Cancha.Complejo.Direccion, tv.UsuarioApp.Codigo, tv.UsuarioApp.Nombre,  tv.UsuarioApp.Apellido, tv.UsuarioApp.Telefono, tv.UsuarioApp.CodigoTelefono,
+                    tv.UsuarioApp.Imagen});
                 }
 
                 return tablaTurnos;
