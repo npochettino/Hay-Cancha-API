@@ -382,9 +382,12 @@ namespace BibliotecaLogica.Controladores
 
                 DataTable tablaTurnos = new DataTable();
                 tablaTurnos.Columns.Add("Hora");
+                tablaTurnos.Columns.Add("HoraDesde");
+                tablaTurnos.Columns.Add("HoraHasta");
 
                 foreach (Cancha cancha in listaCanchas)
                 {
+                    tablaTurnos.Columns.Add("codigoCancha" + cancha.Descripcion);
                     tablaTurnos.Columns.Add("codigoTurno" + cancha.Descripcion);
                     tablaTurnos.Columns.Add(cancha.Descripcion);
                 }
@@ -399,6 +402,8 @@ namespace BibliotecaLogica.Controladores
                 {
                     DataRow filaNueva = tablaTurnos.NewRow();
                     filaNueva["hora"] = i + " a " + (i + 1);
+                    filaNueva["HoraDesde"] = i;
+                    filaNueva["HoraHasta"] = i + 1;
 
                     foreach (Cancha cancha in listaCanchas)
                     {
@@ -407,6 +412,8 @@ namespace BibliotecaLogica.Controladores
                         if (turnoFijo == null)
                         {
                             TurnoVariable turnoVariable = (from tv in listaTurnosVariables where tv.FechaHoraDesde.Hour == i && tv.Cancha.Codigo == cancha.Codigo select tv).SingleOrDefault();
+
+                            filaNueva["codigoCancha" + cancha.Descripcion] = cancha.Codigo; 
 
                             if (turnoVariable == null)
                             {

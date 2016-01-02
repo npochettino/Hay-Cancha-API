@@ -79,6 +79,7 @@
                 </div>
             </div>
         </div>
+
         <!-- BEGIN PAGE CONTENT -->
         <div class="page-content">
             <div class="container-fluid">
@@ -188,69 +189,50 @@
 
 
 
-
-
-    <!--BEGIN POPUP-->
-    <dx:ASPxPopupControl ID="pcImagenesComplejo" runat="server" CloseAction="OuterMouseClick" CloseOnEscape="true"
-        PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="pcImagenesComplejo"
-        HeaderText="Imagenes del Complejo" AllowDragging="True" Modal="True" PopupAnimationType="Fade" Width="600"
-        EnableViewState="False" Theme="Metropolis">
-        <ContentCollection>
-            <dx:PopupControlContentControl ID="PopupControlContentControl1" runat="server">
-                <dx:ASPxCallbackPanel ID="ASPxCallbackPanel2" runat="server">
-                    <PanelCollection>
-                        <dx:PanelContent ID="PanelContent1" runat="server">
-                            <!--Init Modal Form Google Maps
-      ============================================-->
-                            <div class="page-content">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <form>
-                                            <div class="col-md-12">
-                                                <!-- BEGIN SAMPLE FORM PORTLET-->
-                                                <div class="portlet light">
-                                                    <div class="portlet-title">
-                                                        <div class="caption">
-                                                            <i class="fa fa-cogs font-green-sharp"></i>
-                                                            <span class="caption-subject font-green-sharp bold uppercase">Imagenes del Complejo</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-header">
-                                                        <div class="form-actions">
-                                                            <button type="button" class="btn red">Eliminar</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <dx:ASPxImageSlider ID="ASPxImageSlider1" EnableTheming="false" runat="server">
-                                                                </dx:ASPxImageSlider>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <asp:FileUpload ID="fileUploadImagenes" runat="server" />
-                                                        <%--<asp:Button ID="btnFileUploadImages" runat="server" UseSubmitBehavior="false" Text="Cargar Imagen" OnClientClick="beginPost();" />--%>
-                                                        <dx:ASPxButton ID="btnSubirImagenes" runat="server" Text="Subir Imagenes DX" OnClick="btnCargarImagenes_Click">
-                                                        </dx:ASPxButton>
-<%--                                                        <dx:ASPxCallbackPanel ID="ASPxCallbackPanel1" runat="server" ClientInstanceName="uploadImage"
-                                                            OnCallback="ASPxCallbackPanel1_Callback">
-                                                        </dx:ASPxCallbackPanel>--%>
-                                                        <hr />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
+    <!--Init Modal Form Google Maps
+                            ============================================-->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <form>
+                    <div class="col-md-12">
+                        <!-- BEGIN SAMPLE FORM PORTLET-->
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-cogs font-green-sharp"></i>
+                                    <span class="caption-subject font-green-sharp bold uppercase">Imagenes del Complejo</span>
+                                </div>
+                            </div>
+                            <div class="modal-header">
+                                <div class="form-actions">
+                                    <button type="button" class="btn red">Eliminar</button>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <dx:ASPxImageSlider ID="ASPxImageSlider1" EnableTheming="false" runat="server">
+                                        </dx:ASPxImageSlider>
                                     </div>
                                 </div>
                             </div>
-                        </dx:PanelContent>
-                    </PanelCollection>
-                </dx:ASPxCallbackPanel>
-            </dx:PopupControlContentControl>
-        </ContentCollection>
-    </dx:ASPxPopupControl>
-    <!--END POPUP-->
+                            <div class="modal-footer">
+                                <asp:FileUpload ID="fileUploadImagenes" runat="server" />
+                                <%--<asp:Button ID="btnFileUploadImages" runat="server" UseSubmitBehavior="false" Text="Cargar Imagen" OnClientClick="beginPost();" />--%>
+                                <dx:ASPxButton ID="btnSubirImagenes" runat="server" Text="Subir Imagenes DX" OnClick="btnCargarImagenes_Click">
+                                </dx:ASPxButton>
+                                <%--                                                        <dx:ASPxCallbackPanel ID="ASPxCallbackPanel1" runat="server" ClientInstanceName="uploadImage"
+                                                            OnCallback="ASPxCallbackPanel1_Callback">
+                                                        </dx:ASPxCallbackPanel>--%>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script type="text/javascript">
         function beginPost() {

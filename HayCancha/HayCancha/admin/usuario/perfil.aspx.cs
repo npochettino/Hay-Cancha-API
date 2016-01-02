@@ -21,6 +21,8 @@ namespace HayCancha.admin.usuario
         {
             DataTable dtPerfilUsuario = ControladorUsuarios.RecuperarUsuarioWeb(Session["mailUsuarioActual"].ToString(), Session["contraseñaUsuarioActual"].ToString());
 
+            imgProfileUserApp.ImageUrl = "~\\ImagenesComplejos\\" + Session["codigoComplejo"].ToString() + "_logo\\" + Session["logocomplejo"].ToString();
+
             Session.Add("codigoUsuarioWeb",dtPerfilUsuario.Rows[0]["codigoUsuario"].ToString());
             lblNombreDelComplejo.Text = dtPerfilUsuario.Rows[0]["descripcionComplejo"].ToString();
             txtNombreUsuario.Text = dtPerfilUsuario.Rows[0]["nombre"].ToString();

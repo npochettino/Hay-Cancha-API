@@ -133,6 +133,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                 <a href="../../admin/complejo/complejo.aspx">Complejo</a>
                             </li>
                             <li class="active">
+                                <a href="../../admin/complejo/imagenes.aspx">Imagenes</a>
+                            </li>
+                            <li class="active">
                                 <a href="../../admin/canchas/listado.aspx">Canchas</a>
                             </li>
                             <%--<li class="active">

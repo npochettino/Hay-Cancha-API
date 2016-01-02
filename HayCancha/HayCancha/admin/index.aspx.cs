@@ -35,9 +35,14 @@ namespace HayCancha.admin
 
             DataTable dtCanchas = ControladorGeneral.RecuperarCanchasPorComplejo(Convert.ToInt32(Session["codigoComplejo"]));
 
+            gvTurnos.Columns["Hora Desde"].Visible = false;
+            gvTurnos.Columns["Hora Hasta"].Visible = false;
+
             for (int i = 0; i < dtCanchas.Rows.Count; i ++)
+            {
+                gvTurnos.Columns["codigoCancha" + dtCanchas.Rows[i]["descripcion"].ToString()].Visible = false;
                 gvTurnos.Columns["codigo Turno " + dtCanchas.Rows[i]["descripcion"].ToString()].Visible = false;
-            
+            }
             gvTurnos.DataBind();
             
         }
@@ -78,8 +83,10 @@ namespace HayCancha.admin
                 btnGuardarTurno.Visible = true;
                 btnEliminarReserva.Visible = false;
                 //Muestro Pop Up en blanco....
-                imgProfileUserApp.ImageUrl = "~\\ImagenesComplejos\\logo_complejo_default.png";
+                
                 //divValoracionTurno.Style
+                cargarDatosTurnoWeb();
+                Session.Add("nombreCancha", nombreCancha);
             }
             if (estado.Contains("Pendiente de confirmación -"))
             {
@@ -92,6 +99,19 @@ namespace HayCancha.admin
             }
                 
             
+        }
+
+        private void cargarDatosTurnoWeb()
+        {
+            imgProfileUserApp.ImageUrl = "~\\ImagenesComplejos\\logo_complejo_default.png";
+
+            int HoraDesde = int.Parse(gvTurnos.GetRowValues(gvTurnos.FocusedRowIndex, "HoraDesde").ToString());
+            int HoraHasta = int.Parse(gvTurnos.GetRowValues(gvTurnos.FocusedRowIndex, "HoraHasta").ToString());
+            DateTime fechaDelTurno = Convert.ToDateTime(txtFechaGrillaTurnos.Date.ToString("dd/MM/yyyy"));
+
+            txtFechaDelTurno.Text = txtFechaGrillaTurnos.Date.ToString("dd/MM/yyyy");
+            ddlHoraDesde.SelectedValue = Convert.ToString(HoraDesde);
+            ddlHoraHasta.SelectedValue = Convert.ToString(HoraHasta);
         }
 
         private void cargarDatosTurno(string nombreCancha)
@@ -112,7 +132,7 @@ namespace HayCancha.admin
             ddlHoraDesde.SelectedValue = dtTurnoActual.Rows[0]["horaDesde"].ToString();
             ddlHoraHasta.SelectedValue = dtTurnoActual.Rows[0]["horaHasta"].ToString();
 
-            imgProfileUserApp.ImageUrl = "~\\Imagenes\\" + dtTurnoActual.Rows[0]["imagenUsuarioApp"].ToString(); ;
+            imgProfileUserApp.ImageUrl = "~\\Imagenes\\" + dtTurnoActual.Rows[0]["imagenUsuarioApp"].ToString();
         }
 
         protected void txtFechaGrillaTurnos_DateChanged(object sender, EventArgs e)
@@ -149,6 +169,19 @@ namespace HayCancha.admin
             cambiarEstadoDelTurno(Constantes.EstadosTurno.CANCELADO);
         }
 
-        
+        protected void btnGuardarTurno_Click(object sender, EventArgs e)
+        {
+            
+            int codigoCancha = int.Parse(gvTurnos.GetRowValues(gvTurnos.FocusedRowIndex, "codigoCancha" + Session["nombreCancha"]).ToString());
+            int HoraDesde = int.Parse(gvTurnos.GetRowValues(gvTurnos.FocusedRowIndex, "HoraDesde").ToString());
+            int HoraHasta = int.Parse(gvTurnos.GetRowValues(gvTurnos.FocusedRowIndex, "HoraHasta").ToString());
+            DateTime fechaDelTurno = Convert.ToDateTime(txtFechaGrillaTurnos.Date.ToString("dd/MM/yyyy"));
+            
+            ControladorTurnos.InsertarActualizarTurnoVariable(0, codigoCancha, fechaDelTurno.AddHours(HoraDesde), fechaDelTurno.AddHours(HoraHasta),
+                1, "", txtResponsable.Text, double.Parse(txtSeña.Text));
+
+            pcTurno.ShowOnPageLoad = false;
+            LoadGrillaTurnosNew();
+        }        
     }
 }

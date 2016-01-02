@@ -7,90 +7,63 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace HayCancha.admin.usuario {
+namespace HayCancha.admin.complejo {
     
     
-    public partial class perfil {
+    public partial class imagenes {
         
         /// <summary>
-        /// Control imgProfileUserApp.
+        /// Control ScriptManager1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgProfileUserApp;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// Control lblNombreDelComplejo.
+        /// Control btnEliminarImagen.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNombreDelComplejo;
+        protected global::System.Web.UI.WebControls.Button btnEliminarImagen;
         
         /// <summary>
-        /// Control txtNombreUsuario.
+        /// Control isImagenesComplejo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreUsuario;
+        protected global::DevExpress.Web.ASPxImageSlider.ASPxImageSlider isImagenesComplejo;
         
         /// <summary>
-        /// Control txtApellidoUsuario.
+        /// Control fileUploadImagenes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtApellidoUsuario;
+        protected global::System.Web.UI.WebControls.FileUpload fileUploadImagenes;
         
         /// <summary>
-        /// Control txtMailUsuario.
+        /// Control btnFileUploadImages.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMailUsuario;
+        protected global::System.Web.UI.WebControls.Button btnFileUploadImages;
         
         /// <summary>
-        /// Control txtPasswordUsuario.
+        /// Control btnSubirImagenes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPasswordUsuario;
-        
-        /// <summary>
-        /// Control txtNewPasswordUsuario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNewPasswordUsuario;
-        
-        /// <summary>
-        /// Control txtRepeatNewPasswordUsuario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRepeatNewPasswordUsuario;
-        
-        /// <summary>
-        /// Control btnGuardar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardar;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btnSubirImagenes;
     }
 }

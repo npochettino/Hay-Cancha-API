@@ -237,6 +237,20 @@
                                                                                                                     </div>
                                                                                                                 </div>
                                                                                                             </div>
+                                                                                                            <div class="row">
+                                                                                                                <div class="col-md-6">
+                                                                                                                    <div class="form-group">
+                                                                                                                        <label class="control-label"><strong>Responsable: </strong></label>
+                                                                                                                        <asp:TextBox type="text" placeholder="Responsable" class="form-control" ID="txtResponsable" runat="server"></asp:TextBox>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div class="col-md-6">
+                                                                                                                    <div class="form-group">
+                                                                                                                        <label class="control-label"><strong>Seña: </strong></label>
+                                                                                                                        <asp:TextBox type="text" placeholder="Seña" class="form-control" ID="txtSeña" runat="server"></asp:TextBox>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
 
 
                                                                                                             <div class="modal-footer">
@@ -244,7 +258,7 @@
                                                                                                                 <asp:Button ID="btnAceptar" OnClick="btnAceptar_Click" UseSubmitBehavior="false" runat="server" CssClass="btn green" Text="Aceptar" />
                                                                                                                 <asp:Button ID="btnEliminarReserva" OnClick="btnEliminarReserva_Click" UseSubmitBehavior="false" runat="server" CssClass="btn red" Text="Eliminar Reserva" />
                                                                                                                 <asp:Button ID="btnRechazar" OnClick="btnRechazar_Click" UseSubmitBehavior="false" runat="server" CssClass="btn red" Text="Rechazar" />
-                                                                                                                <asp:Button ID="btnGuardarTurno" UseSubmitBehavior="false" runat="server" CssClass="btn blue" Text="Guardar Turno" />
+                                                                                                                <asp:Button ID="btnGuardarTurno" OnClick="btnGuardarTurno_Click" UseSubmitBehavior="false" runat="server" CssClass="btn blue" Text="Guardar Turno" />
                                                                                                             </div>
                                                                                                         </form>
                                                                                                     </div>

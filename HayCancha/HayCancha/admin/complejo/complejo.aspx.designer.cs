@@ -139,42 +139,6 @@ namespace HayCancha.admin.complejo {
         protected global::System.Web.UI.WebControls.Button btnGuardar;
         
         /// <summary>
-        /// Control pcImagenesComplejo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxPopupControl.ASPxPopupControl pcImagenesComplejo;
-        
-        /// <summary>
-        /// Control PopupControlContentControl1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxPopupControl.PopupControlContentControl PopupControlContentControl1;
-        
-        /// <summary>
-        /// Control ASPxCallbackPanel2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel ASPxCallbackPanel2;
-        
-        /// <summary>
-        /// Control PanelContent1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxPanel.PanelContent PanelContent1;
-        
-        /// <summary>
         /// Control ASPxImageSlider1.
         /// </summary>
         /// <remarks>
@@ -191,15 +155,6 @@ namespace HayCancha.admin.complejo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fileUploadImagenes;
-        
-        /// <summary>
-        /// Control btnFileUploadImages.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFileUploadImages;
         
         /// <summary>
         /// Control btnSubirImagenes.

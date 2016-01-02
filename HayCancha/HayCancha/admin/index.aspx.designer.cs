@@ -157,6 +157,24 @@ namespace HayCancha.admin {
         protected global::System.Web.UI.WebControls.DropDownList ddlHoraHasta;
         
         /// <summary>
+        /// Control txtResponsable.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtResponsable;
+        
+        /// <summary>
+        /// Control txtSeña.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSeña;
+        
+        /// <summary>
         /// Control btnCerrar.
         /// </summary>
         /// <remarks>

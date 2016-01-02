@@ -4173,6 +4173,7 @@
     <Content Include="admin\canchas\cancha.aspx" />
     <Content Include="admin\canchas\listado.aspx" />
     <Content Include="admin\complejo\complejo.aspx" />
+    <Content Include="admin\complejo\imagenes.aspx" />
     <Content Include="admin\extra.html" />
     <Content Include="admin\form_dropzone.html" />
     <Content Include="admin\form_fileupload.html" />
@@ -4448,6 +4449,13 @@
     </Compile>
     <Compile Include="admin\complejo\complejo.aspx.designer.cs">
       <DependentUpon>complejo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\complejo\imagenes.aspx.cs">
+      <DependentUpon>imagenes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\complejo\imagenes.aspx.designer.cs">
+      <DependentUpon>imagenes.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>

@@ -34,7 +34,7 @@
                             <div class="portlet light profile-sidebar-portlet">
                                 <!-- SIDEBAR USERPIC -->
                                 <div class="profile-userpic">
-                                    <img src="assets/admin/pages/media/profile/profile_user.jpg" class="img-responsive" alt="">
+                                    <asp:Image runat="server" ID="imgProfileUserApp" class="img-responsive" alt="" />
                                 </div>
                                 <!-- END SIDEBAR USERPIC -->
                                 <!-- SIDEBAR USER TITLE -->

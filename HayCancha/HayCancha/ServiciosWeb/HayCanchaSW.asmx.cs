@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Services;
 using BibliotecaLogica.Controladores;
@@ -21,12 +23,85 @@ namespace HayCancha.ServiciosWeb
             try
             {
                 ControladorUsuarios.InsertarActualizarUsuarioApp(codigoUsuario, nombre, apellido, mail, contraseña, telefono, codigoPosicion, codigoTelefono, isActivo);
+                if (codigoUsuario == 0)
+                {
+                    EnviarEmail(nombre, apellido, mail, "Bienvenido", "");
+                }
                 return "ok";
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
+
+        [WebMethod]
+        public string RecuperarContraseña(string mail)
+        {
+            try
+            {
+                DataTable tablaUsuarioApp = ControladorUsuarios.RecuperarContraseñaApp(mail);
+
+                if (tablaUsuarioApp.Rows.Count > 0)
+                {
+                    //ControladorGeneral.EnviarMail();                    
+                    EnviarEmail(tablaUsuarioApp.Rows[0]["nombre"].ToString(), tablaUsuarioApp.Rows[0]["apellido"].ToString(), tablaUsuarioApp.Rows[0]["mail"].ToString(), "Recuperar Contraseña", tablaUsuarioApp.Rows[0]["contraseña"].ToString());
+                    return "ok";
+                }
+                else
+                {
+                    return "UsuarioInexistente";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void EnviarEmail(string nombre, string apellido, string email, string parametro, string contraseña)
+        {
+            string HTML = "";
+
+            if (parametro == "Recuperar Contraseña")
+            {
+                HTML = File.ReadAllText(Server.MapPath("/email/emailPasswordApp.html"));
+                HTML = HTML.Replace("varNombre", nombre);
+                HTML = HTML.Replace("varApellido", apellido);
+                HTML = HTML.Replace("varContraseña", contraseña);
+                HTML = HTML.Replace("varMail", email);
+            }
+            if (parametro == "Bienvenido")
+            {
+                HTML = File.ReadAllText(Server.MapPath("/email/emailRegistroApp.html"));
+                HTML = HTML.Replace("varNombre", nombre);
+                HTML = HTML.Replace("varApellido", apellido);                
+            }
+
+            //Envio el mail
+            MailMessage mail = new MailMessage();
+
+            mail.To.Add(email);
+
+            mail.From = new MailAddress("haycancha@sempait.com.ar", "Hay Cancha");
+            //email's subject
+            mail.Subject = "Hay Cancha - " + parametro;
+            //email's body, this is going to be html. note that we attach the image as using cid
+            mail.Body = HTML;
+            //set email's body to html
+            mail.IsBodyHtml = true;
+            mail.Priority = MailPriority.Normal;
+            //client.EnableSsl = true; 
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = System.Configuration.ConfigurationManager.AppSettings["SMTP_SERVER"].ToString();
+            try
+            {
+                smtp.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }            
         }
 
         [WebMethod]

@@ -57,6 +57,51 @@ namespace BibliotecaLogica.Controladores
             }
         }
 
+        public static DataTable RecuperarContraseñaApp(string mail)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                DataTable tablaUsuario = new DataTable();
+                tablaUsuario.Columns.Add("codigoUsuario", typeof(int));
+                tablaUsuario.Columns.Add("nombre", typeof(string));
+                tablaUsuario.Columns.Add("apellido", typeof(string));
+                tablaUsuario.Columns.Add("mail", typeof(string));
+                tablaUsuario.Columns.Add("contraseña", typeof(string));
+                tablaUsuario.Columns.Add("telefono", typeof(string));
+                tablaUsuario.Columns.Add("codigoPosicion", typeof(int));
+                tablaUsuario.Columns.Add("descripcionPosicion", typeof(string));
+                tablaUsuario.Columns.Add("codigoTelefono", typeof(string));
+                tablaUsuario.Columns.Add("imagen", typeof(string));
+                tablaUsuario.Columns.Add("isActivo", typeof(bool));
+
+                UsuarioApp usuario = CatalogoGenerico<UsuarioApp>.RecuperarPor(x => x.Mail == mail, nhSesion);
+
+                if (usuario != null)
+                {
+                    Random rnd = new Random();
+                    int nuevaContraseña = rnd.Next(111111, 999999);
+                    usuario.Contraseña = nuevaContraseña.ToString();
+                    CatalogoGenerico<UsuarioApp>.InsertarActualizar(usuario, nhSesion);
+
+                    tablaUsuario.Rows.Add(new object[] { usuario.Codigo, usuario.Nombre, usuario.Apellido, usuario.Mail, usuario.Contraseña, usuario.Telefono, 
+                                                     usuario.Posicion.Codigo, usuario.Posicion.Descripcion, usuario.CodigoTelefono, "http://haycancha.sempait.com.ar/Imagenes/" + usuario.Imagen, usuario.IsActivo });
+                }
+
+                return tablaUsuario;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
         public static DataTable RecuperarUsuarioApp(string mail, string contraseña)
         {
             ISession nhSesion = ManejoNHibernate.IniciarSesion();
