@@ -13,6 +13,24 @@ namespace HayCancha {
     public partial class login {
         
         /// <summary>
+        /// Control divLogin.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLogin;
+        
+        /// <summary>
+        /// Control form-login.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl form-login;
+        
+        /// <summary>
         /// Control lblErrorLogin.
         /// </summary>
         /// <remarks>
@@ -49,6 +67,24 @@ namespace HayCancha {
         protected global::System.Web.UI.WebControls.Button btnLogin;
         
         /// <summary>
+        /// Control divForgotPass.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divForgotPass;
+        
+        /// <summary>
+        /// Control form-reset-password.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl form-reset-password;
+        
+        /// <summary>
         /// Control lblErrorForgotPass.
         /// </summary>
         /// <remarks>
@@ -56,6 +92,24 @@ namespace HayCancha {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblErrorForgotPass;
+        
+        /// <summary>
+        /// Control lblOkForgotPass.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblOkForgotPass;
+        
+        /// <summary>
+        /// Control txtMailOlvidaPass.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtMailOlvidaPass;
         
         /// <summary>
         /// Control btnForgotPassword.

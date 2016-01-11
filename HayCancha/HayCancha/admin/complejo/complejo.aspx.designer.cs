@@ -49,15 +49,6 @@ namespace HayCancha.admin.complejo {
         protected global::System.Web.UI.WebControls.Button btnCargarLogo;
         
         /// <summary>
-        /// Control Button1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
-        
-        /// <summary>
         /// Control txtNombreComplejo.
         /// </summary>
         /// <remarks>
@@ -137,32 +128,5 @@ namespace HayCancha.admin.complejo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGuardar;
-        
-        /// <summary>
-        /// Control ASPxImageSlider1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxImageSlider.ASPxImageSlider ASPxImageSlider1;
-        
-        /// <summary>
-        /// Control fileUploadImagenes.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fileUploadImagenes;
-        
-        /// <summary>
-        /// Control btnSubirImagenes.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btnSubirImagenes;
     }
 }

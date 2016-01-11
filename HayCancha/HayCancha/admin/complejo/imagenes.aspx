@@ -6,7 +6,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <asp:scriptmanager id="ScriptManager1" runat="server"></asp:scriptmanager>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <!-- BEGIN PAGE LEVEL STYLES -->
     <link href="../../admin/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
     <link href="../../admin/assets/admin/pages/css/profile.css" rel="stylesheet" type="text/css" />
@@ -36,6 +36,15 @@
                             ============================================-->
         <div class="page-content">
             <div class="container-fluid">
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                    <li>
+                        <a href="index.aspx">Inicio</a><i class="fa fa-circle"></i>
+                    </li>
+                    <li class="active">Imagenes del Complejo
+                    </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
                 <div class="row">
                     <form>
                         <div class="col-md-12">
@@ -49,24 +58,20 @@
                                 </div>
                                 <div class="modal-header">
                                     <div class="form-actions">
-                                        <asp:Button runat="server" ID="btnEliminarImagen" Text="Eliminar" CssClass="btn red" OnClick="btnEliminarImagen_Click"/>
+                                        <asp:Button runat="server" ID="btnEliminarImagen" Text="Eliminar" CssClass="btn red" OnClick="btnEliminarImagen_Click" />
                                     </div>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <dx:aspximageslider id="isImagenesComplejo" enabletheming="false" runat="server">
-                                                                </dx:aspximageslider>                                            
+                                            <dx:ASPxImageSlider ID="isImagenesComplejo" EnableTheming="false" runat="server">
+                                            </dx:ASPxImageSlider>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <div class="modal-footer">
-                                    <asp:fileupload id="fileUploadImagenes" runat="server" />
-                                    <asp:Button ID="btnFileUploadImages" runat="server" UseSubmitBehavior="false" Text="Cargar Imagen" OnClick="btnSubirImagenes_Click" />
-                                    <dx:aspxbutton id="btnSubirImagenes" runat="server" text="Subir Imagenes DX" onclick="btnSubirImagenes_Click">
-                                                        </dx:aspxbutton>
-                                  
+                                    <hr />
+                                    <asp:FileUpload ID="fileUploadImagenes" runat="server" />
+                                    <hr />
+                                    <asp:Button ID="btnFileUploadImages" CssClass="btn blue" runat="server" UseSubmitBehavior="false" Text="Cargar Imagen" OnClick="btnSubirImagenes_Click" />
                                     <hr />
                                 </div>
                             </div>

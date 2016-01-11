@@ -37,16 +37,16 @@ namespace HayCancha
         {
             string HTML = "";
 
-            HTML = File.ReadAllText(Server.MapPath("/email/emailRegistroWeb.html"));
+            HTML = File.ReadAllText(Server.MapPath("/haycancha/email/emailRegistroWeb.html"));
             
             //Envio el mail
             MailMessage mailMessage = new MailMessage();
 
             mailMessage.To.Add(mail);
 
-            mailMessage.From = new MailAddress("haycancha@sempait.com.ar", "Bienvenido a HayCancha Admin");
+            mailMessage.From = new MailAddress("haycancha@sempait.com.ar", "HayCancha Admin");
             //email's subject
-            mailMessage.Subject = "Hay Cancha";
+            mailMessage.Subject = "Hay Cancha - Bienvenido";
             //email's body, this is going to be html. note that we attach the image as using cid
             mailMessage.Body = HTML;
             //set email's body to html

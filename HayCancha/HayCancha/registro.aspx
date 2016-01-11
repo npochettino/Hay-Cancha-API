@@ -32,7 +32,7 @@
 	============================================= -->
     <title>Hay Cancha</title>
 
-    <link rel="shortcut icon" href="images/hayCancha/favicon.ico">
+    <link rel="shortcut icon" href="images/hayCancha/favicon.png">
 
 </head>
 

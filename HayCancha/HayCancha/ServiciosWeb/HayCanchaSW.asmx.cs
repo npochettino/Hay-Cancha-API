@@ -65,7 +65,7 @@ namespace HayCancha.ServiciosWeb
 
             if (parametro == "Recuperar Contraseña")
             {
-                HTML = File.ReadAllText(Server.MapPath("/email/emailPasswordApp.html"));
+                HTML = File.ReadAllText(Server.MapPath("/haycancha/email/emailPasswordApp.html"));
                 HTML = HTML.Replace("varNombre", nombre);
                 HTML = HTML.Replace("varApellido", apellido);
                 HTML = HTML.Replace("varContraseña", contraseña);
@@ -73,7 +73,7 @@ namespace HayCancha.ServiciosWeb
             }
             if (parametro == "Bienvenido")
             {
-                HTML = File.ReadAllText(Server.MapPath("/email/emailRegistroApp.html"));
+                HTML = File.ReadAllText(Server.MapPath("/haycancha/email/emailRegistroApp.html"));
                 HTML = HTML.Replace("varNombre", nombre);
                 HTML = HTML.Replace("varApellido", apellido);                
             }

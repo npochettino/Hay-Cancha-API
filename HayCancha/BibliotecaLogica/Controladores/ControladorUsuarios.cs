@@ -422,6 +422,54 @@ namespace BibliotecaLogica.Controladores
             }
         }
 
+        public static DataTable RecuperarContraseñaWeb(string mail)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                DataTable tablaUsuario = new DataTable();
+                tablaUsuario.Columns.Add("codigoUsuario");
+                tablaUsuario.Columns.Add("nombre");
+                tablaUsuario.Columns.Add("apellido");
+                tablaUsuario.Columns.Add("mail");
+                tablaUsuario.Columns.Add("contraseña");
+                tablaUsuario.Columns.Add("codigoComplejo");
+                tablaUsuario.Columns.Add("descripcionComplejo");
+                tablaUsuario.Columns.Add("direccionComplejo");
+                tablaUsuario.Columns.Add("horaApertura");
+                tablaUsuario.Columns.Add("horaCierre");
+                tablaUsuario.Columns.Add("mailComplejo");
+                tablaUsuario.Columns.Add("telefonoComplejo");
+                tablaUsuario.Columns.Add("logoComplejo");
+
+                UsuarioWeb usuario = CatalogoGenerico<UsuarioWeb>.RecuperarPor(x => x.Mail == mail, nhSesion);
+
+                if (usuario != null)
+                {
+                    Random rnd = new Random();
+                    int nuevaContraseña = rnd.Next(111111, 999999);
+                    usuario.Contraseña = nuevaContraseña.ToString();
+                    CatalogoGenerico<UsuarioWeb>.InsertarActualizar(usuario, nhSesion);
+
+                    tablaUsuario.Rows.Add(new object[] { usuario.Codigo, usuario.Nombre, usuario.Apellido, usuario.Mail, usuario.Contraseña, usuario.Complejo.Codigo, 
+                                                     usuario.Complejo.Descripcion, usuario.Complejo.Direccion, usuario.Complejo.HoraApertura, usuario.Complejo.HoraCierre,
+                                                     usuario.Complejo.Mail, usuario.Complejo.Telefono, usuario.Complejo.Logo });
+                }
+
+                return tablaUsuario;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
         #endregion
     }
 }
