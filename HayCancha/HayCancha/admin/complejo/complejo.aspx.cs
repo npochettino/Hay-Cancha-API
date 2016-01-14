@@ -64,7 +64,7 @@ namespace HayCancha.admin.complejo
             string[] direccion = txtPlaces.Text.Split(',');
 
             ControladorGeneral.InsertarActualizarComplejo(Convert.ToInt32(Session["codigoComplejo"].ToString()), txtNombreComplejo.Text, direccion[0],
-                Convert.ToInt32(ddlHoraApertura.SelectedValue), Convert.ToInt32(ddlHoraCierre.SelectedValue), txtMailComplejo.Text, txtTelefono.Text, (double)lat, (double)lon, Convert.ToString(Session["codigoComplejo"]) + ".png");
+                Convert.ToInt32(ddlHoraApertura.SelectedValue), Convert.ToInt32(ddlHoraCierre.SelectedValue), txtMailComplejo.Text, txtTelefono.Text, (double)lat, (double)lon);
 
             Response.Redirect("complejo.aspx");
         }

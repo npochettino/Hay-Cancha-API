@@ -14,8 +14,7 @@ namespace BibliotecaLogica
     {
         static void Main()
         {
-            ControladorUsuarios.InsertarActualizarValoracionUsuarioApp(1, 2, 4, "");
-            DataTable t = ControladorUsuarios.RecuperarValoracionesPorUsuarioApp(1);
+            ControladorTurnos.RecuperarTurnosPorRangoHorario(Convert.ToDateTime("2015-10-31"), 15, 18, 1);
         }
     }
 }

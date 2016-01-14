@@ -176,7 +176,7 @@ namespace BibliotecaLogica.Controladores
 
         #region Complejo
 
-        public static void InsertarActualizarComplejo(int codigoComplejo, string descripcion, string direccion, int horaApertura, int horaCierre, string mail, string telefono, double latitud, double longitud, string rutaLogo)
+        public static void InsertarActualizarComplejo(int codigoComplejo, string descripcion, string direccion, int horaApertura, int horaCierre, string mail, string telefono, double latitud, double longitud)
         {
             ISession nhSesion = ManejoNHibernate.IniciarSesion();
 
@@ -201,8 +201,6 @@ namespace BibliotecaLogica.Controladores
                 complejo.Longitud = longitud;
                 complejo.Mail = mail;
                 complejo.Telefono = telefono;
-                //complejo.Logo = "http://haycancha.sempait.com.ar/Imagenes/" + rutaLogo;
-                complejo.Logo = rutaLogo;
 
                 CatalogoGenerico<Complejo>.InsertarActualizar(complejo, nhSesion);
             }
@@ -451,11 +449,11 @@ namespace BibliotecaLogica.Controladores
 
                 if (codigoEstadoSolicitud == 0)
                 {
-                    listaSolicitudesInvitado = CatalogoGenerico<Solicitud>.RecuperarLista(x => x.UsuarioAppInvitado.Codigo == codigoUsuarioApp && x.TurnoVariable.FechaHoraDesde < DateTime.Now, nhSesion);
+                    listaSolicitudesInvitado = CatalogoSolicitud.RecuperarVigentesPorUsuarioApp(codigoUsuarioApp, nhSesion);
                 }
                 else
                 {
-                    listaSolicitudesInvitado = CatalogoGenerico<Solicitud>.RecuperarLista(x => x.EstadoSolicitud.Codigo == codigoEstadoSolicitud && x.UsuarioAppInvitado.Codigo == codigoUsuarioApp && x.TurnoVariable.FechaHoraDesde < DateTime.Now, nhSesion);
+                    listaSolicitudesInvitado = CatalogoSolicitud.RecuperarVigentesPorUsuarioAppYEstado(codigoUsuarioApp, codigoEstadoSolicitud, nhSesion);
                 }
 
                 foreach (Solicitud solicitud in listaSolicitudesInvitado)
@@ -519,7 +517,7 @@ namespace BibliotecaLogica.Controladores
                     imagenUsuario, nombreApellido, false, codigoTurno, codigoUsuarioApp, direccionComplejo, precio, codigoTelefono });
                 }
 
-                List<int> listaTurnosVariables = CatalogoGenerico<TurnoVariable>.RecuperarLista(x => x.UsuarioApp.Codigo == codigoUsuarioApp, nhSesion).Select(x => x.Codigo).ToList();
+                List<int> listaTurnosVariables = CatalogoGenerico<TurnoVariable>.RecuperarLista(x => x.UsuarioApp.Codigo == codigoUsuarioApp && x.FechaHoraDesde > DateTime.Now, nhSesion).Select(x => x.Codigo).ToList();
                 List<Solicitud> listaSolicitud;
 
                 if (codigoEstadoSolicitud == 0)
@@ -542,8 +540,8 @@ namespace BibliotecaLogica.Controladores
                     string direccionComplejo;
                     double precio;
                     int codigoTurno;
-                    bool isVariable;
                     string codigoTelefono = string.Empty;
+                    bool isVariable;
 
                     if (solicitud.TurnoFijo != null)
                     {

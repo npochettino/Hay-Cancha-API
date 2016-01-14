@@ -35,5 +35,31 @@ namespace BibliotecaDatos.Catalogos
                 throw ex;
             }
         }
+
+        public static List<Solicitud> RecuperarVigentesPorUsuarioApp(int codigoUsuarioApp, ISession nhSesion)
+        {
+            try
+            {
+                List<Solicitud> listaSolicitudes = nhSesion.QueryOver<Solicitud>().Where(x => x.UsuarioAppInvitado.Codigo == codigoUsuarioApp).JoinQueryOver(x => x.TurnoVariable).Where(x => x.FechaHoraDesde > DateTime.Now).List().ToList();
+                return listaSolicitudes;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
+        public static List<Solicitud> RecuperarVigentesPorUsuarioAppYEstado(int codigoUsuarioApp, int codigoEstadoSolicitud, ISession nhSesion)
+        {
+            try
+            {
+                List<Solicitud> listaSolicitudes = nhSesion.QueryOver<Solicitud>().Where(x => x.UsuarioAppInvitado.Codigo == codigoUsuarioApp && x.EstadoSolicitud.Codigo == codigoEstadoSolicitud).JoinQueryOver(x => x.TurnoVariable).Where(x => x.FechaHoraDesde > DateTime.Now).List().ToList();
+                return listaSolicitudes;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

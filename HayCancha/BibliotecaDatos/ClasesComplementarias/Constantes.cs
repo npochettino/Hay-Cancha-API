@@ -26,5 +26,6 @@ namespace BibliotecaDatos.ClasesComplementarias
 
         public const string RutaImagenesUsuariosApp = "http://haycancha.sempait.com.ar/Imagenes/";
         public const string RutaImagenesComplejos = "http://haycancha.sempait.com.ar/ImagenesComplejos/";
+        public const string RutaLogosComplejos = "http://haycancha.sempait.com.ar/ImagenesComplejos/Logos/";
     }
 }

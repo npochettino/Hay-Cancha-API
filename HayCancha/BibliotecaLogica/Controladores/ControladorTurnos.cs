@@ -349,12 +349,12 @@ namespace BibliotecaLogica.Controladores
                 tablaTurnos.Columns.Add("codigoEstado", typeof(int));
                 tablaTurnos.Columns.Add("descripcionEstado", typeof(string));
 
-                List<TurnoVariable> listaTurnosVariables = CatalogoGenerico<TurnoVariable>.RecuperarLista(x => x.UsuarioApp.Codigo == codigoUsuarioApp && (x.EstadoTurno.Codigo == Constantes.EstadosTurno.PENDIENTE || x.EstadoTurno.Codigo == Constantes.EstadosTurno.RESERVADO || x.EstadoTurno.Codigo == Constantes.EstadosTurno.CANCELADO) && x.FechaHoraDesde < DateTime.Now, nhSesion);
+                List<TurnoVariable> listaTurnosVariables = CatalogoGenerico<TurnoVariable>.RecuperarLista(x => x.UsuarioApp.Codigo == codigoUsuarioApp && (x.EstadoTurno.Codigo == Constantes.EstadosTurno.PENDIENTE || x.EstadoTurno.Codigo == Constantes.EstadosTurno.RESERVADO || x.EstadoTurno.Codigo == Constantes.EstadosTurno.CANCELADO) && x.FechaHoraDesde >= DateTime.Now, nhSesion);
 
                 listaTurnosVariables.Aggregate(tablaTurnos, (dt, r) =>
                 {
                     dt.Rows.Add(r.Codigo, r.FechaHoraDesde.Hour, r.FechaHoraHasta.Hour, r.Cancha.Codigo, r.Cancha.Descripcion, r.Cancha.TipoCancha.Codigo,
-                        r.Cancha.TipoCancha.Descripcion, r.Cancha.Complejo.Codigo, r.Cancha.Complejo.Descripcion, "imagen", r.Cancha.PrecioTarde, r.Cancha.Complejo.Direccion,
+                        r.Cancha.TipoCancha.Descripcion, r.Cancha.Complejo.Codigo, r.Cancha.Complejo.Descripcion, r.Cancha.Complejo.Logo, r.Cancha.PrecioTarde, r.Cancha.Complejo.Direccion,
                         3, r.Cancha.Complejo.Latitud, r.Cancha.Complejo.Longitud, r.FechaHoraDesde.ToString("dd/MM/yyyy"), r.EstadoTurno.Codigo, r.EstadoTurno.Descripcion); return dt;
                 });
 

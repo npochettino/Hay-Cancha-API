@@ -27,11 +27,7 @@ namespace BibliotecaDatos.Clases
         {
             get
             {
-                return Constantes.RutaImagenesUsuariosApp + Logo;
-            }
-            set
-            {
-                Logo = value;
+                return Constantes.RutaLogosComplejos + Codigo + ".png";
             }
         }
 

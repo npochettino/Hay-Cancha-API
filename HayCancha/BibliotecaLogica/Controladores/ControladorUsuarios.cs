@@ -404,7 +404,6 @@ namespace BibliotecaLogica.Controladores
                         complejo.Telefono = "";
                         complejo.Latitud = 0.0;
                         complejo.Longitud = 0.0;
-                        complejo.Logo = "";
 
                         usuario.Complejo = complejo;
                     }
@@ -425,7 +424,6 @@ namespace BibliotecaLogica.Controladores
                         //inserto la foto del complejo
                         DataTable dtUsuarioWebActual = RecuperarUsuarioWeb(mail, contraseña);
                         Complejo complejoActual = CatalogoGenerico<Complejo>.RecuperarPorCodigo(Convert.ToInt32(dtUsuarioWebActual.Rows[0]["codigoComplejo"]), nhSesion);
-                        complejoActual.Logo = complejoActual.Codigo + ".png";
                         CatalogoGenerico<Complejo>.InsertarActualizar(complejoActual, nhSesion);
                     }
                     return "ok";
