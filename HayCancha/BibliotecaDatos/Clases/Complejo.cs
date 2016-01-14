@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BibliotecaDatos.ClasesComplementarias;
 
 namespace BibliotecaDatos.Clases
 {
@@ -22,7 +23,17 @@ namespace BibliotecaDatos.Clases
         public virtual int HoraCierre { get; set; }
         public virtual double Latitud { get; set; }
         public virtual double Longitud { get; set; }
-        public virtual string Logo { get; set; }
+        public virtual string Logo
+        {
+            get
+            {
+                return Constantes.RutaImagenesUsuariosApp + Logo;
+            }
+            set
+            {
+                Logo = value;
+            }
+        }
 
         public virtual IList<ValoracionComplejo> ValoracionesComplejo { get; set; }
     }
