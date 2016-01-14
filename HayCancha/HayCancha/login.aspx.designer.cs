@@ -22,15 +22,6 @@ namespace HayCancha {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLogin;
         
         /// <summary>
-        /// Control form-login.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl form-login;
-        
-        /// <summary>
         /// Control lblErrorLogin.
         /// </summary>
         /// <remarks>
@@ -74,15 +65,6 @@ namespace HayCancha {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divForgotPass;
-        
-        /// <summary>
-        /// Control form-reset-password.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl form-reset-password;
         
         /// <summary>
         /// Control lblErrorForgotPass.

@@ -152,7 +152,7 @@ namespace HayCancha.admin
                 if(estado == Constantes.EstadosTurno.RESERVADO)
                     PushNotification.SendPersonalPush("reservation", Session["descripcionComplejo"].ToString() + " ha respondido!", Session["codigoTelefonoUsuarioApp"].ToString());
                 if(estado == Constantes.EstadosTurno.CANCELADO)
-                    PushNotification.SendPersonalPush("cancelation", Session["descripcionComplejo"].ToString() + " ha respondido!", Session["codigoTelefonoUsuarioApp"].ToString());
+                    PushNotification.SendPersonalPush("reservation", Session["descripcionComplejo"].ToString() + " ha respondido!", Session["codigoTelefonoUsuarioApp"].ToString());
             }
     
             pcTurno.ShowOnPageLoad = false;
