@@ -24,7 +24,7 @@ namespace BibliotecaDatos.Mapeos
             Map(x => x.CodigoTelefono).Column("codigoTelefono");
 
             References(x => x.Posicion).Column("codigoPosicion").Cascade.None().LazyLoad(Laziness.Proxy);
-            HasMany<ValoracionUsuarioApp>(x => x.Valoraciones).Table("ValoracionesUsuariosApp").KeyColumn("codigoUsuarioAppEvaluado").Cascade.None();
+            HasMany<ValoracionUsuarioApp>(x => x.Valoraciones).Table("ValoracionesUsuariosApp").KeyColumn("codigoUsuarioAppEvaluado").Cascade.AllDeleteOrphan();
             HasManyToMany<Complejo>(x => x.ComplejosFravoritos).Table("ComplejosFavoritos").ParentKeyColumn("codigoUsuarioApp").ChildKeyColumn("codigoComplejo").Cascade.AllDeleteOrphan();
         }
     }

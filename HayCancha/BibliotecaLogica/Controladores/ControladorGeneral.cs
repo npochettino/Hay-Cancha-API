@@ -89,6 +89,27 @@ namespace BibliotecaLogica.Controladores
             }
         }
 
+        public static void EliminarCancha(int codigoCancha)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                Cancha cancha = CatalogoGenerico<Cancha>.RecuperarPorCodigo(codigoCancha, nhSesion);
+
+                CatalogoGenerico<Cancha>.Eliminar(cancha, nhSesion);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
         #endregion
 
         #region Posicion

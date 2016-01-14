@@ -14,7 +14,8 @@ namespace BibliotecaLogica
     {
         static void Main()
         {
-            ControladorGeneral.RecuperarSolicitudesPorUsuario(7, 0);
+            ControladorUsuarios.InsertarActualizarValoracionUsuarioApp(1, 2, 4, "");
+            DataTable t = ControladorUsuarios.RecuperarValoracionesPorUsuarioApp(1);
         }
     }
 }

@@ -349,7 +349,7 @@ namespace BibliotecaLogica.Controladores
                 tablaTurnos.Columns.Add("codigoEstado", typeof(int));
                 tablaTurnos.Columns.Add("descripcionEstado", typeof(string));
 
-                List<TurnoVariable> listaTurnosVariables = CatalogoGenerico<TurnoVariable>.RecuperarLista(x => x.UsuarioApp.Codigo == codigoUsuarioApp && (x.EstadoTurno.Codigo == Constantes.EstadosTurno.PENDIENTE || x.EstadoTurno.Codigo == Constantes.EstadosTurno.RESERVADO || x.EstadoTurno.Codigo == Constantes.EstadosTurno.CANCELADO), nhSesion);
+                List<TurnoVariable> listaTurnosVariables = CatalogoGenerico<TurnoVariable>.RecuperarLista(x => x.UsuarioApp.Codigo == codigoUsuarioApp && (x.EstadoTurno.Codigo == Constantes.EstadosTurno.PENDIENTE || x.EstadoTurno.Codigo == Constantes.EstadosTurno.RESERVADO || x.EstadoTurno.Codigo == Constantes.EstadosTurno.CANCELADO) && x.FechaHoraDesde < DateTime.Now, nhSesion);
 
                 listaTurnosVariables.Aggregate(tablaTurnos, (dt, r) =>
                 {

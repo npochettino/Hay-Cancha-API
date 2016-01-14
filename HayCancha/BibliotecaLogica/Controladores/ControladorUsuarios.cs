@@ -307,6 +307,73 @@ namespace BibliotecaLogica.Controladores
             }
         }
 
+        public static void InsertarActualizarValoracionUsuarioApp(int codigoUsuarioEvaluado, int codigoUsuarioEvaluador, int puntaje, string comentario)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                UsuarioApp usuarioEvaluado = CatalogoGenerico<UsuarioApp>.RecuperarPorCodigo(codigoUsuarioEvaluado, nhSesion);
+
+                ValoracionUsuarioApp valoracion = usuarioEvaluado.Valoraciones.Where(x => x.UsuarioAppEvaluador.Codigo == codigoUsuarioEvaluador).SingleOrDefault();
+
+                if (valoracion == null)
+                {
+                    valoracion = new ValoracionUsuarioApp();
+                    valoracion.UsuarioAppEvaluador = CatalogoGenerico<UsuarioApp>.RecuperarPorCodigo(codigoUsuarioEvaluador, nhSesion);
+                }
+
+                valoracion.Comentario = comentario;
+                valoracion.Puntaje = puntaje;
+
+                usuarioEvaluado.Valoraciones.Add(valoracion);
+
+                CatalogoGenerico<UsuarioApp>.InsertarActualizar(usuarioEvaluado, nhSesion);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
+        public static DataTable RecuperarValoracionesPorUsuarioApp(int codigoUsuarioApp)
+        {
+            ISession nhSesion = ManejoNHibernate.IniciarSesion();
+
+            try
+            {
+                DataTable tablaValoraciones = new DataTable();
+                tablaValoraciones.Columns.Add("codigoUsuarioEvaluador");
+                tablaValoraciones.Columns.Add("nombreUsuarioEvaluador");
+                tablaValoraciones.Columns.Add("apellidoUsuarioEvaluador");
+                tablaValoraciones.Columns.Add("puntaje");
+                tablaValoraciones.Columns.Add("comentario");
+
+                UsuarioApp usuario = CatalogoGenerico<UsuarioApp>.RecuperarPorCodigo(codigoUsuarioApp, nhSesion);
+
+                usuario.Valoraciones.Aggregate(tablaValoraciones, (dt, r) =>
+                {
+                    dt.Rows.Add(r.UsuarioAppEvaluador.Codigo, r.UsuarioAppEvaluador.Nombre, r.UsuarioAppEvaluador.Apellido, r.Puntaje, r.Comentario); return dt;
+                });
+
+                return tablaValoraciones;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                nhSesion.Close();
+                nhSesion.Dispose();
+            }
+        }
+
         #endregion
 
         #region UsuarioWeb
@@ -359,7 +426,7 @@ namespace BibliotecaLogica.Controladores
                         DataTable dtUsuarioWebActual = RecuperarUsuarioWeb(mail, contraseña);
                         Complejo complejoActual = CatalogoGenerico<Complejo>.RecuperarPorCodigo(Convert.ToInt32(dtUsuarioWebActual.Rows[0]["codigoComplejo"]), nhSesion);
                         complejoActual.Logo = complejoActual.Codigo + ".png";
-                        CatalogoGenerico<Complejo>.InsertarActualizar(complejoActual,nhSesion);
+                        CatalogoGenerico<Complejo>.InsertarActualizar(complejoActual, nhSesion);
                     }
                     return "ok";
                 }
