@@ -43,7 +43,6 @@ namespace BibliotecaDatos.ClasesComplementarias
             }
 
             return isPushMessageSend;
-            return true;
         }
 
         public static bool SendPersonalPush(string deepLink, string message, string deviceToken)
@@ -76,7 +75,6 @@ namespace BibliotecaDatos.ClasesComplementarias
 
             return isPushMessageSend;
 
-            return true;
         }
 
     }

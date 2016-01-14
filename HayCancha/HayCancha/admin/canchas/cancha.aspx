@@ -4,6 +4,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+    function OnInit(s, e) {
+            ASPxClientUtils.AttachEventToElement(s.GetInputElement(), "click", function (event) {
+                s.ShowDropDown();
+            });
+        }
+
     <div class="page-container">
         <!-- BEGIN PAGE HEAD -->
         <div class="page-head">
@@ -67,10 +73,7 @@
                                                     ValueField="codigo" TextField="descripcion" IncrementalFilteringMode="Contains" ValueType="System.Int32" Width="100%" 
                                                 EnableTheming="True" Theme="Metropolis" AutoPostBack="false">
                                                 <CaptionSettings ShowColon="false" RequiredMarkDisplayMode="Hidden" />
-                                                <%--<Columns>
-                                                        <dx:ListBoxColumn FieldName="codigo" Visible="false" Width="30%" />
-                                                        <dx:ListBoxColumn FieldName="descripcion" Caption="" />
-                                                </Columns>    --%>
+                                                <ClientSideEvents Init="OnInit" />
                                             </dx:ASPxComboBox>
                                         </div>
                                     </div>
