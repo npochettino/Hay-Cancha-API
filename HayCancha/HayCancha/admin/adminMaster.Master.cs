@@ -21,15 +21,15 @@ namespace HayCancha.admin
             else
             {
                 lblUsuarioLogueado.InnerText = " " + Session["mailUsuarioActual"].ToString();
-                string pathLogoComplejo = Server.MapPath("\\") + "haycancha\\ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "_logo\\";
+                string pathLogoComplejo = Server.MapPath("\\") + "haycancha\\ImagenesComplejos\\Logos\\";
                 if (!Directory.Exists(pathLogoComplejo))
                 {
                     DirectoryInfo di2 = Directory.CreateDirectory(pathLogoComplejo);
                     File.Copy(Server.MapPath("\\") + "haycancha\\ImagenesComplejos" + "\\logo_complejo_default.png", pathLogoComplejo + Convert.ToString(Session["codigoComplejo"]) + ".png");
-                    imgLogoComplejo.ImageUrl = "~\\ImagenesComplejos\\" + Session["codigoComplejo"].ToString() + "_logo\\" + Convert.ToString(Session["codigoComplejo"]) + ".png";
+                    imgLogoComplejo.ImageUrl = "~\\ImagenesComplejos\\Logos\\" + Convert.ToString(Session["codigoComplejo"]) + ".png";
                 }
                 else
-                    imgLogoComplejo.ImageUrl = "~\\ImagenesComplejos\\" + Session["codigoComplejo"].ToString() + "_logo\\" + Convert.ToString(Session["codigoComplejo"]) + ".png";
+                    imgLogoComplejo.ImageUrl = "~\\ImagenesComplejos\\Logos\\" + Convert.ToString(Session["codigoComplejo"]) + ".png";
             }
         }
 

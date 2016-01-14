@@ -63,7 +63,7 @@
                                 <div class="panel-body" style="padding: 40px;">
                                     <form id="login-form" name="login-form" class="nobottommargin" action="#" method="post">
                                         <div id="divLogin" runat="server">
-                                            <section id="form-login" runat="server" style="display: block">
+                                            <section id="form-login" style="display: block">
                                                 <h3>Ingresa a tu cuenta</h3>
                                                 <div class="col_full">
                                                     <label id="lblErrorLogin" runat="server" class="errormsg" style="display: none">Email o Contraseña incorrecta!</label>
@@ -87,7 +87,7 @@
                                             </section>
                                         </div>
                                         <div id="divForgotPass" runat="server">
-                                            <section id="form-reset-password" runat="server" style="display: none">
+                                            <section id="form-reset-password" style="display: none">
                                                 <h3>Recuperar contraseña</h3>
                                                 <div class="col_full">
                                                     <label id="lblErrorForgotPass" runat="server" class="errormsg" style="display: none">Email incorrecto!</label>

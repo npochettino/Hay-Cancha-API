@@ -44,14 +44,14 @@ namespace HayCancha.admin.complejo
             txtLatitud.Text = dtComplejoActual.Rows[0]["latitud"].ToString();
             txtLongitud.Text = dtComplejoActual.Rows[0]["longitud"].ToString();
 
-            string pathLogoComplejo = Server.MapPath("\\") + "haycancha\\ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "_logo\\";
+            string pathLogoComplejo = Server.MapPath("\\") + "haycancha\\ImagenesComplejos\\Logos\\";
             if (!Directory.Exists(pathLogoComplejo))
             {
                 DirectoryInfo di2 = Directory.CreateDirectory(pathLogoComplejo);
                 File.Copy(Server.MapPath("\\") + "haycancha\\ImagenesComplejos" + "\\logo_complejo_default.png", pathLogoComplejo + Convert.ToString(Session["codigoComplejo"]) + ".png");
             }
 
-            isLogoComplejo.ImageSourceFolder = "~\\ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "_logo\\" + "\\";
+            isLogoComplejo.ImageSourceFolder = "~\\ImagenesComplejos\\Logos\\" + "\\";
 
         }
 
@@ -74,7 +74,7 @@ namespace HayCancha.admin.complejo
             if (fuLogo.HasFile)
             {
                 string fileName = Path.GetFileName(fuLogo.PostedFile.FileName);
-                fuLogo.PostedFile.SaveAs(Server.MapPath("\\") + "haycancha\\ImagenesComplejos\\" + Convert.ToString(Session["codigoComplejo"]) + "_logo\\" + Session["codigoComplejo"].ToString() + ".png");
+                fuLogo.PostedFile.SaveAs(Server.MapPath("\\") + "haycancha\\ImagenesComplejos\\Logos\\" + Session["codigoComplejo"].ToString() + ".png");
                 Response.Redirect("complejo.aspx");
             }
         }
