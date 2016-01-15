@@ -258,7 +258,6 @@ namespace BibliotecaLogica.Controladores
                 imagenReducida.Save(rutaGuardar, ImageFormat.Jpeg);
 
                 UsuarioApp usu = CatalogoGenerico<UsuarioApp>.RecuperarPorCodigo(codigoUsuarioApp, nhSesion);
-                usu.Imagen = codigoUsuarioApp + ".jpg";
                 CatalogoGenerico<UsuarioApp>.InsertarActualizar(usu, nhSesion);
 
                 return "http://haycancha.sempait.com.ar/Imagenes/" + codigoUsuarioApp + ".jpg";

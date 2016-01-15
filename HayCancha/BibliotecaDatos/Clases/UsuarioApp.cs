@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BibliotecaDatos.ClasesComplementarias;
 
 namespace BibliotecaDatos.Clases
 {
@@ -21,7 +22,13 @@ namespace BibliotecaDatos.Clases
         public virtual string Contraseña { get; set; }
         public virtual string Telefono { get; set; }
         public virtual bool IsActivo { get; set; }
-        public virtual string Imagen { get; set; }
+        public virtual string Imagen 
+        { 
+            get
+            {
+                return Constantes.RutaImagenesUsuariosApp + Codigo + ".png";
+            }
+        }
         public virtual string CodigoTelefono { get; set; }
 
         public virtual Posicion Posicion { get; set; }

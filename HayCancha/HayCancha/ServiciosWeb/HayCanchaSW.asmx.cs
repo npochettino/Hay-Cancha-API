@@ -75,7 +75,7 @@ namespace HayCancha.ServiciosWeb
             {
                 HTML = File.ReadAllText(Server.MapPath("/haycancha/email/emailRegistroApp.html"));
                 HTML = HTML.Replace("varNombre", nombre);
-                HTML = HTML.Replace("varApellido", apellido);                
+                HTML = HTML.Replace("varApellido", apellido);
             }
 
             //Envio el mail
@@ -101,7 +101,7 @@ namespace HayCancha.ServiciosWeb
             catch (Exception ex)
             {
                 throw ex;
-            }            
+            }
         }
 
         [WebMethod]
@@ -326,5 +326,34 @@ namespace HayCancha.ServiciosWeb
                 throw ex;
             }
         }
+
+        [WebMethod]
+        public string InsertarActualizarValoracionUsuarioApp(int codigoUsuarioApp, int codigoUsuarioEvaluador, int puntaje, string comentario)
+        {
+            try
+            {
+                ControladorUsuarios.InsertarActualizarValoracionUsuarioApp(codigoUsuarioApp, codigoUsuarioEvaluador, puntaje, comentario);
+                return JsonConvert.SerializeObject("ok");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [WebMethod]
+        public string RecuperarValoracionesUsuarioApp(int codigoUsuarioApp)
+        {
+            try
+            {
+                DataTable tablaValoraciones = ControladorUsuarios.RecuperarValoracionesPorUsuarioApp(codigoUsuarioApp);
+                return JsonConvert.SerializeObject(tablaValoraciones);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
